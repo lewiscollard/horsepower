@@ -59,7 +59,7 @@
    </section>
 
   {% for tax in taxonomies %}
-    <section class="gallery-section" id="{{tax.slug}}">
+    <section class="gallery-section {% if loop.index % 2 == 0 %}gallery-section-altLayout{% endif %}" id="{{tax.slug}}">
       <div class="gallery-section-text">
         <div class="gallery-section-text-inner">
           <h2 class="gallery-section-text-title">{{ tax.name }}</h2>

@@ -1,20 +1,28 @@
 .gallery-section {
   @include Clearfix();
+  position: relative;
 
   background-color: $color-black;
   color: $color-white;
 }
 
 .gallery-section-text {
-  float: left;
-  width: 35%;
-}
+  position: absolute;
+  right: 65%;
+  top: 0;
+  bottom: 0;
 
+  .gallery-section-altLayout & {
+    left: 65%;
+    right: auto;
+  }
+}
 
 .gallery-section-text-inner {
   padding: $pad-base * 3;
 
-  max-width: 400px;
+  height: 100%;
+  max-width: 520px;
 
   float: right;
 }
@@ -38,6 +46,10 @@
 
   width: 65%;
   float: right;
+
+  .gallery-section-altLayout & {
+    float: left;
+  }
 }
 
 .gallery-section-item-inner {
