@@ -11,6 +11,11 @@ gulp.task('bs-reload', function () {
   browserSync.reload();
 });
 
+gulp.task('images', function() {
+  gulp.src('assets/images/**/*')
+    .pipe(gulp.dest('html/resource/images/'));
+});
+
 gulp.task('styles', function(){
   gulp.src(['assets/scss/**/*.scss'])
     .pipe(plumber({
@@ -38,7 +43,8 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('html/resource/js'))
 });
 
-gulp.task('default', ['styles', 'scripts'], function(){
+gulp.task('default', ['styles', 'scripts', 'images'], function(){
   gulp.watch("assets/scss/**/*.scss", ['styles']);
+  gulp.watch("assets/images/**/*", ['images']);
   gulp.watch("assets/js/**/*.js", ['scripts']);
 });
