@@ -1,42 +1,41 @@
 <!doctype html>
 <html prefix="og: http://ogp.me/ns#">
- <head>
-  <title>{%block title_entire%}{%block title%}{%endblock%} -- {{config.site_name}}{%endblock%}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta property="og:site_name" content="Horsepower, by Lewis Collard" />
-  {%block meta%}{%endblock%}
-  <link rel="stylesheet" href="/resource/css/style.css" />
-  <script src="/resource/js/jquery.js"></script>
-  <script src="/resource/js/extended.js"></script>
- </head>
- 
- <header id="header">
- <h1><a href="/">Horsepower</a></h1> 
-  <h2 class="subtitle">A motorsports gallery by Lewis Collard</h2>
-  <nav id="top-nav">
-   <div class="contained">
-    <Ul>
-     <li><a href="/">Home</a></li>
-     <li><a href="/galleries/events/">Events</a></li>
-     <li><a href="/galleries/drivers/">Drivers</a></li>
-    </ul>
-   </div>
-  </nav>
- 
- </header>
- 
- <body>
-  {%block content%}{%endblock%}
-  
-  <footer id="footer">
-   <p>In memory of Mark Callf, 1964-2015.</p>
-   
-   <p><a href="/copyright/">Anti-copyright</a> Lewis Collard, 2014-2016.</p>
-   
-   <p><a href="mailto:lewiscollard@gmail.com">lewiscollard@gmail.com</p>
-  </footer>
-  
- </body>
- 
- 
+  <head>
+    <title>{% block title_entire %}{% block title %}{% endblock %} -- {{ config.site_name }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:site_name" content="Horsepower, by Lewis Collard" />
+    {% block meta %}{% endblock %}
+    <link rel="stylesheet" href="/resource/css/style.css" />
+    <script src="/resource/js/main.js"></script>
+  </head>
+
+  <header class="header contained">
+    <h1 class="header-logo"><a href="/"></a></h1>
+    <nav id="nav-outer">
+      <ul class="nav-items">
+        <li class="nav-item">
+          <a href="/" class="nav-item-actions">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item-action" href="/galleries/events/">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item-action" href="/galleries/drivers/">Drivers</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <body>
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+    <p>In memory of Mark Callf, 1964-2015.</p>
+
+    <p><a href="/copyright/">Anti-copyright</a> Lewis Collard, 2014-2016.</p>
+
+    <p><a href="mailto:lewiscollard@gmail.com">lewiscollard@gmail.com</p>
+    </footer>
+
+  </body>
 </html>
