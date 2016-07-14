@@ -1,109 +1,98 @@
-{%extends "base.html"%}
-{%block title_entire%}{{config.site_name}}{%endblock%}
-{%block meta%}
-<meta property="og:image" content="http://hp.lewiscollard.com{{featured[0].get_size('huge_crop').get_url()}}" />
-<meta property="og:title" content="Horsepower" />
-<meta property="og:description" content="A motorsports gallery by Lewis Collard." />
-{%endblock%}
-{%block content%}
+{% extends "base.html" %}
+{% block title_entire %}{{ config.site_name }}{% endblock %}
 
-<article class="contained front-page">
- <section id="featured">
-  <h1 class="assistive">Featured photographs</h1>
-  <div class="slider">
-   {%for photo in featured%}
-    <div class="slide" id="slide-{{loop.index}}">
-     <img src="{{photo.get_size('huge_crop').get_url()}}" />
+{% block meta %}
+  <meta property="og:image" content="http://hp.lewiscollard.com{{featured[0].get_size('huge_crop').get_url()}}" />
+  <meta property="og:title" content="Horsepower" />
+  <meta property="og:description" content="A motorsports gallery by Lewis Collard." />
+{% endblock %}
+
+{% block content %}
+  <article class="front-page">
+   <section id="featured">
+    <h1 class="assistive">Featured photographs</h1>
+    <div class="slider">
+     {%for photo in featured%}
+      <div class="slide" id="slide-{{loop.index}}">
+       <img src="{{photo.get_size('huge_crop').get_url()}}" />
+      </div>
+     {%endfor%}
     </div>
-   {%endfor%}
-  </div>
-  <script>
-   var slider = $(".slider");
-   slider.slider();
-  </script>
+    <script>
+     var slider = $(".slider");
+     slider.slider();
+    </script>
 
- </section>
+   </section>
 
- <section class="stats">
-  <h2 class="stats-title">About</h2>
-  <p class="stats-subtitle">The man behind the lens</p>
+   <section class="stats">
+    <h2 class="stats-title">About</h2>
+    <p class="stats-subtitle">The man behind the lens</p>
 
-  <p class="stats-text constrained">
-    Lorem Khaled Ipsum is a major key to success. Bless up. The ladies
-    always say Khaled you smell good, I use no cologne. Cocoa butter
-    is the key. The key to more success is to get a massage once a week, very
-    important, major key, cloth talk. They key is to have every key, the key
-    to open every door. Surround yourself with angels, positive energy,
-    beautiful people, beautiful souls, clean heart, angel. The key to success
-    is to keep your head above the water, never give up. Find peace, life is
-    like a water fall, you've gotta flow.
-  </p>
+    <p class="stats-text constrained">
+      Lorem Khaled Ipsum is a major key to success. Bless up. The ladies
+      always say Khaled you smell good, I use no cologne. Cocoa butter
+      is the key. The key to more success is to get a massage once a week, very
+      important, major key, cloth talk. They key is to have every key, the key
+      to open every door. Surround yourself with angels, positive energy,
+      beautiful people, beautiful souls, clean heart, angel. The key to success
+      is to keep your head above the water, never give up. Find peace, life is
+      like a water fall, you've gotta flow.
+    </p>
 
-  <ul class="stats-stats">
-    <li class="stats-stat">
-      <span class="stats-stat-number">X</span>
-      <span class="stats-stat-desc">years of photgraphy experience</span>
-    </li>
+    <ul class="stats-stats">
+      <li class="stats-stat">
+        <span class="stats-stat-number">X</span>
+        <span class="stats-stat-desc">years of photgraphy experience</span>
+      </li>
 
-    <li class="stats-stat">
-      <span class="stats-stat-number">37</span>
-      <span class="stats-stat-desc">events attended</span>
-    </li>
+      <li class="stats-stat">
+        <span class="stats-stat-number">37</span>
+        <span class="stats-stat-desc">events attended</span>
+      </li>
 
-    <li class="stats-stat">
-      <span class="stats-stat-number">XX</span>
-      <span class="stats-stat-desc">drivers photographed</span>
-    </li>
-  </ul>
- </section>
+      <li class="stats-stat">
+        <span class="stats-stat-number">XX</span>
+        <span class="stats-stat-desc">drivers photographed</span>
+      </li>
+    </ul>
+   </section>
 
- <section id="fp-greatest-hits">
-  <h2><div></div><span>Greatest Hits</span></h2>
-
-  <ul>
-   {%for pic in awesome.pictures[0:10]%}
-    <li>
-     <a href="/galleries/awesome/awesome/{{pic.identifier}}/">
-      <img src="{{pic.get_size('thumb').get_url()}}" alt="" />
-     </a>
-    </li>
-   {%endfor%}
-  </ul>
-  <div class="clearme"></div>
-  <div class="more-button">
-   <a class="button" href="{{awesome.get_url()}}">More &gt;</a>
-  </div>
- </section>
-
-
-
- {%for tax in taxonomies%}
-  <section id="{{tax.slug}}">
-   <h2><div></div><span>{{tax.name}}</span></h2>
-
-   <ul class="album-listing album-listing-{{tax.slug}}">
-    {%for gallery in tax.galleries%}
-     <li>
-      <div>
-       <a href="{{gallery.get_url()}}">
-        <img src="{{gallery.get_cover().get_size('thumb').get_url()}}" alt="" />
-        <span class="title">{{gallery.title}}</span>
-        <span class="count">
-         <span class="assistive">(</span>{{gallery.count()}}
-         <span class="assistive">photos)</span>
-        </span>
-       </a>
+  {% for tax in taxonomies %}
+    <section class="gallery-section" id="{{tax.slug}}">
+      <div class="gallery-section-text">
+        <div class="gallery-section-text-inner">
+          <h2 class="gallery-section-text-title">{{ tax.name }}</h2>
+          <p class="gallery-section-text-subtitle">
+            {% if tax.name == "Drivers" %}
+              Wicked skills and unique style
+            {% elif tax.name == "Events" %}
+              Documenting the action from up close
+            {% endif %}
+          </p>
+          <p class="gallery-text-action-outer">
+            <a class="gallery-section-text-button">View all</a>
+          </p>
+        </div>
       </div>
 
-     </li>
-    {%endfor%}
-   </ul>
-   <div class="clearme"></div>
-   <div class="more-button">
-    <a class="button" href="{{tax.index_url}}">{{tax.button_text}} &gt;</a>
-   </div>
-  </section>
-
- {%endfor%}
-</article>
-{%endblock%}
+      <ul class="gallery-section-items album-listing-{{tax.slug}}">
+      {% for gallery in tax.galleries %}
+        <li class="gallery-section-item">
+          <div class="gallery-section-item-inner">
+            <a href="{{ gallery.get_url() }}" class="gallery-section-item-action">
+              <img class="gallery-section-item-image" src="{{ gallery.get_cover().get_size('thumb').get_url() }}" alt="" />
+              <span class="gallery-section-item-title">{{ gallery.title }}</span>
+              <span class="gallery-section-item-count">
+              <span class="assistive">(</span>{{ gallery.count() }}
+              <span class="assistive">photos)</span>
+            </span>
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+  </article>
+{% endblock %}

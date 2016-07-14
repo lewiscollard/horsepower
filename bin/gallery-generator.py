@@ -670,7 +670,7 @@ class Gallery():
     ctx["taxonomies"] = [
       {
         "name": "Events",
-        "galleries": events_sorted[0:8],
+        "galleries": events_sorted[0:9],
         "index_url": self.config["URL"] + "galleries/events/",
         "slug": "events",
         "button_text": "More events",
@@ -678,14 +678,14 @@ class Gallery():
       },
       {
         "name": "Drivers",
-        "galleries": drivers_sorted[0:8],
+        "galleries": drivers_sorted[0:9],
         "index_url": self.config["URL"] + "galleries/drivers/",
         "slug": "drivers",
         "button_text": "All drivers",
       },
       {
         "name": "Teams",
-        "galleries": teams_sorted[0:8],
+        "galleries": teams_sorted[0:9],
         "index_url": self.config["URL"] + "galleries/teams/",
         "slug": "teams",
         "button_text": "All teams",
