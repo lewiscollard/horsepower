@@ -1,0 +1,40 @@
+.header {
+  height: 120px;
+
+  background-color: $color-black;
+}
+
+.header-inner {
+  height: 100%;
+  @include Clearfix();
+}
+
+.nav-outer {
+  font-size: 0;
+
+  height: 100%;
+  float: right;
+}
+
+.nav-item {
+  display: inline-block;
+  line-height: 120px;
+  color: #fff;
+
+  & + & {
+    margin-left: 30px;
+  }
+}
+
+.nav-item-action {
+  color: inherit;
+
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $color-red;
+  }
+}
