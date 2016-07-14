@@ -1,9 +1,0 @@
-@mixin Clearfix() {
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-}
-
-@mixin
