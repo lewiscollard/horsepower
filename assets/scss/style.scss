@@ -1,6 +1,9 @@
 @import "base/definitions";
 @import "base/reset";
 
+@import "layout/layout";
+@import "layout/header";
+
 /* Generics */
 a:link {
 	color: #5555dd;
@@ -20,12 +23,6 @@ i, em {
 
 .clearme {
 	clear: both;
-}
-
-.contained {
-	max-width: 960px;
-	margin: 0 auto;
-	padding: 0 20px;
 }
 
 a.button {
@@ -170,7 +167,6 @@ body {
 	background-image: url(/resource/images/loading.gif);
 	background-position: 0px center;
 	background-repeat: no-repeat;
-
 }
 
 .slider .slide {
