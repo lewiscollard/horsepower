@@ -1,0 +1,76 @@
+{%extends "base.html"%}
+{%block title_entire%}{{config.site_name}}{%endblock%}
+{%block meta%}
+<meta property="og:image" content="http://hp.lewiscollard.com{{featured[0].get_size('huge_crop').get_url()}}" />
+<meta property="og:title" content="Horsepower" />
+<meta property="og:description" content="A motorsports gallery by Lewis Collard." />
+{%endblock%}
+{%block content%}
+
+<article class="contained front-page">
+ <section id="featured">
+  <h1 class="assistive">Featured photographs</h1>
+  <div class="slider">
+   {%for photo in featured%}
+    <div class="slide" id="slide-{{loop.index}}">
+     <img src="{{photo.get_size('huge_crop').get_url()}}" />
+    </div>
+   {%endfor%}
+  </div>
+  <script>
+   var slider = $(".slider");
+   slider.slider();
+  </script>
+
+ </section>
+
+ <section id="fp-greatest-hits">
+  <h2><div></div><span>Greatest Hits</span></h2>
+
+  <ul>
+   {%for pic in awesome.pictures[0:10]%}
+    <li>
+     <a href="/galleries/awesome/awesome/{{pic.identifier}}/">
+      <img src="{{pic.get_size('thumb').get_url()}}" alt="" />
+     </a>
+    </li>
+   {%endfor%}
+  </ul>
+  <div class="clearme"></div>
+  <div class="more-button">
+   <a class="button" href="{{awesome.get_url()}}">More &gt;</a>
+  </div>
+ </section>
+
+
+
+ {%for tax in taxonomies%}
+  <section id="{{tax.slug}}">
+   <h2><div></div><span>{{tax.name}}</span></h2>
+
+   <ul class="album-listing album-listing-{{tax.slug}}">
+    {%for gallery in tax.galleries%}
+     <li>
+      <div>
+       <a href="{{gallery.get_url()}}">
+        <img src="{{gallery.get_cover().get_size('thumb').get_url()}}" alt="" />
+        <span class="title">{{gallery.title}}</span>
+        <span class="count">
+         <span class="assistive">(</span>{{gallery.count()}}
+         <span class="assistive">photos)</span>
+        </span>
+       </a>
+      </div>
+
+     </li>
+    {%endfor%}
+   </ul>
+   <div class="clearme"></div>
+   <div class="more-button">
+    <a class="button" href="{{tax.index_url}}">{{tax.button_text}} &gt;</a>
+   </div>
+  </section>
+
+ {%endfor%}
+</article>
+{%endblock%}

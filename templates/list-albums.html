@@ -1,0 +1,26 @@
+{%extends "base.html"%}
+{%block title%}{{title}}{%endblock%}
+{%block content%}
+ <article class="contained">
+  <h1 class="page-title album-index-title">{{title}}</h1>
+  <ul class="album-listing album-listing-{{base_slug}}">
+   {%for album in albums%}
+    <li>
+     <div>
+      <a href="{{album.get_url()}}">
+       <img src="{{album.get_cover().get_size('thumb').get_url()}}" alt="" />
+       <span class="title">{{album.title}}</span>
+       <span class="count">
+        <span class="assistive">(</span>{{album.count()}}
+        <span class="assistive">photos)</span>
+       </span>
+      </a>
+     </div>
+    </li>
+   {%endfor%}
+  </ul>
+  <div class="clearme"></div>
+ </article>
+
+
+{%endblock%}

@@ -1,0 +1,53 @@
+{%extends "base.html"%}
+{%block title%}{{photo.get_title()}}{%endblock%}
+{%block meta%}
+<meta name="object-hash" content="{{object_hash}}" />
+<meta property="og:title" content="{{photo.get_title()}}" />
+<meta property="og:image" content="http://hp.lewiscollard.com{{photo.get_size('large').get_url()}}" />
+{%endblock%}
+{%block content%}
+ <article class="gallery-image contained">
+  <div class="image-container image-container-{{photo.aspect_ratio_name()}}">
+   {%if prev_photo%}
+    <div class="photo-prevnext prev">
+     <a href="{{prev_photo.context_url}}"><span class="assistive">Next photo</span></a>
+    </div>
+   {%endif%}
+
+   {%if next_photo%}
+    <div class="photo-prevnext next">
+     <a href="{{next_photo.context_url}}"><span class="assistive">Next photo</span></a>
+    </div>
+   {%endif%}
+   <div class="image-container-inner" style="padding-bottom: {{photo.aspect_padding_bottom()}}%">
+    <img src='{{photo.get_size("large").get_url()}}' alt="{{photo.identifier}}" />
+   </div>
+  </div>
+  
+  <p class="fullres-download">
+   <a class="button" href='{{photo.get_size("full").get_url()}}'>Download in full resolution!</a>
+  </p>
+  
+  <ul id="desc">
+   <li><strong>Photo reference:</strong> {{photo.identifier}}</li>
+   {%if photo.driver_objects%}
+    <li>
+     <strong>Driver{%if photo.driver_objects|length > 1%}s{%endif%}:</strong>
+     {%for driver in photo.driver_objects%}{%if loop.index > 1%},{%endif%}
+     <a href="{{driver.get_url()}}">{{driver.title}}</a>{%endfor%}
+    </li>
+   {%endif%}
+   {%if photo.event_object%}
+    <li><strong>Event:</strong> <a href="{{photo.event_object.get_url()}}">{{photo.event_object.title}}</a></li>
+   {%endif%}
+   {%if photo.team_objects%}
+    <li><strong>Team{%if photo.team_objects|length > 1%}s{%endif%}:</strong>
+    {%for team in photo.team_objects%}
+     <a href="{{team.get_url()}}">{{team.title}}</a>
+    {%endfor%}
+   {%endif%}
+    
+  
+  </ul>
+ </article>
+{%endblock%}
