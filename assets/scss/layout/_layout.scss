@@ -1,11 +1,16 @@
 .contained {
-  max-width: 1400px;
+  max-width: $size-contained-large;
   margin: 0 auto;
   padding: 0 20px;
 }
 
+.contained-med {
+  max-width: $size-contained-med;
+  margin: 0 auto;
+}
+
 .constrained {
-  max-width: 960px;
+  max-width: $size-contained-small;
   margin: 0 auto;
   padding: 0 20px;
 }

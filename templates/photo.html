@@ -1,53 +1,75 @@
-{%extends "base.html"%}
-{%block title%}{{photo.get_title()}}{%endblock%}
-{%block meta%}
-<meta name="object-hash" content="{{object_hash}}" />
-<meta property="og:title" content="{{photo.get_title()}}" />
-<meta property="og:image" content="http://hp.lewiscollard.com{{photo.get_size('large').get_url()}}" />
-{%endblock%}
-{%block content%}
- <article class="gallery-image contained">
-  <div class="image-container image-container-{{photo.aspect_ratio_name()}}">
-   {%if prev_photo%}
-    <div class="photo-prevnext prev">
-     <a href="{{prev_photo.context_url}}"><span class="assistive">Next photo</span></a>
-    </div>
-   {%endif%}
+{% extends "base.html" %}
 
-   {%if next_photo%}
-    <div class="photo-prevnext next">
-     <a href="{{next_photo.context_url}}"><span class="assistive">Next photo</span></a>
+{% block title %}{{ photo.get_title() }}{% endblock %}
+
+{% block meta %}
+  <meta name="object-hash" content="{{object_hash}}" />
+  <meta property="og:title" content="{{photo.get_title()}}" />
+  <meta property="og:image" content="http://hp.lewiscollard.com{{photo.get_size('large').get_url()}}" />
+{% endblock %}
+
+{% block content %}
+  <article class="photo-outer">
+    <div class="photo-container-outer">
+      <div class="photo-container photo-container-{{photo.aspect_ratio_name()}}">
+        {% if prev_photo %}
+          <div class="photo-prevnext prev">
+            <a href="{{ prev_photo.context_url }}"><span class="assistive">Next photo</span></a>
+          </div>
+        {% endif %}
+
+        {% if next_photo %}
+          <div class="photo-prevnext next">
+            <a href="{{ next_photo.context_url }}"><span class="assistive">Next photo</span></a>
+          </div>
+        {% endif %}
+
+        <div class="photo-container-inner" style="padding-bottom: {{ photo.aspect_padding_bottom() }}%">
+          <img class="photo-container-image" src='{{ photo.get_size("large").get_url() }}' alt="{{ photo.identifier }}" />
+
+          <p class="photo-download">
+            <a class="photo-download-action" href='{{ photo.get_size("full").get_url() }}'>
+              <i class="icon icon-download"></i>Download high res</a>
+          </p>
+        </div>
+      </div>
     </div>
-   {%endif%}
-   <div class="image-container-inner" style="padding-bottom: {{photo.aspect_padding_bottom()}}%">
-    <img src='{{photo.get_size("large").get_url()}}' alt="{{photo.identifier}}" />
-   </div>
-  </div>
-  
-  <p class="fullres-download">
-   <a class="button" href='{{photo.get_size("full").get_url()}}'>Download in full resolution!</a>
-  </p>
-  
-  <ul id="desc">
-   <li><strong>Photo reference:</strong> {{photo.identifier}}</li>
-   {%if photo.driver_objects%}
-    <li>
-     <strong>Driver{%if photo.driver_objects|length > 1%}s{%endif%}:</strong>
-     {%for driver in photo.driver_objects%}{%if loop.index > 1%},{%endif%}
-     <a href="{{driver.get_url()}}">{{driver.title}}</a>{%endfor%}
-    </li>
-   {%endif%}
-   {%if photo.event_object%}
-    <li><strong>Event:</strong> <a href="{{photo.event_object.get_url()}}">{{photo.event_object.title}}</a></li>
-   {%endif%}
-   {%if photo.team_objects%}
-    <li><strong>Team{%if photo.team_objects|length > 1%}s{%endif%}:</strong>
-    {%for team in photo.team_objects%}
-     <a href="{{team.get_url()}}">{{team.title}}</a>
-    {%endfor%}
-   {%endif%}
-    
-  
-  </ul>
- </article>
+
+    <div class="photo-meta-outer constrained">
+      <div class="photo-meta-inner">
+        <span class="photo-meta-icon">
+          <i class="icon icon-info"></i>
+        </span>
+        <ul id="photo-meta">
+          <li class="photo-meta-item">
+            <strong class="photo-meta-item-title">Photo reference<span class="assistive">:</span></strong> {{photo.identifier}}
+          </li>
+
+          {% if photo.driver_objects %}
+            <li class="photo-meta-item">
+              <strong class="photo-meta-item-title">Driver{% if photo.driver_objects|length > 1 %}s{% endif %}<span class="assistive">:</span></strong>
+              {% for driver in photo.driver_objects %}{% if loop.index > 1%},{% endif %}
+              <a href="{{ driver.get_url() }}">{{ driver.title }}</a>{% endfor %}
+            </li>
+          {% endif %}
+
+          {% if photo.event_object %}
+            <li class="photo-meta-item">
+              <strong class="photo-meta-item-title">Event<span class="assistive">:</span></strong>
+              <a href="{{ photo.event_object.get_url() }}">{{ photo.event_object.title }}</a>
+            </li>
+          {% endif %}
+
+          {% if photo.team_objects %}
+            <li class="photo-meta-item">
+              <strong class="photo-meta-item-title">Team{% if photo.team_objects|length > 1 %}s{% endif %}<span class="assistive">:</span></strong>
+              {% for team in photo.team_objects %}
+                <a href="{{ team.get_url() }}">{{ team.title }}</a>
+              {% endfor %}
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </article>
 {%endblock%}

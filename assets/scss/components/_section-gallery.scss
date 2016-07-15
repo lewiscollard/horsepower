@@ -72,6 +72,33 @@
   height: 100%;
 }
 
+.gallery-section-item-action {
+  color: #fff;
+  text-decoration: none;
+}
+
+.gallery-section-item-title {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+  text-shadow: $text-shadow;
+  text-transform: uppercase;
+}
+
+.gallery-section-item-count {
+  display: block;
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+
+  font-weight: 700;
+  text-shadow: $text-shadow;
+}
+
 .gallery-section-item-image {
   position: absolute;
 
