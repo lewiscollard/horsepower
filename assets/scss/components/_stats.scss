@@ -6,17 +6,15 @@
 }
 
 .stats-title {
-  font-weight: 700;
-  text-transform: uppercase;
+  @include Title();
+
   margin-bottom: 10px;
 }
 
 .stats-subtitle {
-  margin-bottom: $pad-base * 1.5;
+  @include Title();
 
-  font-size: $fs-large;
-  font-weight: 700;
-  text-transform: uppercase;
+  margin-bottom: $pad-base * 1.5;
 }
 
 .stats-stats {
@@ -49,10 +47,11 @@
 }
 
 .stats-stat-number {
+  @include Title();
+
   display: block;
 
   font-size: 120px;
-  font-weight: 700;
   color: $color-red;
 }
 

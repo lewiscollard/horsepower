@@ -28,17 +28,15 @@
 }
 
 .gallery-section-text-title {
-  text-transform: uppercase;
-  font-weight: 800;
+  @include Title();
 
   margin-bottom: $pad-base;
 }
 
 .gallery-section-text-subtitle {
-  font-size: $fs-large;
+  @include Title();
 
-  text-transform: uppercase;
-  font-weight: 800;
+  font-size: $fs-large;
 }
 
 .gallery-section-items {
