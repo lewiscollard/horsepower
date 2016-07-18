@@ -78,10 +78,10 @@
 
       <ul class="gallery-section-items album-listing-{{tax.slug}}">
       {% for gallery in tax.galleries %}
-        <li class="gallery-section-item">
-          <div class="gallery-section-item-inner">
-            <a href="{{ gallery.get_url() }}" class="gallery-section-item-action">
-              <div class="gallery-section-item-image" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"/>
+        <li class="gallery-section-item gallery-item has-caption">
+          <div class="gallery-section-item-inner gallery-item">
+            <a href="{{ gallery.get_url() }}" class="gallery-item-action">
+              <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"/>
               <span class="gallery-section-item-title">{{ gallery.title }}</span>
               <span class="gallery-section-item-count">
               <i class="icon icon-th"></i>
