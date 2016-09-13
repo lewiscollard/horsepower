@@ -29,9 +29,11 @@ def debug_print(txt):
   if DEBUG:
     stderr_print(txt)
 
+
 def stderr_print(txt):
   sys.stderr.write("%s: %s\n" % (sys.argv[0], txt))
   sys.stderr.flush()
+
 
 def parse_kvp_file(fd, dict=False):
   kvp = []
@@ -69,6 +71,7 @@ def parse_kvp_file(fd, dict=False):
     return rv
   return kvp
 
+
 def mkdirs(path, silent=True):
   try:
     os.makedirs(path)
@@ -77,6 +80,7 @@ def mkdirs(path, silent=True):
     # XX: is this portable?
     if not detail.errno == 17 and silent:
       raise detail
+
 
 def slugify(text):
   # Credit: http://snipplr.com/view/26266/
@@ -90,6 +94,7 @@ def slugify(text):
   ret = re.sub("\W", " ", ret)
   ret = re.sub(" +", "-", ret)
   return ret.strip()
+
 
 def extract_hash(path):
   fd = open(path)
@@ -105,6 +110,7 @@ def extract_hash(path):
     return None
   return match.group(1)
 
+
 def template_safe_config(config):
   rv = {}
   for k in config:
@@ -113,6 +119,7 @@ def template_safe_config(config):
     sk = sk.replace("-", "_")
     rv[sk] = config[k]
   return rv
+
 
 class ImageSize():
   def __init__(self, size, filename, config):
@@ -133,6 +140,7 @@ class ImageSize():
       return (self.height, self.width)
     im = Image.open(self.get_path())
     return im.size
+
 
 class GalleryImage():
   def __init__(self, config):
@@ -528,6 +536,7 @@ class TeamAlbum(AlbumBase):
   def get_sort_reverse(self):
     return True
 
+
 class Gallery():
   def __init__(self, config):
     self.drivers = []
@@ -719,6 +728,7 @@ class Gallery():
       fd.write(tmpl.render(ctx))
       fd.close()
 
+
 class Page:
   def __init__(self, template, config):
     self.template = template
@@ -778,6 +788,7 @@ class PageManager:
   def writeout(self, force_overwrite=False):
     for i in self.pages:
       i.writeout(force_overwrite)
+
 
 def main():
   global DEBUG
