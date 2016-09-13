@@ -6,10 +6,10 @@ import hashlib
 import htmlentitydefs
 import os
 import os.path
-from pprint import pprint
 import re
 import shutil
 import sys
+from pprint import pprint
 
 import exifread
 from PIL import Image, ImageOps
