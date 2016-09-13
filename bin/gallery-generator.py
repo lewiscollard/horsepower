@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import argparse
 import copy
 import datetime
@@ -11,8 +11,8 @@ import re
 import shutil
 import sys
 
-import EXIF
-import Image, ImageOps
+import exifread
+from PIL import Image, ImageOps
 from jinja2 import Environment, FileSystemLoader
 
 IMAGE_EXTENSIONS = ("jpg", "jpeg", "jpe", "png")
@@ -326,7 +326,7 @@ class GalleryImage():
     # Parse EXIF data
     try:
       fd = open(filename)
-      exif = EXIF.process_file(fd)
+      exif = exifread.process_file(fd)
       for k in INTERESTING_EXIF_FIELDS:
         if exif.has_key(k):
           self.exif[INTERESTING_EXIF_FIELDS[k]] = exif[k]

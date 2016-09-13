@@ -2,3 +2,4 @@ html/
 rsync.sh
 node_modules
 npm-debug.log
+.venv
