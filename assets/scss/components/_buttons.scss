@@ -1,0 +1,20 @@
+.button {
+  @include Title();
+
+  display: inline-block;
+  height: 45px;
+  line-height: 45px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  border: 1px solid #000;
+  color: #fff;
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  &.onDark {
+    border-color: #fff;
+    color: #fff;
+  }
+}

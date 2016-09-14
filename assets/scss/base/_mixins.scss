@@ -7,7 +7,7 @@
 }
 
 @mixin Title {
-    font-family: "Helvetica Neue", "Arial Black", "Freesans", "Arial", sans-serif;
+    font-family: $font-mega;
     font-weight: 900;
     text-transform: uppercase;
 }
