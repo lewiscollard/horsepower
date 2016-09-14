@@ -14,6 +14,8 @@
 .stats-subtitle {
   @include Title();
 
+  font-size: $fs-large;
+
   margin-bottom: $pad-base * 1.5;
 }
 

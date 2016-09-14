@@ -1,3 +1,61 @@
+.gallery-item {
+  position: relative;
+}
+
 .gallery-item-action {
+  @include Spread();
+
   color: inherit;
+  text-decoration: none;
+  z-index: 3;
+
+  &::after {
+    @include Spread();
+
+    content: '';
+
+    background-color: $color-red;
+
+    opacity: 0;
+    transform: scale(0);
+    transition: all $transition-time;
+
+    z-index: 3;
+  }
+
+  &:hover::after {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+}
+
+.gallery-item-image {
+  position: relative;
+  z-index: 2;
+}
+
+.gallery-item-title {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+
+  font-weight: 700;
+
+  line-height: 1.4;
+  text-shadow: $text-shadow;
+  text-transform: uppercase;
+
+  z-index: 5;
+}
+
+.gallery-item-count {
+  display: block;
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+
+  z-index: 5;
+
+  font-weight: 700;
+  text-shadow: $text-shadow;
 }

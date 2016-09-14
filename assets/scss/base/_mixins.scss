@@ -1,3 +1,12 @@
+@mixin Spread() {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
 @mixin Clearfix() {
   &::after {
     content: '';
@@ -7,7 +16,7 @@
 }
 
 @mixin Title {
-    font-family: $font-mega;
-    font-weight: 900;
-    text-transform: uppercase;
+  font-family: $font-mega;
+  font-weight: 900;
+  text-transform: uppercase;
 }
