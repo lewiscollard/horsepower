@@ -1,6 +1,4 @@
 .button {
-  @include Title();
-
   display: inline-block;
   height: 45px;
   line-height: 45px;
@@ -9,12 +7,20 @@
 
   border: 1px solid #000;
   color: #fff;
-  font-size: 12px;
 
+  font-size: 12px;
+  font-weight: bold;
   text-transform: uppercase;
 
+  transition: all 0.1s;
+
   &.onDark {
-    border-color: #fff;
-    color: #fff;
+    border-color: $color-white;
+    color: $color-white;
+
+    &:hover {
+      color: $color-red;
+      background-color: $color-white;
+    }
   }
 }

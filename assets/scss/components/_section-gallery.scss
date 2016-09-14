@@ -25,18 +25,27 @@
   max-width: 520px;
 
   float: right;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .gallery-section-text-title {
-  @include Title();
-
   margin-bottom: $pad-base;
+
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .gallery-section-text-subtitle {
   @include Title();
 
   font-size: $fs-large;
+}
+
+.gallery-section-text-action-outer {
+  margin-top: $pad-base * 3;
 }
 
 .gallery-section-items {
