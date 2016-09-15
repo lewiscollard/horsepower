@@ -84,9 +84,14 @@
               <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>
               <span class="gallery-item-title">{{ gallery.title }}</span>
               <span class="gallery-item-count">
-              <i class="icon icon-th"></i>
-              <span class="assistive">(</span>{{ gallery.count() }}
-              <span class="assistive">photos)</span>
+                <i class="icon icon-th"></i>
+                <span class="assistive">(</span>{{ gallery.count() }}
+                <span class="assistive">photos)</span>
+              </span>
+
+              <span class="gallery-item-indicator">
+                <i class="icon icon-right-open"></i>
+              </span>
             </a>
           </div>
         </li>
