@@ -42,18 +42,18 @@
 
     <ul class="stats-stats">
       <li class="stats-stat">
-        <span class="stats-stat-number">X</span>
-        <span class="stats-stat-desc">years of photgraphy experience</span>
-      </li>
-
-      <li class="stats-stat">
-        <span class="stats-stat-number">37</span>
+        <span class="stats-stat-number">{{ event_count }}</span>
         <span class="stats-stat-desc">events attended</span>
       </li>
 
       <li class="stats-stat">
-        <span class="stats-stat-number">XX</span>
+        <span class="stats-stat-number">{{ driver_count }}</span>
         <span class="stats-stat-desc">drivers photographed</span>
+      </li>
+
+      <li class="stats-stat">
+        <span class="stats-stat-number">{{ "{:,}".format(photo_count) }}</span>
+        <span class="stats-stat-desc">full resolution photographs</span>
       </li>
     </ul>
    </section>

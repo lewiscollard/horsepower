@@ -565,6 +565,7 @@ class Gallery():
         self.config = config
         self.featured = []
         self.awesome = AwesomeAlbum(config)
+        self.photo_count = 0
 
     def walk_callback(self, arg, path, names):
         for fn in names:
@@ -642,6 +643,7 @@ class Gallery():
                 self.featured.append(img)
             if img.awesome:
                 self.awesome.add_image(img)
+            self.photo_count += 1
 
     def ingest_directory(self, directory):
         debug_print("ingesting directory %s" % directory)
@@ -724,6 +726,10 @@ class Gallery():
             },
         ]
         ctx["awesome"] = self.awesome
+        ctx["driver_count"] = len(drivers_sorted)
+        ctx["event_count"] = len(events_sorted)
+        ctx["photo_count"] = self.photo_count
+
         tmpl = template_env.get_template("main-page.html")
         fd = open(output_file, "w")
         fd.write(tmpl.render(ctx))
