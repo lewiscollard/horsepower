@@ -1,0 +1,28 @@
+.plain-text {
+  > * {
+    margin-top: $pad-base;
+    margin-bottom: $pad-base;
+
+    line-height: 1.5;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  h2 {
+    @include Title();
+
+    font-size: $fs-medium;
+  }
+
+  a {
+    font-weight: 800;
+    text-decoration: underline;
+    color: $color-red;
+  }
+}

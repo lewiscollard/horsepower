@@ -14,3 +14,16 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.full-height {
+  min-height: calc(100vh - 96px - 76px);
+}
+
+.text-page {
+  padding-top: $pad-base * 4;
+  padding-bottom: $pad-base * 4;
+
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
