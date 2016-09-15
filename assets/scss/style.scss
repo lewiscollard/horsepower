@@ -6,6 +6,7 @@
 @import "layout/header";
 @import "layout/footer";
 
+@import "components/album-index";
 @import "components/buttons";
 @import "components/gallery";
 @import "components/photo";
@@ -169,15 +170,6 @@ i, em {
 
 .album-listing {
 	margin-left: -0.5%;
-}
-
-.album-listing li {
-	float: left;
-	position: relative;
-	width: 24.5%;
-	margin-left: 0.5%;
-	margin-bottom: 0.7%;
-	overflow: hidden;
 }
 
 .album-listing .count {

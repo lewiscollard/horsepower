@@ -65,7 +65,7 @@
           <h2 class="gallery-section-text-title">{{ tax.name }}</h2>
           <p class="gallery-section-text-subtitle">
             {% if tax.name == "Drivers" %}
-              Wicked skills. Unique styles.
+              Mad skills.<br />Unique styles.
             {% elif tax.name == "Events" %}
               Documenting the action from up close
             {% endif %}
@@ -78,8 +78,8 @@
 
       <ul class="gallery-section-items album-listing-{{tax.slug}}">
       {% for gallery in tax.galleries %}
-        <li class="gallery-section-item gallery-item has-caption">
-          <div class="gallery-section-item-inner gallery-item">
+        <li class="gallery-item gallery-section-item has-caption">
+          <div class="gallery-section-item-inner">
             <a href="{{ gallery.get_url() }}" class="gallery-item-action">
               <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>
               <span class="gallery-item-title">{{ gallery.title }}</span>

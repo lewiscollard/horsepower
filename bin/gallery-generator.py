@@ -744,7 +744,7 @@ class Gallery():
             ("Teams", "teams", teams_sorted)
         ):
             ctx = {
-                "config": self.config,
+                "config": template_safe_config(self.config),
                 "title": title,
                 "slug": slug,
                 "base_slug": slug,

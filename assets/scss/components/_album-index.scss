@@ -1,0 +1,17 @@
+.album-index-outer {
+  background-color: $color-black;
+  color: $color-white;
+
+  min-height: calc(100vh - 100px);
+}
+
+.album-index-header {
+  padding-top: $pad-base * 3;
+  padding-bottom: $pad-base * 3;
+}
+
+.album-index-title {
+  @include Title();
+
+  font-size: $fs-large;
+}

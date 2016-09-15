@@ -1,4 +1,7 @@
 .gallery-item {
+  width: 25%;
+  float: left;
+
   position: relative;
 }
 
@@ -27,6 +30,11 @@
     opacity: 0.9;
     transform: scale(1);
   }
+}
+
+.gallery-item-inner {
+  position: relative;
+  padding-bottom: 66.6%;
 }
 
 .gallery-item-image {
