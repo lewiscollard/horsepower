@@ -1,25 +1,39 @@
-{%extends "base.html"%}
-{%block title%}{{album.get_title()}}{%endblock%}
-{%block meta%}
-<meta property="og:title" content="{{album.get_title()}}" />
-<meta property="og:description" content="" />
-<meta property="og:image" content="http://hp.lewiscollard.com{{photos[0].get_size('large').get_url()}}" />
-{%endblock%}
-{%block content%}
+{% extends "base.html" %}
 
-<article class="album contained">
- <h1 class="album-title page-title">{{album.get_title()}}</h1>
- <ul class="album-photos">
-  {%for photo in photos%}
-   <li>
-    <div>
-     <a href="{{photo.context_url}}">
-      <img src="{{photo.get_size('thumb').get_url()}}" alt="{{photo.identifier}}" />
-     </a>
+{% block title %}{{ album.get_title() }}{% endblock %}
+
+{% block meta %}
+  <meta property="og:title" content="{{ album.get_title() }}" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="http://hp.lewiscollard.com{{photos[0].get_size('large').get_url()}}" />
+{% endblock %}
+
+{% block content %}
+  <article class="album-outer">
+    <div class="album-inner contained">
+      <div class="album-header">
+        <div class="album-header-text">
+          <h1 class="album-title">
+            <span class="album-title-above">Temporary</span>
+            <span class="album-title-main">{{ album.title }}</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="album-items-outer">
+        <ul class="album-items">
+          {% for photo in photos %}
+            <li class="album-item">
+              <a href="{{ photo.context_url }}" class="album-item-action">
+                <div class="album-item-inner">
+                  <img class="album-item-photo" src="{{ photo.get_size('thumb').get_url() }}" alt="{{ photo.identifier }}" />
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+          </ul>
+      </div>
+      <div class="clearme"></div>
     </div>
-   </li>
-  {%endfor%}
- </ul>
- <div class="clearme"></div>
-</article>
-{%endblock%}
+  </article>
+{% endblock %}

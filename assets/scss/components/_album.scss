@@ -1,0 +1,53 @@
+.album-outer {
+  background-color: $color-black;
+}
+
+.album-header {
+  padding-top: $pad-base * 4;
+  padding-bottom: $pad-base * 4;
+
+  color: #fff;
+}
+
+.album-header-text {
+  max-width: 66%;
+}
+
+.album-title-main {
+  @include Title();
+
+  display: block;
+
+  font-size: 52px;
+}
+
+.album-title-above {
+  display: block;
+  margin-bottom: $pad-base;
+
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.album-items {
+
+}
+
+.album-item {
+  width: 25%;
+  float: left;
+}
+
+.album-item-action {
+  display: block;
+}
+
+.album-item-inner {
+  position: relative;
+  padding-bottom: 66.666%;
+}
+
+.album-item-photo {
+  @include Spread();
+}
