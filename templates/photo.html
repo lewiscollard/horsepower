@@ -13,15 +13,18 @@
     <div class="photo-container-outer">
       <div class="photo-container photo-container-{{photo.aspect_ratio_name()}}">
         {% if prev_photo %}
-          <div class="photo-prevnext prev">
-            <a href="{{ prev_photo.context_url }}"><span class="assistive">Next photo</span></a>
-          </div>
+          <a aria-hidden="true" class="photo-prevnext prev" href="{{ prev_photo.context_url }}">
+            <i class="icon icon-left-open"></i>
+
+            <span class="assistive">Next photo</span>
+          </a>
         {% endif %}
 
         {% if next_photo %}
-          <div class="photo-prevnext next">
-            <a href="{{ next_photo.context_url }}"><span class="assistive">Next photo</span></a>
-          </div>
+          <a aria-hidden="true" class="photo-prevnext next" href="{{ next_photo.context_url }}">
+            <span class="assistive">Next photo</span>
+            <i class="icon icon-right-open"></i>
+          </a>
         {% endif %}
 
         <div class="photo-container-inner" style="padding-bottom: {{ photo.aspect_padding_bottom() }}%">

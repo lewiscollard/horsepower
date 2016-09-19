@@ -1,4 +1,6 @@
 .photo-container-outer {
+  padding-top: $pad-base * 3;
+
   background-color: $color-black;
 }
 
@@ -6,7 +8,7 @@
   margin-left: auto;
   margin-right: auto;
 
-  padding-top: $pad-base * 3;
+  position: relative;
 
   &.photo-container-wide {
     max-width: $size-contained-med;
@@ -37,10 +39,11 @@
 }
 
 .photo-download-action {
-  @include Title();
-
   color: inherit;
+
+  font-weight: 700;
   text-decoration: none;
+  text-transform: uppercase;
 
   text-shadow: $text-shadow;
 
@@ -49,9 +52,38 @@
   }
 }
 
+.photo-prevnext {
+  z-index: 2;
+
+  position: absolute;
+  top: 50%;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+
+  line-height: 50px;
+  text-align: center;
+  font-family: sans-serif;
+
+
+  border: 1px solid #cccccc;
+  background: #000000;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: $color-white;
+
+  &.prev {
+    left: -70px;
+  }
+  &.next {
+    right: -70px;
+  }
+}
+
 .photo-meta-outer {
   padding-top: $pad-base * 5;
   padding-bottom: $pad-base * 5;
+
+  background-color: $color-white;
 }
 
 .photo-meta-inner {
@@ -116,7 +148,8 @@
 }
 
 .photo-meta-item-title {
-  @include Title();
+  font-weight: 700;
   display: block;
   margin-bottom: 5px;
+  text-transform: uppercase;
 }
