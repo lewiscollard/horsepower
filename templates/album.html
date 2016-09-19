@@ -14,7 +14,9 @@
       <div class="album-header">
         <div class="album-header-text">
           <h1 class="album-title">
-            <span class="album-title-above">Temporary</span>
+            {% if album.get_taxonomy_name() %}
+              <span class="album-title-above">{{ album.get_taxonomy_name() }}</span><span class="assistive">:</span>
+            {% endif %}
             <span class="album-title-main">{{ album.title }}</span>
           </h1>
         </div>

@@ -394,6 +394,9 @@ class AlbumBase():
     def get_sort_reverse(self):
         raise NotImplementedError
 
+    def get_taxonomy_name(self):
+        return ""
+
     def get_cover(self):
         return self.get_first(1)[0]
 
@@ -487,6 +490,9 @@ class EventAlbum(AlbumBase):
     def get_sort_reverse(self):
         return True
 
+    def get_taxonomy_name(self):
+        return "Events"
+
 
 class DriverAlbum(AlbumBase):
 
@@ -509,6 +515,9 @@ class DriverAlbum(AlbumBase):
 
     def get_sort_reverse(self):
         return True
+
+    def get_taxonomy_name(self):
+        return "Drivers"
 
 
 class AwesomeAlbum(AlbumBase):
