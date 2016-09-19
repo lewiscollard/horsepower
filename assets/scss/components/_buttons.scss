@@ -5,14 +5,20 @@
   padding-left: 30px;
   padding-right: 30px;
 
-  border: 1px solid #000;
+  background-color: $color-black;
+  border: 1px solid transparent;
   color: #fff;
 
   font-size: 12px;
   font-weight: bold;
+  text-decoration: none;
   text-transform: uppercase;
 
   transition: all 0.1s;
+
+  &:hover {
+    background-color: $color-red;
+  }
 
   &.onDark {
     border-color: $color-white;
