@@ -29,6 +29,9 @@
               <a href="{{ photo.context_url }}" class="album-item-action">
                 <div class="album-item-inner">
                   <img class="album-item-photo" src="{{ photo.get_size('thumb').get_url() }}" alt="{{ photo.identifier }}" />
+                  <span class="album-item-indicator">
+                    <i class="icon icon-search"></i>
+                  </span>
                 </div>
               </a>
             </li>

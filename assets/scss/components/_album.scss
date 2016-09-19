@@ -41,13 +41,59 @@
 
 .album-item-action {
   display: block;
+
+  color: #fff;
 }
 
 .album-item-inner {
   position: relative;
   padding-bottom: 66.666%;
+
+  &::after {
+    @include Spread();
+
+    content: '';
+
+    background-color: $color-red;
+
+    opacity: 0;
+    transform: scale(0);
+    transition: all $transition-time * 3;
+
+    z-index: 3;
+  }
+
+  &:hover::after {
+    opacity: 0.9;
+    transform: scale(1);
+  }
 }
 
 .album-item-photo {
   @include Spread();
+}
+
+.album-item-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: #fff;
+
+  z-index: 4;
+
+  opacity: 0;
+
+  .album-item:hover & {
+    opacity: 1;
+
+    transition: opacity $transition-time;
+    transition-delay: $transition-time * 3;
+  }
 }
