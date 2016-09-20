@@ -127,7 +127,7 @@
               <a class="section-teams-item-action" href="{{ gallery.get_url() }}">
                 <span class="section-teams-item-image">
                   {% if gallery.metadata["Transparent image"] %}
-                    <img aria-hidden="true" src='gallery.metadata["Transparent image"]' alt="" />
+                    <img aria-hidden="true" src='{{ gallery.metadata["Transparent image"] }}' alt="" />
                   {% else %}
                     <span class="section-teams-item-image-placeholder"></span>
                   {% endif %}

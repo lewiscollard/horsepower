@@ -814,7 +814,7 @@ class Page:
                     return
         tmpl = template_env.get_template("pages/" + path_sub)
         context = {
-            "config": self.config,
+            "config": template_safe_config(self.config),
         }
         debug_print("writing %s" % target)
         fd = open(target, "w")

@@ -74,7 +74,16 @@
   display: block;
   height: 130px;
 
+  margin-bottom: $pad-base * 2;
+
   z-index: 2;
+
+  text-align: center;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
 }
 
 .section-teams-item-image-placeholder {
