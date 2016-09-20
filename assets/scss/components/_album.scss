@@ -23,11 +23,15 @@
 
 .album-title-above {
   display: block;
-  margin-bottom: $pad-base;
+  margin-bottom: $pad-base * 0.5;
 
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.album-description {
+  margin-top: $pad-base * 2;
 }
 
 .album-items {

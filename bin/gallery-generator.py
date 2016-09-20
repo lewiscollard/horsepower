@@ -356,6 +356,7 @@ class AlbumBase():
         self.pictures = []
         self.picture_count = 0
         self.config = config
+        self.info = None
         self.title = ""
 
     def hash(self):
@@ -407,6 +408,18 @@ class AlbumBase():
     def get_sorted_pictures(self):
         return sorted(self.pictures, key=lambda x: getattr(x, self.get_sort_attr()),
                       reverse=self.get_sort_reverse())
+
+    def load_description_file(self):
+        assert self.slug
+        filename = "{}.desc".format(
+            os.path.join(self.config["Data directory"], self.get_base_slug(), self.slug)
+        )
+        try:
+            fd = open(filename)
+        except:
+            self.info = {}
+            return
+        self.metadata = parse_kvp_file(fd, dict=True)
 
     def output(self, template_env, output_dir, template_dir, base_url,
                sort_attr, reverse, force_overwrite):
@@ -474,6 +487,7 @@ class EventAlbum(AlbumBase):
         self.title = event_name
         self.slug = slugify(event_name)
         self.date = None
+        self.load_description_file()
 
     def get_slug(self):
         return self.date.strftime("%Y-%m-%d") + "-" + self.slug
@@ -500,6 +514,7 @@ class DriverAlbum(AlbumBase):
         AlbumBase.__init__(self, config)
         self.title = driver_name
         self.slug = slugify(driver_name)
+        self.load_description_file()
 
     def get_base_slug(self):
         return "drivers"
@@ -548,6 +563,7 @@ class TeamAlbum(AlbumBase):
         AlbumBase.__init__(self, config)
         self.title = team_name
         self.slug = slugify(team_name)
+        self.load_description_file()
 
     def get_title(self):
         return "Photographs of %s" % self.title
@@ -843,6 +859,8 @@ def main():
                     "this program is.")
     ap.add_argument("--pages-only", dest="pages_only", action="store_true",
                     help="only regenerate pages; don't regenerate albums")
+    ap.add_argument("--data-directory", dest="data_directory", metavar="DIR",
+                    help="directory for driver and team data files")
     ap.add_argument("-v", dest="verbose", action="store_true",
                     help="be verbose about what we are doing")
     args = ap.parse_args()
@@ -850,8 +868,10 @@ def main():
 
     fd = open(args.file)
     kvp = parse_kvp_file(fd, True)
-    if not kvp.has_key("Template directory"):
+    if not "Template directory" in kvp:
         kvp["Template directory"] = "./templates"
+    if not "Data directory" in kvp:
+        kvp["Data directory"] = args.data_directory or './metadata'
     if not args.pages_only:
         gallery = Gallery(kvp)
         gallery.output_path = kvp["Output to"]

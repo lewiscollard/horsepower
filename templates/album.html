@@ -19,6 +19,12 @@
             {% endif %}
             <span class="album-title-main">{{ album.title }}</span>
           </h1>
+
+          {% if album.metadata and album.metadata["Description"] %}
+            <p class="album-description">
+              {{ album.metadata["Description"] }}
+            </p>
+          {% endif %}
         </div>
       </div>
 
