@@ -24,5 +24,10 @@
     font-weight: 800;
     text-decoration: underline;
     color: $color-red;
+
+    &.button {
+      color: #fff;
+      text-decoration: none;
+    }
   }
 }
