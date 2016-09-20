@@ -356,7 +356,7 @@ class AlbumBase():
         self.pictures = []
         self.picture_count = 0
         self.config = config
-        self.info = None
+        self.metadata = {}
         self.title = ""
 
     def hash(self):

@@ -93,28 +93,57 @@
         </div>
 
         <ul class="gallery-section-items album-listing-{{tax.slug}}">
-        {% for gallery in tax.galleries %}
-          <li class="gallery-item gallery-section-item has-caption">
-            <div class="gallery-section-item-inner">
-              <a href="{{ gallery.get_url() }}" class="gallery-item-action">
-                <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>
-                <span class="gallery-item-title">{{ gallery.title }}</span>
-                <span class="gallery-item-count">
-                  <i class="icon icon-th"></i>
-                  <span class="assistive">(</span>{{ gallery.count() }}
-                  <span class="assistive">photos)</span>
-                </span>
+          {% for gallery in tax.galleries %}
+            <li class="gallery-item gallery-section-item has-caption">
+              <div class="gallery-section-item-inner">
+                <a href="{{ gallery.get_url() }}" class="gallery-item-action">
+                  <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>
+                  <span class="gallery-item-title">{{ gallery.title }}</span>
+                  <span class="gallery-item-count">
+                    <i class="icon icon-th"></i>
+                    <span class="assistive">(</span>{{ gallery.count() }}
+                    <span class="assistive">photos)</span>
+                  </span>
 
-                <span class="gallery-item-indicator">
-                  <i class="icon icon-right-open"></i>
-                </span>
-              </a>
-            </div>
-          </li>
-        {% endfor %}
+                  <span class="gallery-item-indicator">
+                    <i class="icon icon-right-open"></i>
+                  </span>
+                </a>
+              </div>
+            </li>
+          {% endfor %}
         </ul>
       </section>
-    {% endif %}
-  {% endfor %}
+    {% elif tax.name == "Teams" %}
+      <section class="section-teams contained">
+        <div class="section-teams-header">
+          <h1 class="section-teams-title">{{ tax.name }}</h1>
+          <p class="section-teams-subtitle">Speed. Angle. Showmanship.</p>
+        </div>
+
+        <ul class="section-teams-items">
+          {% for gallery in tax.galleries %}
+            <li class="section-teams-item">
+              <a class="section-teams-item-action" href="{{ gallery.get_url() }}">
+                <span class="section-teams-item-image">
+                  {% if gallery.metadata["Transparent image"] %}
+                    <img aria-hidden="true" src='gallery.metadata["Transparent image"]' alt="" />
+                  {% else %}
+                    <span class="section-teams-item-image-placeholder"></span>
+                  {% endif %}
+                </span>
+                <span class="section-teams-item-text">
+                  {{ gallery.title }}
+                </span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <p class="section-teams-action-outer">
+          <a class="button" href="{{ tax.index_url }}">View all teams</a>
+        </p>
+      {% endif %}
+    {% endfor %}
   </article>
 {% endblock %}
