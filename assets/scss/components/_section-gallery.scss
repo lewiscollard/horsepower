@@ -64,6 +64,8 @@
 .gallery-section-item-inner {
   padding-bottom: 66.66%;
   position: relative;
+
+  overflow: hidden;
 }
 
 .gallery-section-item {
@@ -93,6 +95,8 @@
   left: 0;
   width: 100%;
   height: 100%;
+
+  transform: scale(1.01);
 
   background-position: center;
   background-size: cover;
