@@ -40,6 +40,11 @@
 .gallery-item-image {
   position: relative;
   z-index: 2;
+
+  .gallery-item:hover & {
+    transform: scale(1.1);
+    transition: transform $transition-time * 3;
+  }
 }
 
 .gallery-item-title {

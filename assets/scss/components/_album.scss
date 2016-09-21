@@ -52,6 +52,7 @@
 .album-item-inner {
   position: relative;
   padding-bottom: 66.666%;
+  overflow: hidden;
 
   &::after {
     @include Spread();
@@ -75,6 +76,11 @@
 
 .album-item-photo {
   @include Spread();
+
+  .album-item:hover & {
+    transform: scale(1.1);
+    transition: transform $transition-time * 3;
+  }
 }
 
 .album-item-indicator {
