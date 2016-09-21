@@ -143,7 +143,38 @@
         <p class="section-teams-action-outer">
           <a class="button" href="{{ tax.index_url }}">View all teams</a>
         </p>
-      {% endif %}
-    {% endfor %}
+      </section>
+    {% endif %}
+  {% endfor %}
+
+  <section class="gallery-section {% if loop.index % 2 == 0 %}gallery-section-altLayout{% endif %}" id="awesome">
+    <div class="gallery-section-text">
+      <div class="gallery-section-text-inner">
+        <h2 class="gallery-section-text-title">Greatest hits</h2>
+        <p class="gallery-section-text-subtitle">
+          The best of the best.
+        </p>
+        <p class="gallery-section-text-action-outer">
+          <a href="{{ awesome.get_url() }}" class="button onDark gallery-section-text-button">View all</a>
+        </p>
+      </div>
+    </div>
+
+    <ul class="gallery-section-items album-listing-awesome">
+      {% for image in awesome.pictures[0:9] %}
+        <li class="gallery-item gallery-section-item has-caption">
+          <div class="gallery-section-item-inner">
+            <a href="/galleries/awesome/awesome/{{ image.identifier }}/" class="gallery-item-action">
+              <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ image.get_size('thumb').get_url() }})"></div>
+
+              <span class="gallery-item-indicator gallery-item-indicator-glass">
+                <i class="icon icon-search"></i>
+              </span>
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
   </article>
 {% endblock %}

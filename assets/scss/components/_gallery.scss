@@ -72,6 +72,15 @@
   opacity: 0;
   z-index: 5;
 
+  &.gallery-item-indicator-glass {
+    border: 0;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+  }
+
   .gallery-item:hover & {
     opacity: 1;
 
