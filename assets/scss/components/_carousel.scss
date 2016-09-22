@@ -45,6 +45,8 @@
   position: relative;
   display: inline-block;
   width: 100%;
+
+  cursor: pointer;
 }
 
 .carousel-slide-inner {
@@ -57,6 +59,7 @@
 .carousel-slide-image {
   @include Spread();
 
+  cursor: pointer;
   user-select: none;
 }
 
