@@ -20,7 +20,7 @@
       <h1 class="assistive">Featured photographs</h1>
       <div class="carousel-frame">
         <div class="carousel-slides js_slides">
-          {% for photo in featured * 2 %}
+          {% for photo in featured %}
             <div class="carousel-slide slide js_slide" id="slide-{{loop.index}}">
               <div class="carousel-slide-inner">
                 <img class="carousel-slide-image" src="{{photo.get_size('huge_crop').get_url()}}" />
