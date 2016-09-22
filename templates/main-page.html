@@ -9,21 +9,27 @@
 
 {% block content %}
   <article class="front-page">
-   <section id="featured">
-    <h1 class="assistive">Featured photographs</h1>
-    <div class="slider">
-     {%for photo in featured%}
-      <div class="slide" id="slide-{{loop.index}}">
-       <img src="{{photo.get_size('huge_crop').get_url()}}" />
+    <section class="carousel-outer">
+      <span class="carousel-button carousel-button-previous"></span>
+      <span class="carousel-button carousel-button-next"></span>
+      <h1 class="assistive">Featured photographs</h1>
+      <div class="carousel-frame">
+        <div class="carousel-slides js_slides">
+          {% for photo in featured * 2 %}
+            <div class="carousel-slide slide js_slide" id="slide-{{loop.index}}">
+              <div class="carousel-slide-inner">
+                <img class="carousel-slide-image" src="{{photo.get_size('huge_crop').get_url()}}" />
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
-     {%endfor%}
-    </div>
+    </section>
+
     <script>
-     var slider = $(".slider");
-     slider.slider();
+      makeCarousel('.carousel-outer');
     </script>
 
-   </section>
 
    <section class="stats">
     <h2 class="stats-title">About</h2>
@@ -176,5 +182,5 @@
       {% endfor %}
     </ul>
   </section>
-  </article>
+</article>
 {% endblock %}

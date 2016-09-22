@@ -1,0 +1,50 @@
+.carousel-frame {
+  position: relative;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.carousel-button {
+  display: block;
+  height: 50px;
+  width: 50px;
+
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  z-index: 3;
+
+  border: 1px solid #fff;
+
+  cursor: pointer;
+  user-select: none;
+
+  &.carousel-button-next {
+    left: auto;
+    right: 0;
+  }
+}
+
+.carousel-slides {
+  display: block;
+}
+
+.carousel-slide {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.carousel-slide-inner {
+  width: 100%;
+  position: relative;
+  padding-bottom: 66.666%;
+}
+
+.carousel-slide-image {
+  @include Spread();
+}
+
