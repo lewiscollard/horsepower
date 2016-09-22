@@ -7,11 +7,14 @@ function makeCarousel(selector) {
     lory(carousel, {
         'infinite': 1,
         'classNameFrame': 'carousel-frame',
-        'classNamePrevCtrl': 'carousel-button-next',
-        'classNameNextCtrl': 'carousel-button-previous',
-        'classNameSlideContainer': 'carousel-slides'
+        'classNamePrevCtrl': 'carousel-button-previous',
+        'classNameNextCtrl': 'carousel-button-next',
+        'classNameSlideContainer': 'carousel-slides',
+        'enableMouseEvents': 'true'
     });
-
+    carousel.addEventListener('after.lory.init', function () {
+        console.log('lory is loaded');
+    });
     window.addEventListener("load", function () {
         carousel.classList.remove('carousel-loading');
     })

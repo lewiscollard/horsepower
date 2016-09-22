@@ -1,9 +1,14 @@
+.carousel-outer {
+  position: relative;
+}
+
 .carousel-frame {
   position: relative;
   font-size: 0;
   line-height: 0;
   overflow: hidden;
   white-space: nowrap;
+  width: 100%;
 }
 
 .carousel-button {
@@ -11,20 +16,24 @@
   height: 50px;
   width: 50px;
 
+  line-height: 50px;
+  text-align: center;
+
   position: absolute;
   top: 50%;
-  left: 0;
+  left: 2%;
 
   z-index: 3;
 
   border: 1px solid #fff;
+  color: #fff;
 
   cursor: pointer;
   user-select: none;
 
   &.carousel-button-next {
     left: auto;
-    right: 0;
+    right: 2%;
   }
 }
 
@@ -41,10 +50,13 @@
 .carousel-slide-inner {
   width: 100%;
   position: relative;
-  padding-bottom: 66.666%;
+  padding-bottom: 66.67%;
+  z-index: -1;
 }
 
 .carousel-slide-image {
   @include Spread();
+
+  user-select: none;
 }
 
