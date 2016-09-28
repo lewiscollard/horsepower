@@ -23,3 +23,9 @@
   font-weight: 900;
   text-transform: uppercase;
 }
+
+@mixin mq($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}

@@ -30,11 +30,17 @@
 
   text-align: justify;
 
+  margin-left: -3.3%;
+
   &::after {
     content: "";
     display: inline-block;
     height: 1px;
     width: 100%;
+  }
+
+ @include mq($mq-landscape-tablet) {
+    margin-left: -11.33%;
   }
 }
 
@@ -42,8 +48,16 @@
   display: inline-block;
   text-align: center;
   vertical-align: top;
+  width: 30%;
+  clear: none;
+  float: left;
 
-  width: 22%;
+  margin-left: 3.33%;
+
+  @include mq($mq-landscape-tablet) {
+    width: 22%;
+    margin-left: 11.33%;
+  }
 }
 
 .stats-text {
@@ -57,8 +71,12 @@
 
   display: block;
 
-  font-size: 120px;
+  font-size: 80px;
   color: $color-red;
+
+  @include mq($mq-landscape-tablet) {
+    font-size: 120px;
+  }
 }
 
 .stats-stat-desc {

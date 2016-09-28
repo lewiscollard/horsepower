@@ -9,14 +9,26 @@
 }
 
 .gallery-section-text {
-  position: absolute;
-  right: 65%;
-  top: 0;
-  bottom: 0;
 
-  .gallery-section-altLayout & {
-    left: 65%;
-    right: auto;
+  @include mq($mq-portrait-tablet) {
+    position: absolute;
+    right: 50%;
+    top: 0;
+    bottom: 0;
+
+    .gallery-section-altLayout & {
+      left: 50%;
+      right: auto;
+    }
+  }
+
+  @include mq($mq-computer-bigger) {
+    right: 65%;
+
+    .gallery-section-altLayout & {
+      left: 65%;
+      right: auto;
+    }
   }
 }
 
@@ -24,13 +36,16 @@
   padding: $pad-base * 3;
 
   height: 100%;
-  max-width: 520px;
 
-  float: right;
+  @include mq($mq-portrait-tablet) {
+    float: right;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 520px;
+  }
 }
 
 .gallery-section-text-title {
@@ -53,11 +68,54 @@
 .gallery-section-items {
   @include Clearfix();
 
-  width: 65%;
-  float: right;
+  @include mq($mq-portrait-tablet) {
+    width: 50%;
+    float: right;
 
-  .gallery-section-altLayout & {
-    float: left;
+    .gallery-section-altLayout & {
+      float: left;
+    }
+  }
+
+  @include mq($mq-computer-bigger) {
+    width: 65%;
+  }
+}
+
+.gallery-section-item {
+  width: 50%;
+  float: left;
+
+  &:nth-child(n+7) {
+    display: none;
+  }
+
+  @include mq($mq-portrait-tablet) {
+    width: 100%;
+
+    &:nth-child(n+3) {
+      display: none;
+    }
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: 50%;
+
+    &:nth-child(n+3) {
+      display: block;
+    }
+
+    &:nth-child(n+7) {
+      display: none;
+    }
+  }
+
+  @include mq($mq-computer-bigger) {
+    width: 33.333%;
+
+    &:nth-child(n+7) {
+      display: block;
+    }
   }
 }
 
@@ -66,11 +124,6 @@
   position: relative;
 
   overflow: hidden;
-}
-
-.gallery-section-item {
-  width: 33.333%;
-  float: left;
 }
 
 .gallery-section-item-action {
