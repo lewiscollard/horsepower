@@ -20,12 +20,33 @@
   @include Clearfix();
 }
 
+.footer-right,
 .footer-left {
-  float: left;
+  text-align: center;
+
+  @include mq($mq-landscape-tablet) {
+    text-align: left;
+  }
+}
+
+.footer-left {
+  line-height: $line-height;
+
+  @include mq($mq-landscape-tablet) {
+    float: left;
+    line-height: 1;
+  }
 }
 
 .footer-right {
-  float: right;
+  text-align: center;
+  margin-top: $pad-base;
+
+  @include mq($mq-landscape-tablet) {
+    margin-top: 0;
+    float: right;
+    text-align: right;
+  }
 }
 
 .footer-chiara {
