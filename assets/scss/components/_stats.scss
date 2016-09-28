@@ -4,8 +4,13 @@
 
   text-align: center;
 
-  padding-top: $pad-base * 6;
-  padding-bottom: $pad-base * 6;
+  padding-top: $pad-base * 4;
+  padding-bottom: $pad-base * 4;
+
+  @media ($mq-landscape-tablet) {
+    padding-top: $pad-base * 6;
+    padding-bottom: $pad-base * 6;
+  }
 }
 
 .stats-title {
@@ -30,40 +35,43 @@
 
   text-align: justify;
 
-  margin-left: -3.3%;
-
   &::after {
     content: "";
     display: inline-block;
     height: 1px;
     width: 100%;
   }
-
- @include mq($mq-landscape-tablet) {
-    margin-left: -11.33%;
-  }
-}
-
-.stats-stat {
-  display: inline-block;
-  text-align: center;
-  vertical-align: top;
-  width: 30%;
-  clear: none;
-  float: left;
-
-  margin-left: 3.33%;
-
-  @include mq($mq-landscape-tablet) {
-    width: 22%;
-    margin-left: 11.33%;
-  }
 }
 
 .stats-text {
   line-height: $line-height;
+  margin-bottom: $pad-base * 2;
 
-  margin-bottom: $pad-base * 3;
+  @include mq($mq-portrait-tablet) {
+    margin-bottom: $pad-base * 3;
+  }
+}
+
+.stats-stat {
+  vertical-align: top;
+  clear: both;
+
+  & + & {
+    margin-top: $pad-base;
+  }
+
+  @include mq($mq-portrait-tablet) {
+    width: 30%;
+    float: none;
+    display: inline-block;
+    clear: none;
+
+    text-align: center;
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: 22%;
+  }
 }
 
 .stats-stat-number {
@@ -74,17 +82,24 @@
   font-size: 80px;
   color: $color-red;
 
+  text-align: center;
+
+  @include mq($mq-portrait-tablet) {
+    margin-right: 0;
+    float: none;
+  }
+
   @include mq($mq-landscape-tablet) {
     font-size: 120px;
   }
 }
 
 .stats-stat-desc {
-  display: block;
-
   line-height: $line-height;
   font-weight: 700;
   text-transform: uppercase;
+  text-align: center;
+  display: block;
 }
 
 .stats-action-outer {
