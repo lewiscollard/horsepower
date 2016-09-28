@@ -39,8 +39,12 @@
 }
 
 .album-item {
-  width: 25%;
+  width: 50%;
   float: left;
+
+  @include mq($mq-portrait-tablet) {
+    width: 25%;
+  }
 }
 
 .album-item-action {
