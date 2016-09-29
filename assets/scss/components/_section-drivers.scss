@@ -23,18 +23,23 @@
 .section-teams-items {
   @include Clearfix();
 
-  margin-left: -3%;
-  margin-top: $pad-base * 3;
+  @include mq($mq-portrait-tablet) {
+    margin-left: -3%;
+    margin-top: $pad-base * 3;
+  }
 }
 
 .section-teams-item {
-  float: left;
-  width: 30%;
-  margin-left: 3%;
-
   margin-bottom: $pad-base * 3;
 
   position: relative;
+
+  @include mq($mq-portrait-tablet) {
+    float: left;
+
+    width: 30%;
+    margin-left: 3%;
+  }
 
   &::before {
     content: '';
