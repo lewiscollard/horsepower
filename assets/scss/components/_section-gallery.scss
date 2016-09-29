@@ -33,9 +33,9 @@
 }
 
 .gallery-section-text-inner {
-  padding: $pad-base * 3;
-
   height: 100%;
+
+  padding: ($pad-base * 2) ($pad-base * 1);
 
   @include mq($mq-portrait-tablet) {
     float: right;
@@ -45,6 +45,7 @@
     justify-content: center;
 
     max-width: 520px;
+    padding: $pad-base * 3;
   }
 }
 
