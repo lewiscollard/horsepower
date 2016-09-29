@@ -8,6 +8,11 @@
   transform: translate3d(0,0,0);
 
   overflow: hidden;
+
+  @media screen and (orientation: portrait) {
+    height: 0;
+    padding-bottom: 66%;
+  }
 }
 
 .fullscreen-image {
