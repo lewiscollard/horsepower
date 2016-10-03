@@ -1,0 +1,29 @@
+.contact-section {
+  padding-top: $pad-base * 5;
+  padding-bottom: $pad-base * 5;
+
+  background-color: #fff;
+
+  text-align: center;
+}
+
+.contact-section-title {
+  font-weight: 700;
+  text-transform: uppercase;
+
+  margin-bottom: $pad-base / 2;
+}
+
+.contact-section-subtitle {
+  @include Title();
+
+  font-size: $fs-large;
+}
+
+.contact-section-text {
+  margin-top: $pad-base * 1.5;
+}
+
+.contact-section-action-outer {
+  margin-top: $pad-base * 1.5;
+}
