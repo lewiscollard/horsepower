@@ -73,6 +73,11 @@
   & + & {
     margin-left: 30px;
   }
+
+  &.nav-item-button {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
 
 .nav-item-action {
@@ -87,3 +92,4 @@
     color: $color-red;
   }
 }
+
