@@ -2,7 +2,8 @@
   padding-top: $pad-base * 5;
   padding-bottom: $pad-base * 5;
 
-  background-color: #fff;
+  background-color: darken($color-red, 4);
+  color: #fff;
 
   text-align: center;
 }
