@@ -75,17 +75,6 @@
 
   {% for tax in taxonomies %}
     {% if tax.name in ["Events", "Drivers"] %}
-      {% if tax.name == "Events" %}
-        <div class="fullscreen">
-          <div class="fullscreen-image fast-parallax" data-parallax-y-by="0.5" data-parallax-unit="%" style="background-image: url(/resource/images/fullscreen/ross/DSC_2170-1920.JPG)"></div>
-        </div>
-
-      {% elif tax.name == "Drivers" %}
-        <div class="fullscreen fullscreen-2">
-          <div class="fullscreen-image fast-parallax" data-parallax-y-by="0.5" data-parallax-unit="%" style="background-image: url(/resource/images/fullscreen/ash/DSC_0020-1920.JPG)"></div>
-        </div>
-      {% endif %}
-
       <section class="gallery-section {% if loop.index % 2 == 0 %}gallery-section-altLayout{% endif %}" id="{{tax.slug}}">
         <div class="gallery-section-text">
           <div class="gallery-section-text-inner">
@@ -125,6 +114,17 @@
           {% endfor %}
         </ul>
       </section>
+
+      {% if tax.name == "Events" %}
+        <div class="fullscreen">
+          <div class="fullscreen-image fast-parallax" data-parallax-y-by="1" data-parallax-unit="%" style="background-image: url(/resource/images/fullscreen/ross/DSC_2170-1920.JPG)"></div>
+        </div>
+
+      {% elif tax.name == "Drivers" %}
+        <div class="fullscreen fullscreen-2">
+          <div class="fullscreen-image fast-parallax" data-parallax-y-by="1" data-parallax-unit="%" style="background-image: url(/resource/images/fullscreen/ash/DSC_0020-1920.JPG)"></div>
+        </div>
+      {% endif %}
     {% elif tax.name == "Teams" %}
       <section class="section-teams contained">
         <div class="section-teams-header">
