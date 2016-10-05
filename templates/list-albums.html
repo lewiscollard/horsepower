@@ -14,7 +14,7 @@
           <li class="gallery-item has-caption">
             <div class="gallery-item-inner">
               <a href="{{ album.get_url() }}" class="gallery-item-action">
-                <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ album.get_cover().get_size('thumb').get_url() }})"></div>
+                <div class="gallery-item-image has-caption" style="background-image: url({{ album.get_cover().get_size('thumb').get_url() }})"></div>
                 <span class="gallery-item-title">{{ album.title }}</span>
                 <span class="gallery-item-count">
                   <i class="icon icon-th"></i>

@@ -45,6 +45,14 @@
   @include mq($mq-portrait-tablet) {
     width: 25%;
   }
+
+  @include mq($mq-computer-bigger) {
+    width: 20%;
+  }
+
+  @include mq($mq-computer-huge) {
+    width: 16.666%;
+  }
 }
 
 .album-item-action {
@@ -80,6 +88,11 @@
 
 .album-item-photo {
   @include Spread();
+
+  will-change: transform;
+
+  transition: transform $transition-time;
+  transform: scale(1.01);
 
   .album-item:hover & {
     transform: scale(1.1);
