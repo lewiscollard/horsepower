@@ -67,6 +67,10 @@
     clear: none;
 
     text-align: center;
+
+    & + & {
+      margin-top: 0;
+    }
   }
 
   @include mq($mq-landscape-tablet) {

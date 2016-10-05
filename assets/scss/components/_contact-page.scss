@@ -1,0 +1,64 @@
+.contact-block {
+  padding-top: $pad-base * 4;
+  padding-bottom: $pad-base * 4;
+
+  & + & {
+    border-top: 1px solid $color-border;
+  }
+}
+
+.contact-block-title {
+  @include Title();
+
+  font-size: $fs-large;
+  text-align: center;
+}
+
+.contact-social {
+  margin-top: $pad-base * 2;
+
+  @include mq($mq-landscape-tablet) {
+    margin-top: $pad-base * 4;
+  }
+}
+
+.contact-social-item {
+  text-align: center;
+}
+
+.contact-social-item-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-social-icon {
+  display: inline-block;
+
+  background-color: $color-red;
+  color: #fff;
+
+  height: 250px;
+  width: 250px;
+  line-height: 250px;
+
+  text-align: center;
+
+  .icon {
+    font-size: 150px;
+  }
+}
+
+.contact-social-title {
+  @include Title();
+
+  font-size: $fs-medium;
+
+  display: block;
+  margin-top: $pad-base;
+}
+
+.contact-social-text {
+  display: block;
+  margin-top: $pad-base;
+  margin-bottom: $pad-base;
+}
