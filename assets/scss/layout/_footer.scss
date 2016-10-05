@@ -5,6 +5,10 @@
   padding-top: 30px;
   padding-bottom: 30px;
 
+  .body-dark & {
+    background-color: #222;
+  }
+
   a {
     font-weight: 800;
     color: inherit;
