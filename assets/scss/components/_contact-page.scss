@@ -15,15 +15,31 @@
 }
 
 .contact-social {
-  margin-top: $pad-base * 2;
+  @include Clearfix();
+
+  @include mq($mq-portrait-tablet) {
+    margin-left: -5%;
+  }
 
   @include mq($mq-landscape-tablet) {
-    margin-top: $pad-base * 4;
+    margin-top: $pad-base * 2;
   }
 }
 
 .contact-social-item {
+  margin-top: $pad-base * 2;
   text-align: center;
+
+  @include mq($mq-portrait-tablet) {
+    width: 45%;
+    float: left;
+    margin-left: 5%;
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: 20%;
+    float: left;
+  }
 }
 
 .contact-social-item-link {

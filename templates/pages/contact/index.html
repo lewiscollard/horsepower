@@ -1,12 +1,28 @@
 {% extends "page.html" %}
-
+{% block title %}Get in touch{% endblock %}
 {% block content %}
   <article class="main full-height">
     <section class="contact-block">
       <div class="contact-block-inner contained">
-        <h2 class="contact-block-title">Follow me</h2>
+        <h2 class="contact-block-title">Get in touch</h2>
 
         <ul class="contact-social">
+          <li class="contact-social-item">
+            <span class="contact-social-icon">
+              <i class="icon icon-mail"></i>
+            </span>
+            <span class="contact-social-title">Email</span>
+            <span class="assistive"> - </span>
+            <span class="contact-social-text">
+              Because I love hearing from you!
+            </span>
+
+            <a class="contact-social-button button" href="mailto:lewiscollard@gmail.com">
+              Email me
+            </a>
+          </li>
+
+
           <li class="contact-social-item">
             <span class="contact-social-icon">
               <i class="icon icon-twitter"></i>
@@ -32,16 +48,19 @@
               For epic request threads.
             </span>
 
-            <a class="contact-social-button button" href="https://twitter.com/lewiscollard" target="_blank">
+            <a class="contact-social-button button" href="https://www.facebook.com/lewiscollard" target="_blank">
               Add me
             </a>
           </li>
 
           <li class="contact-social-item">
             <span class="contact-social-icon">
-              <i class="icon icon-twitter"></i>
+              <i class="icon icon-tumblr"></i>
             </span>
             <span class="contact-social-title">Tumblr</span>
+            <span class="contact-social-text">
+              For semi-regular photos.
+            </span>
 
             <a class="contact-social-button button" href="http://tumblr.lewiscollard.com/" target="_blank">
               Follow @lewiscollard
@@ -50,8 +69,5 @@
         </ul>
       </div>
     </section>
-
-    <section class="contact-block">
-      <h2 class="contact-block-title">Or email me</h2>
   </article>
 {% endblock %}
