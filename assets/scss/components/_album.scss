@@ -3,14 +3,21 @@
 }
 
 .album-header {
-  padding-top: $pad-base * 4;
-  padding-bottom: $pad-base * 4;
+  padding-top: $pad-base * 2;
+  padding-bottom: $pad-base * 2;
 
   color: #fff;
+
+  @include mq($mq-portrait-tablet) {
+    padding-top: $pad-base * 4;
+    padding-bottom: $pad-base * 4;
+  }
 }
 
 .album-header-text {
-  max-width: 66%;
+  @include mq($mq-landscape-tablet) {
+    max-width: 66%;
+  }
 }
 
 .album-title-main {
@@ -18,7 +25,11 @@
 
   display: block;
 
-  font-size: 52px;
+  font-size: $fs-large;
+
+  @media ($mq-portrait-tablet) {
+    font-size: 52px;
+  }
 }
 
 .album-title-above {
