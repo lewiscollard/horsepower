@@ -6,13 +6,14 @@
 @import "layout/header";
 @import "layout/footer";
 
+/* needs to go first, don't change */
+@import "components/gallery";
 @import "components/album";
 @import "components/album-index";
 @import "components/buttons";
 @import "components/carousel";
 @import "components/contact-page";
 @import "components/full-screen";
-@import "components/gallery";
 @import "components/photo";
 @import "components/plain-text";
 @import "components/stats";

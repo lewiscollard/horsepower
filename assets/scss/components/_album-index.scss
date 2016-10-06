@@ -15,3 +15,22 @@
 
   font-size: 56px;;
 }
+
+.album-listing-item {
+  @include mq($mq-portrait-tablet) {
+    width: 50%;
+    float: left;
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: 33.33%;
+  }
+
+  @include mq($mq-computer-bigger) {
+    width: 20%;
+  }
+
+  @include mq($mq-computer-huge) {
+    width: 16.666%;
+  }
+}
