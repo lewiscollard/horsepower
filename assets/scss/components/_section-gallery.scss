@@ -87,6 +87,14 @@
   width: 50%;
   float: left;
 
+  filter: grayscale(100%);
+
+  &.in-view {
+    filter: grayscale(0%);
+    transition: all $transition-time * 10;
+    transition-delay: $transition-time * 2;
+  }
+
   &:nth-child(n+7) {
     display: none;
   }
