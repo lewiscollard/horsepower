@@ -12,12 +12,8 @@ function makeCarousel(selector) {
         'classNameSlideContainer': 'carousel-slides',
         'enableMouseEvents': 'true'
     });
-    carousel.addEventListener('after.lory.init', function () {
-        console.log('lory is loaded');
-    });
-    window.addEventListener("load", function () {
-        carousel.classList.remove('carousel-loading');
-    })
+
+    carousel.classList.remove('carousel-loading');
 
     // Autoplay
     var timer = window.setInterval(function () {
@@ -32,3 +28,8 @@ function makeCarousel(selector) {
     carousel.querySelector('.carousel-button-previous').addEventListener('click', cancelTimer);
     carousel.addEventListener('on.lory.touchstart', cancelTimer);
 }
+
+window.addEventListener('load', function() {
+    makeCarousel('.carousel-outer')
+});
+
