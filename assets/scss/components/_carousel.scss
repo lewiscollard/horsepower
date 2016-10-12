@@ -1,5 +1,42 @@
+@keyframes spin {
+  100% {
+    transform:rotate(360deg);
+  }
+}
+
 .carousel-outer {
   position: relative;
+}
+
+.carousel-loader {
+  @include Spread();
+  background-color: #222;
+
+  z-index: 3;
+
+  .carousel-outer-loaded & {
+    opacity: 0;
+    transition: opacity 0.5s, left 2s;
+    left: -100%;
+  }
+}
+
+.carousel-loader-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -75px;
+
+  color: #fff;
+
+  font-size: 100px;
+  width: 150px;
+  text-align: center;
+
+  animation:spin 4s linear infinite;
+
+  opacity: 0.5;
 }
 
 .carousel-frame {

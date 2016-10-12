@@ -3,7 +3,7 @@ function makeCarousel(selector) {
     if (!carousel) {
         return;
     }
-    carousel.classList.add('carousel-loading');
+    carousel.classList.add('carousel-outer-loading');
     var loryCarousel = lory(carousel, {
         'infinite': 1,
         'classNameFrame': 'carousel-frame',
@@ -13,7 +13,8 @@ function makeCarousel(selector) {
         'enableMouseEvents': 'true'
     });
 
-    carousel.classList.remove('carousel-loading');
+    carousel.classList.remove('carousel-outer-loading');
+    carousel.classList.add('carousel-outer-loaded');
 
     // Autoplay
     var timer = window.setInterval(function () {
