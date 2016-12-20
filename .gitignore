@@ -3,3 +3,4 @@ rsync.sh
 node_modules
 npm-debug.log
 .venv
+.DS_Store
