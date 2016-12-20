@@ -9,30 +9,38 @@
 
 {% block content %}
   <article class="front-page">
-    <section class="carousel-outer carousel-outer-loading">
-      <span class="carousel-loader">
-        <i class="carousel-loader-icon icon icon-loading"></i>
-      </span>
-      <span class="carousel-button carousel-button-previous">
-        <i class="icon icon-left-open"></i>
-      </span>
+    <header class="hero" id="front-page-hero">
+      <div class="hero-content contained">
+        <h1 class="hero-title">
+          <span class="hero-title-top">
+            Motorsports photography by
+          </span>
 
-      <span class="carousel-button carousel-button-next">
-        <i class="icon icon-right-open"></i>
-      </span>
-      <h1 class="assistive">Featured photographs</h1>
-      <div class="carousel-frame">
-        <div class="carousel-slides js_slides">
-          {% for photo in featured %}
-            <div class="carousel-slide slide js_slide" id="slide-{{loop.index}}">
-              <div class="carousel-slide-inner">
-                <img class="carousel-slide-image" src="{{photo.get_size('huge_crop').get_url()}}" />
-              </div>
-            </div>
-          {% endfor %}
-        </div>
+          <span class="hero-title-bottom">
+            Lewis Collard
+          </span>
+        </h1>
       </div>
-    </section>
+    </header>
+
+    <script>
+      (function () {
+        var images = [
+          '/resource/images/heroes/coops.jpg'
+        ]
+        var image = images[Math.floor(images.length * Math.random())];
+        var hero = document.getElementById('front-page-hero');
+        hero.classList.add('hero-loading');
+        var imgtag = new Image();
+        imgtag.onload = function() {
+          hero.style.backgroundImage = "url('" + image + "')";
+          hero.classList.remove('hero-loading')
+        }
+        setTimeout(function () {
+          imgtag.src = image
+        }, 1)
+      })();
+    </script>
 
     <section class="stats">
       <h2 class="stats-title">About</h2>

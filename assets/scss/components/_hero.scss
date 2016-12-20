@@ -1,0 +1,38 @@
+.hero {
+  position: relative;
+
+  padding-bottom: 56.25%;
+  background-position: center;
+  background-size: cover;
+
+  @include mq($mq-landscape-tablet) {
+    padding-bottom: 0;
+
+    height: 600px;
+    height: calc(100vh - 120px);
+  }
+}
+
+.hero-title {
+  color: #fff;
+
+  position: absolute;
+  bottom: $pad-base * 4;
+}
+
+.hero-title-top {
+  @include Title();
+
+  display: block;
+  margin-bottom: 4px;
+
+  font-size: 24px;
+  text-shadow: 0 0 6px #000;
+}
+
+.hero-title-bottom {
+  @include Title();
+
+  font-size: 72px;
+  text-shadow: 0 0 15px #000;
+}
