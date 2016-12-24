@@ -30,7 +30,9 @@
     <script>
       (function () {
         var images = [
-          '/resource/images/heroes/coops.jpg'
+          // fixme: add more here
+          '/resource/images/heroes/coops.jpg',
+          '/resource/images/heroes/kiwi.jpg',
         ]
         var image = images[Math.floor(images.length * Math.random())];
         var hero = document.getElementById('front-page-hero');
@@ -48,18 +50,19 @@
 
     <section class="stats">
       <h2 class="stats-title">About</h2>
-      <p class="stats-subtitle">The man behind the lens</p>
+      <p class="stats-subtitle">Behind the lens</p>
 
-      <p class="stats-text constrained">
-        Lorem Khaled Ipsum is a major key to success. Bless up. The ladies
-        always say Khaled you smell good, I use no cologne. Cocoa butter
-        is the key. The key to more success is to get a massage once a week, very
-        important, major key, cloth talk. They key is to have every key, the key
-        to open every door. Surround yourself with angels, positive energy,
-        beautiful people, beautiful souls, clean heart, angel. The key to success
-        is to keep your head above the water, never give up. Find peace, life is
-        like a water fall, you've gotta flow.
-      </p>
+      <div class="plain-text stats-text constrained">
+        <p>I'm Lewis Collard. I am a photographer with the Norfolk Arena Drift Team,
+        though there are allegations that I have occasionally
+        <a href="/galleries/events/2014-04-15-rwyb-santa-pod-raceway-april-2014/">shot
+        things driving in a straight line</a> and even cars
+        <a href="/drivers/darren-brown/b3253b-20160730-run-the-darren-brown-DSC_0485/">not
+        moving at all.</a></p>
+
+        <p>This site is the result of hundreds of hours of work. I hope you
+        enjoy it as much as I enjoyed making it.</p>
+      </div>
 
       <ul class="stats-stats constrained">
         <li class="stats-stat">
@@ -74,7 +77,7 @@
 
         <li class="stats-stat">
           <span class="stats-stat-number">{{ "{:,}".format(photo_count) }}</span>
-          <span class="stats-stat-desc">full resolution photographs</span>
+          <span class="stats-stat-desc">full resolution downloads</span>
         </li>
       </ul>
 
@@ -93,7 +96,7 @@
                 {% if tax.name == "Drivers" %}
                   Mad skills.<br />Unique styles.
                 {% elif tax.name == "Events" %}
-                  Documenting the action. Up close.
+                  The action.<br />Up close.
                 {% endif %}
               </p>
               <p class="gallery-section-text-action-outer">
@@ -143,7 +146,7 @@
           </div>
 
           <ul class="section-teams-items">
-            {% for gallery in tax.galleries %}
+            {% for gallery in tax.galleries[:3] %}
               <li class="section-teams-item">
                 <a class="section-teams-item-action" href="{{ gallery.get_url() }}">
                   <span class="section-teams-item-image">
