@@ -226,7 +226,7 @@ class GalleryImage():
         resolutions = (
             ("large", (1200, 900), False),
             ("hd", (1920, 1080), False),
-            ("thumb", (300, 200), True),
+            ("thumb", (600, 400), True),
         )
         im = Image.open(self.image_file)
         (self.full_width, self.full_height) = im.size
