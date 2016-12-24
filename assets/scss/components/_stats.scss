@@ -72,16 +72,13 @@
       margin-top: 0;
     }
   }
-
-  @include mq($mq-landscape-tablet) {
-    width: 22%;
-  }
 }
 
 .stats-stat-number {
   @include Title();
 
   display: block;
+  margin-bottom: $pad-base;
 
   font-size: 80px;
   color: $color-red;
@@ -94,7 +91,7 @@
   }
 
   @include mq($mq-landscape-tablet) {
-    font-size: 120px;
+    font-size: 100px;
   }
 }
 
