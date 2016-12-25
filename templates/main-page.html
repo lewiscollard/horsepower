@@ -30,7 +30,7 @@
     <script>
       (function () {
         var images = [
-          // fixme: add more here
+          // fixme: add more h ere
           '/resource/images/heroes/coops.jpg',
           '/resource/images/heroes/kiwi.jpg',
         ]
@@ -105,9 +105,9 @@
             </div>
           </div>
 
-          <ul class="gallery-section-items album-listing-{{tax.slug}}">
+          <ul class="gallery-section-items album-listing-{{tax.slug}} gallery-section-items-{{ tax.slug }}">
             {% for gallery in tax.galleries %}
-              <li class="gallery-item gallery-section-item has-caption">
+              <li class="gallery-item gallery-section-item-longerDesc gallery-section-item-{{ tax.name.lower() }} gallery-section-item has-caption">
                 <div class="gallery-section-item-inner">
                   <a href="{{ gallery.get_url() }}" class="gallery-item-action">
                     <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>

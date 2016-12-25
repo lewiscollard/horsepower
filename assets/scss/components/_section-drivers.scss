@@ -1,4 +1,4 @@
-.section-teams {
+ .section-teams {
   padding-top: $pad-base * 5;
   padding-bottom: $pad-base * 5;
 }
@@ -16,8 +16,11 @@
 
 .section-teams-subtitle {
   @include Title();
+  font-size: 28px;
 
-  font-size: $fs-large;
+  @include mq($mq-portrait-tablet) {
+    font-size: $fs-large;
+  }
 }
 
 .section-teams-items {

@@ -16,9 +16,16 @@
 .hero {
   position: relative;
 
-  padding-bottom: 56.25%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
   background-position: center;
   background-size: cover;
+
+  @include mq($mq-portrait-tablet) {
+    padding-top: 0;
+    padding-bottom: 56.25%;
+  }
 
   @include mq($mq-landscape-tablet) {
     padding-bottom: 0;
@@ -31,8 +38,10 @@
 .hero-title {
   color: #fff;
 
-  position: absolute;
-  bottom: $pad-base * 4;
+  @include mq($mq-portrait-tablet) {
+    position: absolute;
+    bottom: $pad-base * 4;
+  }
 }
 
 .hero-title-top {

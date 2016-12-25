@@ -84,9 +84,6 @@
 }
 
 .gallery-section-item {
-  width: 50%;
-  float: left;
-
   filter: grayscale(100%);
 
   &.in-view {
@@ -97,6 +94,15 @@
 
   &:nth-child(n+7) {
     display: none;
+  }
+
+  @include mq($mq-landscape-phone) {
+    width: 50%;
+    float: left;
+
+    &:nth-child(n+3) {
+      display: none;
+    }
   }
 
   @include mq($mq-portrait-tablet) {
