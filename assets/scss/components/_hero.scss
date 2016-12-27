@@ -21,6 +21,8 @@
 
   background-position: center;
   background-size: cover;
+  /* no img fallback */
+  background-color: #333;
 
   @include mq($mq-portrait-tablet) {
     padding-top: 0;

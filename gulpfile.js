@@ -40,6 +40,7 @@ gulp.task('scripts', function () {
         this.emit('end');
     }}))
     .pipe(concat('main.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('html/resource/js'))
 });
 
