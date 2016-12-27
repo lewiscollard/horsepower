@@ -1,25 +1,30 @@
-{%extends "page.html"%}
-{%block title%}Privacy{%endblock%}
+{% extends "page.html" %}
 
-{%block page_text%}
-<p><strong>I do not collect any information about you.</strong></p>
+{% block page_text %}
+  <article class="contained full-height">
+    <div class="plain-text text-page">
+      <h2>Your privacy</h2>
 
-<p>This site carries no material from third parties. There
-are no adverts, statistics packages, or external scripts that
-could reveal your visits to third parties.</p>
+      <p>
+        <strong>I do not collect any information about you.</strong>
+        I do not collect or aggregate any kind of statistics either.
+      </p>
 
-<p>I do not collect or aggregate any kind of statistics.</p>
+      <p>This site carries no material from third parties. There
+      are no adverts, statistics packages, or other external scripts
+      that could reveal your visits to anyone else.</p>
 
-<p>I do not currently log visits to this site. Logging is disabled in
-my web server's configuration. I reserve the right to periodically
-turn this on for performance analysis during periods of
-unexpected server load; this will only be used to improve
-service to this site. Should logging be turned on for any
-reason, I will delete any logs within 48 hours of doing so.
-</p>
+      <p>I do not currently log visits to this site. Logging is disabled in
+      my web server's configuration. I reserve the right to periodically
+      turn this on for performance analysis during periods of
+      unexpected server load; this will only be used to improve
+      service to this site. Should logging be turned on for any
+      reason, I will delete any logs within 48 hours of doing so.
+      </p>
 
-<p>This site does not use cookies.</p>
+      <p>Your connection to this site is encrypted.</p>
 
-<p>Your connection to this site is unencrypted.</p>
- 
-{%endblock%}
+      <p>This site does not use cookies.</p>
+    </div>
+  </article>
+{% endblock %}
