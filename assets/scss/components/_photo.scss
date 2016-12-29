@@ -57,11 +57,11 @@
 
   position: absolute;
   top: 50%;
-  margin-top: -25px;
-  width: 50px;
-  height: 50px;
+  margin-top: -15px;
+  width: 30px;
+  height: 30px;
 
-  line-height: 50px;
+  line-height: 30px;
   text-align: center;
   font-family: sans-serif;
 
@@ -72,10 +72,27 @@
   color: $color-white;
 
   &.prev {
-    left: -70px;
+    left: 0;
   }
+
   &.next {
-    right: -70px;
+    right: 0;
+  }
+
+  @include mq($mq-portrait-tablet) {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -25px;
+  }
+
+  @media (min-width: 1380px) {
+    &.prev {
+      left: -70px;
+    }
+    &.next {
+      right: -70px;
+    }
   }
 }
 
