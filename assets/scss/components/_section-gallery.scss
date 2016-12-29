@@ -126,7 +126,7 @@
   }
 
   @include mq($mq-computer-bigger) {
-    width: 33.333%;
+    width: 33.33%;
 
     &:nth-child(n+7) {
       display: block;
