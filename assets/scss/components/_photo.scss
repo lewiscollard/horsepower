@@ -1,7 +1,9 @@
 .photo-container-outer {
-  padding-top: $pad-base * 3;
-
   background-color: $color-black;
+
+  @include mq($mq-landscape-tablet) {
+    padding-top: $pad-base * 3;
+  }
 }
 
 .photo-container {
