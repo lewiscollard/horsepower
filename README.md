@@ -75,7 +75,7 @@ Team: Team Screamin' Wheels
 
 Simple, right? And from there, it builds its view of the site. Drivers, [Darren Brown](https://hp.lewiscollard.com/galleries/drivers/darren-brown/), [Ross Barnes](https://hp.lewiscollard.com/galleries/drivers/ross-barnes/) and [Josh Payne](https://hp.lewiscollard.com/galleries/drivers/josh-payne/). Team name: [Team Screamin' Wheels](https://hp.lewiscollard.com/galleries/teams/team-screamin-wheels/). (It can support multiple team names, just as it supports multiple drivers, if comma-separated)
 
-But how does it generate a? Simple, the driver taxonomy lives at `/galleries/drivers`. It generates a slug from the driver name.
+But how does it generate a unique identifier? Simple, the driver taxonomy lives at `/galleries/drivers`. It generates a slug from the driver name.
 
 How does this stay persistent, even through photo edits? Well, it generates a unique identifier for the photo, consisting of a hash of a bunch of information about the photo, the date, the slug of the event, and the filename. This is unique enough. In the case of this photo, the identifier was `ec1fd0-20161015-norfolk-arena-darren-brown-ross-barnes-DSC_0400`. And so, and _only_ if the description file does not have an identifier, it _writes that back to the description file_. So the one above will look like this:
 
