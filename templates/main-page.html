@@ -10,6 +10,7 @@
 {% block content %}
   <article class="front-page">
     <header class="hero" id="front-page-hero">
+      <div class="hero-image"></div>
       <div class="hero-content contained">
         <h1 class="hero-title">
           <span class="hero-title-top">
@@ -35,12 +36,13 @@
           '/resource/images/heroes/kiwi.jpg',
         ]
         var image = images[Math.floor(images.length * Math.random())];
-        var hero = document.getElementById('front-page-hero');
+        var hero = document.querySelector('.hero')
+        var heroImage = document.querySelector('.hero-image');
         hero.classList.add('hero-loading');
         var imgtag = new Image();
         imgtag.onload = function() {
-          hero.style.backgroundImage = "url('" + image + "')";
           hero.classList.remove('hero-loading')
+          heroImage.style.backgroundImage = "url('" + image + "')";
         }
         setTimeout(function () {
           imgtag.src = image
