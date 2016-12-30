@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import argparse
-import copy
 import datetime
 import hashlib
 import htmlentitydefs
@@ -9,20 +8,13 @@ import os.path
 import re
 import shutil
 import sys
-from pprint import pprint
 
-import exifread
 from PIL import Image, ImageOps
 from jinja2 import Environment, FileSystemLoader
 
 IMAGE_EXTENSIONS = ("jpg", "jpeg", "jpe", "png")
 
 DEBUG = True
-
-INTERESTING_EXIF_FIELDS = {
-    "Image Model": "Camera",
-    "EXIF FocalLength": "Focal length",
-}
 
 
 def debug_print(txt):
@@ -158,7 +150,6 @@ class GalleryImage():
         self.teams = []
         self.team_objects = []
         self.identifier = ""
-        self.exif = {}
         self.featured = False
         self.featured_order = 0
         self.awesome = False
@@ -173,7 +164,7 @@ class GalleryImage():
         # if this is a pointless optimisation.
         h = hashlib.md5()
         for a in ("drivers", "event", "teams", "identifier", "featured",
-                  "awesome", "exif", "kvp", "config"):
+                  "awesome", "kvp", "config"):
             h.update(str(getattr(self, a)))
         return h.hexdigest()
 
@@ -338,16 +329,6 @@ class GalleryImage():
                 self.awesome = v.lower() in ("1", "0", "yes", "true")
             else:
                 self.kvp[k] = v
-        # Parse EXIF data
-        try:
-            fd = open(filename)
-            exif = exifread.process_file(fd)
-            for k in INTERESTING_EXIF_FIELDS:
-                if exif.has_key(k):
-                    self.exif[INTERESTING_EXIF_FIELDS[k]] = exif[k]
-        except:
-            # Fail silently. (Probably shouldn't.)
-            pass
 
 
 class AlbumBase():
