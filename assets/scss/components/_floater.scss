@@ -1,0 +1,43 @@
+.floater {
+  margin-bottom: $pad-base;
+
+  text-align: center;
+
+  @include mq($mq-landscape-phone) {
+    width: 200px;
+    float: right;
+
+    margin-left: $pad-base * 2;
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: 400px;
+    float: right;
+  }
+
+  @include mq($mq-computer-bigger) {
+    margin-right: -$pad-base * 5;
+  }
+}
+
+.floater-padder {
+  position: relative;
+}
+
+.floater-image {
+  @include Spread();
+}
+
+.floater-caption {
+  color: #666;
+
+  font-size: 14px;
+
+  margin-top: $pad-base / 2;
+}
+
+.floater-link {
+  color: $color-red;
+  font-weight: inherit;
+  text-decoration: underline;
+}
