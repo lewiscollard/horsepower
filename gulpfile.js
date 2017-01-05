@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var minifycss = require('gulp-minify-css');
+var cleancss = require('gulp-clean-css');
 var sass = require('gulp-sass');
 
 gulp.task('bs-reload', function () {
@@ -27,7 +27,7 @@ gulp.task('styles', function(){
     .pipe(sass())
     .pipe(gulp.dest('html/resource/css/'))
     .pipe(rename({suffix: '.min'}))
-    .pipe(minifycss())
+    .pipe(cleancss())
     .pipe(gulp.dest('html/resource/css/'))
 });
 
