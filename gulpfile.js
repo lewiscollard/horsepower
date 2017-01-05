@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
   plumber = require('gulp-plumber'),
   rename = require('gulp-rename');
-var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var cleancss = require('gulp-clean-css');
