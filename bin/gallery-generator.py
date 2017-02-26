@@ -853,6 +853,7 @@ def main():
         gallery.output_path = kvp["Output to"]
         for i in kvp["Directories"].split(","):
             i = i.strip()
+            i = os.path.expanduser(i)  # Allows for ~/username to be used.
             gallery.ingest_directory(i)
         gallery.output(args.force_overwrite)
     p = PageManager(kvp)
