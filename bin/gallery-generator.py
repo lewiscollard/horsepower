@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from collections import OrderedDict
 import argparse
 import datetime
 import hashlib
@@ -446,6 +447,7 @@ class AlbumBase():
             fd.write(template.render(ctx))
             fd.close()
         index_file = os.path.join(base_fs_path, self.get_slug(), "index.html")
+
         ctx = {
             "photos": pics_sorted,
             "album": self,
@@ -652,11 +654,32 @@ class Gallery():
     def ingest_directory(self, directory):
         debug_print("ingesting directory %s" % directory)
         # Look for the event description file.
+        filepath = os.path.join(directory, "event.desc")
+
         try:
-            infofd = open(os.path.join(directory, "event.desc"))
+            infofd = open(filepath)
         except Exception, detail:
             stderr_print("%s has no event.desc (%s)" % (directory, detail))
-            return
+            generate_event_desc = raw_input('Would you like to generate one? [Y/n] ').lower()
+
+            if generate_event_desc in ['n', 'no', 'false']:
+                return
+
+            # Now we build out the event.desc file. We'll take information from
+            # the directory name where possible.
+            matches = re.match(r'(\d{4}-\d{2}-\d{2})-([A-Za-z-]+)', os.path.split(directory)[-1])
+
+            # Convert a camel case to a normal string.
+            name = re.sub('([a-z0-9])([A-Z])', r'\1 \2', matches.group(2))
+
+            details = OrderedDict()
+            details['Event'] = raw_input('Event name: [{}] '.format(name)) or name
+            details['Date'] = raw_input('Date: [{}] '.format(matches.group(1))) or matches.group(1)
+
+            infofd = open(filepath, 'w+')
+            infofd.write('\n'.join([': '.join(pair) for pair in details.items()]))
+            infofd.seek(0)
+
         kvp = parse_kvp_file(infofd, True)
         infofd.close()
         event_details = {
