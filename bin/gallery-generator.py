@@ -258,8 +258,8 @@ class GalleryImage():
                 out_file)
         # Make 3:2 crop for featured images on slider on front page.
         # (All of my stuff is 3:2 anyway.)
-        if self.kvp.has_key("Featured") and self.kvp["Featured"].lower() in ["yes", "1", "true"]:
-            if self.kvp.has_key("Featured order"):
+        if 'Featured' in self.kvp and self.kvp["Featured"].lower() in ["yes", "1", "true"]:
+            if 'Featured order' in self.kvp:
                 self.featured_order = int(self.kvp["Featured order"])
             out_file = os.path.join(base_dir, "huge_crop", filename)
             if (not os.path.exists(out_file)) or os.path.getmtime(out_file) < os.path.getmtime(self.image_file):
@@ -305,7 +305,6 @@ class GalleryImage():
         desc_file = filename + ".desc"
         debug_print("processing %s" % desc_file)
         fd = open(desc_file)
-        lcount = 0
         self.image_file = filename
         kvp = parse_kvp_file(fd)
         for k, v in kvp:
@@ -407,7 +406,6 @@ class AlbumBase():
         base_fs_path = os.path.join(output_dir, self.get_base_slug())
         gallery_dir = os.path.join(base_fs_path, self.get_slug())
         mkdirs(gallery_dir)
-        gallery_url = base_url + self.get_slug() + "/"
         pics_sorted = self.get_sorted_pictures()
         template = template_env.get_template(self.get_template_name())
         count = -1
@@ -590,7 +588,7 @@ class Gallery():
                 continue
             # Check for a .desc file for the image.
             if not os.path.exists(fullpath + ".desc"):
-                #stderr_print("warning: %s has no description file" % fullpath)
+                # stderr_print("warning: %s has no description file" % fullpath)
                 continue
             img = GalleryImage(self.config)
             img.from_file(fullpath)
@@ -645,7 +643,7 @@ class Gallery():
                 self.events.append(event)
             event.add_image(img)
             img.event_object = event
-            if img.kvp.has_key("Featured") and img.kvp["Featured"].lower() in ["yes", "1", "true"]:
+            if 'Featured' in img.kvp and img.kvp["Featured"].lower() in ["yes", "1", "true"]:
                 self.featured.append(img)
             if img.awesome:
                 self.awesome.add_image(img)
@@ -668,14 +666,11 @@ class Gallery():
         os.path.walk(directory, self.walk_callback, event_details)
 
     def output(self, force_overwrite):
-        base_context = {
-            "config": template_safe_config(self.config),
-        }
         op = self.config["Output to"]
         template_env = Environment(
             loader=FileSystemLoader(self.config["Template directory"]))
         # Write out the index files. First, the main event pages.
-        events = sorted(self.events, key=lambda x: x.date, reverse=True)
+        self.events = sorted(self.events, key=lambda x: x.date, reverse=True)
         output_path = os.path.join(op, "galleries")
         base_url = self.config["URL"] + "galleries/"
         for event in self.events:
@@ -849,9 +844,9 @@ def main():
 
     fd = open(args.file)
     kvp = parse_kvp_file(fd, True)
-    if not "Template directory" in kvp:
+    if "Template directory" not in kvp:
         kvp["Template directory"] = "./templates"
-    if not "Data directory" in kvp:
+    if "Data directory" not in kvp:
         kvp["Data directory"] = args.data_directory or './metadata'
     if not args.pages_only:
         gallery = Gallery(kvp)
@@ -862,6 +857,7 @@ def main():
         gallery.output(args.force_overwrite)
     p = PageManager(kvp)
     p.writeout(args.force_overwrite)
+
 
 if __name__ == "__main__":
     main()
