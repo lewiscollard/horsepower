@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from collections import OrderedDict
 import argparse
 import datetime
 import hashlib
@@ -258,8 +259,8 @@ class GalleryImage():
                 out_file)
         # Make 3:2 crop for featured images on slider on front page.
         # (All of my stuff is 3:2 anyway.)
-        if self.kvp.has_key("Featured") and self.kvp["Featured"].lower() in ["yes", "1", "true"]:
-            if self.kvp.has_key("Featured order"):
+        if 'Featured' in self.kvp and self.kvp["Featured"].lower() in ["yes", "1", "true"]:
+            if 'Featured order' in self.kvp:
                 self.featured_order = int(self.kvp["Featured order"])
             out_file = os.path.join(base_dir, "huge_crop", filename)
             if (not os.path.exists(out_file)) or os.path.getmtime(out_file) < os.path.getmtime(self.image_file):
@@ -305,7 +306,6 @@ class GalleryImage():
         desc_file = filename + ".desc"
         debug_print("processing %s" % desc_file)
         fd = open(desc_file)
-        lcount = 0
         self.image_file = filename
         kvp = parse_kvp_file(fd)
         for k, v in kvp:
@@ -407,7 +407,6 @@ class AlbumBase():
         base_fs_path = os.path.join(output_dir, self.get_base_slug())
         gallery_dir = os.path.join(base_fs_path, self.get_slug())
         mkdirs(gallery_dir)
-        gallery_url = base_url + self.get_slug() + "/"
         pics_sorted = self.get_sorted_pictures()
         template = template_env.get_template(self.get_template_name())
         count = -1
@@ -448,6 +447,7 @@ class AlbumBase():
             fd.write(template.render(ctx))
             fd.close()
         index_file = os.path.join(base_fs_path, self.get_slug(), "index.html")
+
         ctx = {
             "photos": pics_sorted,
             "album": self,
@@ -590,7 +590,7 @@ class Gallery():
                 continue
             # Check for a .desc file for the image.
             if not os.path.exists(fullpath + ".desc"):
-                #stderr_print("warning: %s has no description file" % fullpath)
+                # stderr_print("warning: %s has no description file" % fullpath)
                 continue
             img = GalleryImage(self.config)
             img.from_file(fullpath)
@@ -645,7 +645,7 @@ class Gallery():
                 self.events.append(event)
             event.add_image(img)
             img.event_object = event
-            if img.kvp.has_key("Featured") and img.kvp["Featured"].lower() in ["yes", "1", "true"]:
+            if 'Featured' in img.kvp and img.kvp["Featured"].lower() in ["yes", "1", "true"]:
                 self.featured.append(img)
             if img.awesome:
                 self.awesome.add_image(img)
@@ -654,11 +654,32 @@ class Gallery():
     def ingest_directory(self, directory):
         debug_print("ingesting directory %s" % directory)
         # Look for the event description file.
+        filepath = os.path.join(directory, "event.desc")
+
         try:
-            infofd = open(os.path.join(directory, "event.desc"))
+            infofd = open(filepath)
         except Exception, detail:
             stderr_print("%s has no event.desc (%s)" % (directory, detail))
-            return
+            generate_event_desc = raw_input('Would you like to generate one? [Y/n] ').lower()
+
+            if generate_event_desc in ['n', 'no', 'false']:
+                return
+
+            # Now we build out the event.desc file. We'll take information from
+            # the directory name where possible.
+            matches = re.match(r'(\d{4}-\d{2}-\d{2})-([A-Za-z-]+)', os.path.split(directory)[-1])
+
+            # Convert a camel case to a normal string.
+            name = re.sub('([a-z0-9])([A-Z])', r'\1 \2', matches.group(2))
+
+            details = OrderedDict()
+            details['Event'] = raw_input('Event name: [{}] '.format(name)) or name
+            details['Date'] = raw_input('Date: [{}] '.format(matches.group(1))) or matches.group(1)
+
+            infofd = open(filepath, 'w+')
+            infofd.write('\n'.join([': '.join(pair) for pair in details.items()]))
+            infofd.seek(0)
+
         kvp = parse_kvp_file(infofd, True)
         infofd.close()
         event_details = {
@@ -668,14 +689,11 @@ class Gallery():
         os.path.walk(directory, self.walk_callback, event_details)
 
     def output(self, force_overwrite):
-        base_context = {
-            "config": template_safe_config(self.config),
-        }
         op = self.config["Output to"]
         template_env = Environment(
             loader=FileSystemLoader(self.config["Template directory"]))
         # Write out the index files. First, the main event pages.
-        events = sorted(self.events, key=lambda x: x.date, reverse=True)
+        self.events = sorted(self.events, key=lambda x: x.date, reverse=True)
         output_path = os.path.join(op, "galleries")
         base_url = self.config["URL"] + "galleries/"
         for event in self.events:
@@ -849,19 +867,21 @@ def main():
 
     fd = open(args.file)
     kvp = parse_kvp_file(fd, True)
-    if not "Template directory" in kvp:
+    if "Template directory" not in kvp:
         kvp["Template directory"] = "./templates"
-    if not "Data directory" in kvp:
+    if "Data directory" not in kvp:
         kvp["Data directory"] = args.data_directory or './metadata'
     if not args.pages_only:
         gallery = Gallery(kvp)
         gallery.output_path = kvp["Output to"]
         for i in kvp["Directories"].split(","):
             i = i.strip()
+            i = os.path.expanduser(i)  # Allows for ~/username to be used.
             gallery.ingest_directory(i)
         gallery.output(args.force_overwrite)
     p = PageManager(kvp)
     p.writeout(args.force_overwrite)
+
 
 if __name__ == "__main__":
     main()
