@@ -6,7 +6,9 @@
 {% block meta %}
   <meta property="og:title" content="{{ album.get_title() }}" />
   <meta property="og:description" content="" />
-  <meta property="og:image" content="https://hp.lewiscollard.com{{photos[0].get_size('large').get_url()}}" />
+  {% if photos %}
+    <meta property="og:image" content="https://hp.lewiscollard.com{{photos[0].get_size('large').get_url()}}" />
+  {% endif %}
 {% endblock %}
 
 {% block content %}
