@@ -197,11 +197,6 @@ class GalleryImage():
         parts.append(self.event)
         return ", ".join(parts)
 
-    def get_taxonomy_index_template(self):
-        '''Returns the template which should be used to render the
-        list of albums (e.g. the list of drivers, events, etc).'''
-        return 'list-albums.html'
-
     def make_sizes(self, base_dir):
         filename = self.get_basename()
         # Copy the full-res version into the full/ directory if
@@ -366,10 +361,17 @@ class AlbumBase():
     def get_base_slug(self):
         raise NotImplementedError
 
-    def get_taxonomy_context_data(self, albums):
+    @staticmethod
+    def get_taxonomy_context_data(albums):
         '''Should return a dictionary with which a taxonomy's template should
         be rendered.'''
         return {}
+
+    @staticmethod
+    def get_taxonomy_index_template():
+        '''Returns the template which should be used to render the
+        list of albums (e.g. the list of drivers, events, etc).'''
+        return 'list-albums.html'
 
     def get_template_name(self):
         return "photo.html"
@@ -489,7 +491,8 @@ class EventAlbum(AlbumBase):
     def get_base_slug(self):
         return "events"
 
-    def get_taxonomy_context_data(self, albums):
+    @staticmethod
+    def get_taxonomy_context_data(albums):
         context = super(EventAlbum, self).get_taxonomy_context_data(albums)
         year_dict = SortedDict()
         for album in albums:
