@@ -197,6 +197,11 @@ class GalleryImage():
         parts.append(self.event)
         return ", ".join(parts)
 
+    def get_taxonomy_index_template(self):
+        '''Returns the template which should be used to render the
+        list of albums (e.g. the list of drivers, events, etc).'''
+        return 'list-albums.html'
+
     def make_sizes(self, base_dir):
         filename = self.get_basename()
         # Copy the full-res version into the full/ directory if
@@ -361,6 +366,11 @@ class AlbumBase():
     def get_base_slug(self):
         raise NotImplementedError
 
+    def get_taxonomy_context_data(self, albums):
+        '''Should return a dictionary with which a taxonomy's template should
+        be rendered.'''
+        return {}
+
     def get_template_name(self):
         return "photo.html"
 
@@ -478,6 +488,16 @@ class EventAlbum(AlbumBase):
 
     def get_base_slug(self):
         return "events"
+
+    def get_taxonomy_context_data(self, albums):
+        context = super(EventAlbum, self).get_taxonomy_context_data(albums)
+        year_dict = SortedDict()
+        for album in albums:
+            year = albums.date[:4]
+            if not year in year_dict:
+                year_dict[year] = []
+            year_dict[year].append()
+        return context
 
     def get_sort_attr(self):
         return "awesome"
@@ -761,12 +781,13 @@ class Gallery():
 
         # Write drivers index.
         ctx = {}
-        tmpl = template_env.get_template("list-albums.html")
-        for title, slug, objects in (
-            ("Drivers", "drivers", drivers_sorted),
-            ("Events", "events", events_sorted),
-            ("Teams", "teams", teams_sorted)
+        for title, slug, objects, album_class in (
+            ("Drivers", "drivers", drivers_sorted, DriverAlbum),
+            ("Events", "events", events_sorted, EventAlbum),
+            ("Teams", "teams", teams_sorted, TeamAlbum)
         ):
+            tmpl = album_class.get_taxonomy_index_template()
+
             ctx = {
                 "config": template_safe_config(self.config),
                 "title": title,
@@ -774,6 +795,9 @@ class Gallery():
                 "base_slug": slug,
                 "albums": objects,
             }
+
+            # Add the taxonomy context data
+            ctx.update(album_class.get_taxonomy_context_data(objects))
             output_dir = os.path.join(
                 self.config["Output to"], "galleries", slug)
             mkdirs(output_dir, False)
