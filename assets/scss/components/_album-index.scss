@@ -16,6 +16,10 @@
   font-size: 56px;;
 }
 
+.album-listing {
+  @include Clearfix();
+}
+
 .album-listing-item {
   @include mq($mq-portrait-tablet) {
     width: 50%;
@@ -36,7 +40,9 @@
 }
 
 .album-index-section {
-  margin-top: $pad-base * 3;
+  & + & {
+    margin-top: $pad-base * 3;
+  }
 }
 
 .album-index-section-title {
