@@ -34,3 +34,15 @@
     width: 16.666%;
   }
 }
+
+.album-index-section {
+  margin-top: $pad-base * 3;
+}
+
+.album-index-section-title {
+  @include Title();
+
+  margin-bottom: $pad-base * 2;
+
+  font-size: $fs-large;
+}

@@ -501,7 +501,14 @@ class EventAlbum(AlbumBase):
             if not year in year_dict:
                 year_dict[year] = []
             year_dict[year].append(album)
+        context['years'] = year_dict
         return context
+
+    @staticmethod
+    def get_taxonomy_index_template():
+        '''Returns the template which should be used to render the
+        list of albums (e.g. the list of drivers, events, etc).'''
+        return 'taxonomies/event-list.html'
 
     def get_sort_attr(self):
         return "awesome"
