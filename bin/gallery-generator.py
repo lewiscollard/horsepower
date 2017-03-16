@@ -458,6 +458,7 @@ class AlbumBase():
             fd = open(html_file, "w")
             fd.write(template.render(ctx))
             fd.close()
+
         index_file = os.path.join(base_fs_path, self.get_slug(), "index.html")
 
         ctx = {
@@ -493,13 +494,13 @@ class EventAlbum(AlbumBase):
 
     @staticmethod
     def get_taxonomy_context_data(albums):
-        context = super(EventAlbum, self).get_taxonomy_context_data(albums)
-        year_dict = SortedDict()
+        context = AlbumBase.get_taxonomy_context_data(albums)
+        year_dict = OrderedDict()
         for album in albums:
-            year = albums.date[:4]
+            year = album.date.strftime('%Y')
             if not year in year_dict:
                 year_dict[year] = []
-            year_dict[year].append()
+            year_dict[year].append(album)
         return context
 
     def get_sort_attr(self):
@@ -789,7 +790,7 @@ class Gallery():
             ("Events", "events", events_sorted, EventAlbum),
             ("Teams", "teams", teams_sorted, TeamAlbum)
         ):
-            tmpl = album_class.get_taxonomy_index_template()
+            tmpl = template_env.get_template(album_class.get_taxonomy_index_template())
 
             ctx = {
                 "config": template_safe_config(self.config),
