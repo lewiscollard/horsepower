@@ -371,7 +371,7 @@ class AlbumBase():
     def get_taxonomy_index_template():
         '''Returns the template which should be used to render the
         list of albums (e.g. the list of drivers, events, etc).'''
-        return 'list-albums.html'
+        return 'taxonomies/base.html'
 
     def get_template_name(self):
         return "photo.html"
