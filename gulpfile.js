@@ -29,10 +29,10 @@ gulp.task('serve', function () {
     logPrefix: 'text',
     notify: false,
     open: false,
-    proxy: '0.0.0.0:8000'
+    proxy: 'hp.local'
   });
 
-  process.on('exit', () => {
+  process.on('exit', function () {
     browserSync.exit();
   });
 
