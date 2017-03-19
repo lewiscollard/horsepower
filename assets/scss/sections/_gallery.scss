@@ -1,33 +1,30 @@
 .gallery-section {
-  @include Clearfix();
-  position: relative;
-
   background-color: $color-black;
   color: $color-white;
 
-  z-index: 2;
+  @include mq($mq-portrait-tablet) {
+    display: flex;
+  }
 }
 
 .gallery-section-text {
+  width: 100%;
+
   @include mq($mq-portrait-tablet) {
-    position: absolute;
-    right: 50%;
-    top: 0;
-    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    width: 50%;
 
     .gallery-section-altLayout & {
-      left: 50%;
-      right: auto;
+      justify-content: flex-start;
+      order: 2;
     }
   }
 
   @include mq($mq-computer-bigger) {
-    right: 65%;
-
-    .gallery-section-altLayout & {
-      left: 65%;
-      right: auto;
-    }
+    width: 35%;
   }
 }
 
@@ -37,12 +34,6 @@
   padding: ($pad-base * 2) ($pad-base * 1);
 
   @include mq($mq-portrait-tablet) {
-    float: right;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
     max-width: 520px;
     padding: $pad-base * 3;
   }
@@ -66,15 +57,18 @@
 }
 
 .gallery-section-items {
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+
+  @include mq($mq-landscape-phone) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   @include mq($mq-portrait-tablet) {
     width: 50%;
-    float: right;
 
     .gallery-section-altLayout & {
-      float: left;
+      order: 0;
     }
   }
 
