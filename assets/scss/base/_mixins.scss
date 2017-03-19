@@ -1,3 +1,23 @@
+@mixin Intrinsic($width: 3, $height: 2) {
+  &::before {
+    content: '';
+    display: block;
+    position: relative;
+    padding-bottom: percentage($height / $width);
+  }
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 @mixin Spread() {
   display: block;
   position: absolute;

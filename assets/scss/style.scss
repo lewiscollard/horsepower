@@ -17,10 +17,12 @@
 @import "components/hero";
 @import "components/photo";
 @import "components/plain-text";
-@import "components/stats";
-@import "components/section-contact";
-@import "components/section-drivers";
-@import "components/section-gallery";
+
+/* Front page sections */
+@import "sections/stats";
+@import "sections/contact";
+@import "sections/drivers";
+@import "sections/gallery";
 
 @import "vendor/fontello";
 

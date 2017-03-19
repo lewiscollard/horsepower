@@ -9,7 +9,6 @@
 }
 
 .gallery-section-text {
-
   @include mq($mq-portrait-tablet) {
     position: absolute;
     right: 50%;
@@ -67,7 +66,8 @@
 }
 
 .gallery-section-items {
-  @include Clearfix();
+  display: flex;
+  flex-wrap: wrap;
 
   @include mq($mq-portrait-tablet) {
     width: 50%;
@@ -84,11 +84,15 @@
 }
 
 .gallery-section-item {
+  @include Intrinsic();
+
+  width: 100%;
+
   filter: grayscale(100%);
 
   &.in-view {
     filter: grayscale(0%);
-    transition: all $transition-time * 10;
+    transition: filter $transition-time * 10;
     transition-delay: $transition-time * 2;
   }
 
@@ -98,7 +102,6 @@
 
   @include mq($mq-landscape-phone) {
     width: 50%;
-    float: left;
 
     &:nth-child(n+3) {
       display: none;
@@ -134,31 +137,7 @@
   }
 }
 
-.gallery-section-item-inner {
-  padding-bottom: 66.66%;
-  position: relative;
-
-  overflow: hidden;
-}
-
-.gallery-section-item-action {
-  display: block;
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.gallery-section-item-action {
-  color: #fff;
-  text-decoration: none;
-}
-
 .gallery-section-item-image {
+  /* workaround for rendering weirdness */
   transform: scale(1.01);
-
-  background-position: center;
-  background-size: cover;
 }
