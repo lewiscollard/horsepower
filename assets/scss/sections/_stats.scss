@@ -35,7 +35,7 @@
 
   @include mq($mq-portrait-tablet) {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
