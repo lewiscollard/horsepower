@@ -19,8 +19,8 @@
   height: 100px;
 
   @include mq($mq-portrait-tablet) {
-    float: left;
     height: 100%;
+    margin-left: 0;
   }
 
   @include mq($mq-landscape-tablet) {
@@ -43,7 +43,11 @@
 
 .header-inner {
   height: 100%;
-  @include Clearfix();
+
+  @include mq($mq-portrait-tablet) {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .nav-outer {
@@ -55,23 +59,37 @@
   text-align: center;
 
   @include mq($mq-portrait-tablet) {
-    float: right;
-    text-align: left;
     padding-bottom: 0;
   }
 }
 
-.nav-item {
-  display: inline-block;
-  color: #fff;
-  line-height: 25px;
+.nav-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  height: 100%;
+  margin-top: -$pad-base;
+  margin-left: -30px;
 
   @include mq($mq-portrait-tablet) {
-    line-height: 120px;
+    margin-top: 0;
   }
+}
 
-  & + & {
-    margin-left: 30px;
+.nav-item {
+  flex: 1 0 auto;
+  margin-top: $pad-base;
+  margin-left: 30px;
+
+  color: #fff;
+
+  @include mq($mq-portrait-tablet) {
+    display: flex;
+    align-items: center;
+
+    margin-top: 0;
   }
 
   &.nav-item-button {
