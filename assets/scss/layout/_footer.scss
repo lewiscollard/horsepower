@@ -21,15 +21,12 @@
 }
 
 .footer-inner {
-  @include Clearfix();
-}
-
-.footer-right,
-.footer-left {
   text-align: center;
 
   @include mq($mq-landscape-tablet) {
-    text-align: left;
+    display: flex;
+
+    justify-content: space-between;
   }
 }
 
@@ -37,7 +34,6 @@
   line-height: $line-height;
 
   @include mq($mq-landscape-tablet) {
-    float: left;
     line-height: 1;
   }
 }
@@ -48,8 +44,6 @@
 
   @include mq($mq-landscape-tablet) {
     margin-top: 0;
-    float: right;
-    text-align: right;
   }
 }
 
