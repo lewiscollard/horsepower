@@ -1,5 +1,5 @@
-<ul class="album-listing album-listing-{{ base_slug }}">
-  {%for album in albums%}
+<ul class="album-listing album-listing-{{ base_slug }} gallery-items">
+  {% for album in albums %}
     <li class="gallery-item has-caption album-listing-item">
       <div class="gallery-item-inner">
         <a href="{{ album.get_url() }}" class="gallery-item-action">
