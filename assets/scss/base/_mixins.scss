@@ -1,9 +1,14 @@
 @mixin Intrinsic($width: 3, $height: 2) {
+  position: relative;
+
   &::before {
     content: '';
     display: block;
     position: relative;
     padding-bottom: percentage($height / $width);
+
+    background-size: cover;
+    background-position: center;
   }
 
   > * {

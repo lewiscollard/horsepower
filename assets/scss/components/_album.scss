@@ -46,12 +46,17 @@
 }
 
 .album-items {
+  display: flex;
 
+  flex-wrap: wrap;
 }
 
 .album-item {
+  flex: 0 0 auto;
+
   width: 50%;
-  float: left;
+
+  overflow: hidden;
 
   @include mq($mq-portrait-tablet) {
     width: 25%;
@@ -73,9 +78,7 @@
 }
 
 .album-item-inner {
-  position: relative;
-  padding-bottom: 66.666%;
-  overflow: hidden;
+  @include Intrinsic();
 
   &::after {
     @include Spread();
