@@ -1,8 +1,13 @@
 .upcoming {
-  padding-top: $pad-base * 5;
-  padding-bottom: $pad-base * 5;
+  padding-top: $pad-base * 2;
+  padding-bottom: $pad-base * 2;
 
   text-align: center;
+
+  @include mq($mq-portrait-tablet) {
+    padding-top: $pad-base * 5;
+    padding-bottom: $pad-base * 5;
+  }
 }
 
 .upcoming-title {
@@ -19,9 +24,13 @@
 }
 
 .upcoming-list {
-  margin-top: $pad-base * 3;
+  margin-top: $pad-base * 2;
 
   text-align: left;
+
+  @include mq($mq-portrait-tablet) {
+    margin-top: $pad-base * 3;
+  }
 }
 
 .upcoming-item {
