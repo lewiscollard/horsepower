@@ -5,7 +5,6 @@
 
   @include mq($mq-portrait-tablet) {
     width: 50%;
-    float: left;
   }
 
   @include mq($mq-landscape-tablet) {

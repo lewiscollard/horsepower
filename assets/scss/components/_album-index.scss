@@ -17,13 +17,15 @@
 }
 
 .album-listing {
-  @include Clearfix();
+  @include mq($mq-portrait-tablet) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .album-listing-item {
   @include mq($mq-portrait-tablet) {
     width: 50%;
-    float: left;
   }
 
   @include mq($mq-landscape-tablet) {
