@@ -23,10 +23,6 @@
 
     margin-left: -$pad-base * 2;
   }
-
-  @include mq($mq-landscape-tablet) {
-    margin-left: -$pad-base * 4;
-  }
 }
 
 .contact-social-item {
@@ -39,8 +35,8 @@
   }
 
   @include mq($mq-landscape-tablet) {
-    width: calc(25% - #{$pad-base * 4});
-    margin-left: $pad-base * 4;
+    width: calc(25% - #{$pad-base * 2});
+    margin-left: $pad-base * 2;
   }
 }
 
@@ -50,19 +46,39 @@
 }
 
 .contact-social-icon {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   background-color: $color-red;
   color: #fff;
 
   height: 250px;
   width: 250px;
-  line-height: 250px;
+  margin: 0 auto;
 
   text-align: center;
 
   .icon {
     font-size: 150px;
+  }
+
+  @include mq($mq-landscape-tablet) {
+    height: 200px;
+    width: 200px;
+
+    .icon {
+      font-size: 120px;
+    }
+  }
+
+  @include mq($mq-computer-bigger) {
+    height: 250px;
+    width: 250px;
+
+    .icon {
+      font-size: 150px;
+    }
   }
 }
 
