@@ -15,14 +15,17 @@
 }
 
 .contact-social {
-  @include Clearfix();
+  margin-top: $pad-base * 2;
 
   @include mq($mq-portrait-tablet) {
-    margin-left: -5%;
+    display: flex;
+    flex-wrap: wrap;
+
+    margin-left: -$pad-base * 2;
   }
 
   @include mq($mq-landscape-tablet) {
-    margin-top: $pad-base * 2;
+    margin-left: -$pad-base * 4;
   }
 }
 
@@ -31,14 +34,13 @@
   text-align: center;
 
   @include mq($mq-portrait-tablet) {
-    width: 45%;
-    float: left;
-    margin-left: 5%;
+    width: calc(50% - #{$pad-base * 2});
+    margin-left: $pad-base * 2;
   }
 
   @include mq($mq-landscape-tablet) {
-    width: 20%;
-    float: left;
+    width: calc(25% - #{$pad-base * 4});
+    margin-left: $pad-base * 4;
   }
 }
 
@@ -77,4 +79,6 @@
   display: block;
   margin-top: $pad-base;
   margin-bottom: $pad-base;
+
+  line-height: $line-height;
 }
