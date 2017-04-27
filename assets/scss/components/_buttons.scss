@@ -30,4 +30,16 @@
       background-color: $color-white;
     }
   }
+
+  &.onWhiteHollow {
+    background-color: #fff;
+    border-color: $color-black;
+    color: $color-black;
+
+    &:hover {
+      background-color: $color-red;
+      border-color: $color-red;
+      color: #fff;
+    }
+  }
 }
