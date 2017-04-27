@@ -28,14 +28,16 @@ def stderr_print(txt):
     sys.stderr.flush()
 
 
-def parse_kvp_file(fd, dict=False):
+def parse_kvp_string(string, as_dict=False, filename='<unknown>'):
+    lines = string.split('\n')
+
     kvp = []
     lcount = 0
-    while True:
+
+    for line in lines:
         lcount += 1
-        line = fd.readline()
         if not line:
-            break
+            continue
         if line.startswith(" ") or line.startswith("\t"):
             # Line continuation
             if not len(kvp):
@@ -55,16 +57,20 @@ def parse_kvp_file(fd, dict=False):
         lparts = line.split(":", 1)
         if len(lparts) < 2:
             stderr_print("warning: bad line '%s' on line %s of %s" %
-                         (line, lcount, fd.name))
+                         (line, lcount, filename))
         k = lparts[0].strip()
         v = lparts[1].strip()
         kvp.append([k, v])
-    if dict:
+    if as_dict:
         rv = {}
         for k, v in kvp:
             rv[k] = v
         return rv
     return kvp
+
+
+def parse_kvp_file(fd, as_dict=False):
+    return parse_kvp_string(fd.read(), as_dict=as_dict, filename=fd.name)
 
 
 def mkdirs(path, silent=True):
@@ -362,6 +368,10 @@ class AlbumBase():
         raise NotImplementedError
 
     @staticmethod
+    def get_homepage_context(config):
+        return {}
+
+    @staticmethod
     def get_taxonomy_context_data(albums):
         '''Should return a dictionary with which a taxonomy's template should
         be rendered.'''
@@ -412,7 +422,7 @@ class AlbumBase():
         except:
             self.info = {}
             return
-        self.metadata = parse_kvp_file(fd, dict=True)
+        self.metadata = parse_kvp_file(fd, as_dict=True)
 
     def output(self, template_env, output_dir, template_dir, base_url,
                sort_attr, reverse, force_overwrite):
@@ -482,6 +492,26 @@ class EventAlbum(AlbumBase):
         self.slug = slugify(event_name)
         self.date = None
         self.load_description_file()
+
+    @staticmethod
+    def get_homepage_context(config):
+        '''Adds upcoming events to the homepage template context.'''
+        fd = open(os.path.join(config['Data directory'], 'events/upcoming-events.desc'))
+        parts = fd.read().split('\n%\n')
+        kvps = [parse_kvp_string(part.strip(), as_dict=True) for part in parts if part.strip()]
+        kvps.sort(key=lambda x: x['Date'])
+        events = []
+        today = datetime.date.today()
+
+        # Make it a actual date.
+        for kvp in kvps:
+            kvp['Date'] = datetime.datetime.strptime(kvp['Date'], '%Y-%m-%d').date()
+            if kvp['Date'] < today:
+                continue
+            events.append(kvp)
+        return {
+            'upcoming_events': events,
+        }
 
     def get_slug(self):
         return self.date.strftime("%Y-%m-%d") + "-" + self.slug
@@ -780,6 +810,8 @@ class Gallery():
                 "button_text": "All teams",
             },
         ]
+        for taxonomy in [EventAlbum, DriverAlbum, TeamAlbum, AwesomeAlbum]:
+            ctx.update(taxonomy.get_homepage_context(self.config))
         ctx["awesome"] = self.awesome
         ctx["driver_count"] = len(drivers_sorted)
         ctx["event_count"] = len(events_sorted)
@@ -790,7 +822,7 @@ class Gallery():
         fd.write(tmpl.render(ctx))
         fd.close()
 
-        # Write drivers index.
+        # Write drivers + events + teams indices.
         ctx = {}
         for title, slug, objects, album_class in (
             ("Drivers", "drivers", drivers_sorted, DriverAlbum),
@@ -901,7 +933,7 @@ def main():
     DEBUG = args.verbose
 
     fd = open(args.file)
-    kvp = parse_kvp_file(fd, True)
+    kvp = parse_kvp_file(fd, as_dict=True)
     if "Template directory" not in kvp:
         kvp["Template directory"] = "./templates"
     if "Data directory" not in kvp:
