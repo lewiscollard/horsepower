@@ -93,6 +93,10 @@
   .hero-loading & {
     opacity: 0;
   }
+
+  @include mq($mq-computer) {
+    background-attachment: fixed;
+  }
 }
 
 .hero-title {
