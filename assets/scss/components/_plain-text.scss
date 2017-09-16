@@ -31,4 +31,27 @@
       text-decoration: none;
     }
   }
+
+  ul li {
+    position: relative;
+    padding-left: $pad-base;
+
+    &::before{
+      content: '';
+
+      position: absolute;
+      top: calc(0.75em - 2px);
+      left: 0;
+
+      display: block;
+      width: 5px;
+      height: 5px;
+
+      background-color: $color-red;
+    }
+  }
+
+  li + li{
+    margin-top: $pad-base / 2;
+  }
 }
