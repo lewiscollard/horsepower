@@ -3,7 +3,7 @@
 
 {% block meta %}
   {% if featured %}
-    <meta property="og:image" content="https://hp.lewiscollard.com{{featured[0].get_size('huge_crop').get_url()}}" />
+    <meta property="og:image" content="https://hp.lewiscollard.com/resource/images/heroes/simmons.jpg" />
   {% endif %}
   <meta property="og:title" content="Horsepower" />
   <meta property="og:description" content="A motorsports gallery by Lewis Collard." />
@@ -33,9 +33,8 @@
     <script>
       (function () {
         var images = [
-          // fixme: add more h ere
-          '/resource/images/heroes/coops.jpg',
-          '/resource/images/heroes/kiwi.jpg',
+          '/resource/images/heroes/haddon.jpg',
+          '/resource/images/heroes/simmons.jpg',
         ]
         var image = images[Math.floor(images.length * Math.random())];
         var hero = document.querySelector('.hero')
