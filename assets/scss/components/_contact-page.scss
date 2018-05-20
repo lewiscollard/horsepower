@@ -63,6 +63,12 @@
     font-size: 150px;
   }
 
+  svg {
+    height: 120px;
+
+    fill: #fff;
+  }
+
   @include mq($mq-landscape-tablet) {
     height: 200px;
     width: 200px;
