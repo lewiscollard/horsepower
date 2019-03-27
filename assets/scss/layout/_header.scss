@@ -6,6 +6,33 @@
   }
 }
 
+.header--transparent {
+  @include mq($mq-portrait-tablet) {
+    position: absolute;
+    z-index: 2;
+
+    width: 100%;
+
+    background-color: transparent;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.638) 19%,
+      rgba(0, 0, 0, 0.541) 34%,
+      rgba(0, 0, 0, 0.382) 47%,
+      rgba(0, 0, 0, 0.278) 56.5%,
+      rgba(0, 0, 0, 0.194) 65%,
+      rgba(0, 0, 0, 0.126) 73%,
+      rgba(0, 0, 0, 0.075) 80.2%,
+      rgba(0, 0, 0, 0.042) 86.1%,
+      rgba(0, 0, 0, 0.021) 91%,
+      rgba(0, 0, 0, 0.008) 95.2%,
+      rgba(0, 0, 0, 0.002) 98.2%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+}
+
 .header-logo-action {
   height: 100%;
   width: 100%;
@@ -118,6 +145,18 @@
 
   &:hover {
     color: $color-red;
+    text-shadow: none;
+  }
+
+  .header--transparent & {
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-item-button & {
+    text-shadow: none;
+  }
+
+  .header--transparent &:hover {
+    text-shadow: none;
   }
 }
-

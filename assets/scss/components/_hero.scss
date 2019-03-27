@@ -76,8 +76,7 @@
   @include mq($mq-landscape-tablet) {
     padding-bottom: 0;
 
-    height: 600px;
-    height: calc(100vh - 120px);
+    height: 100vh;
   }
 }
 

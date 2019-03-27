@@ -6,11 +6,11 @@
     <meta property="og:site_name" content="Horsepower, by Lewis Collard" />
     {% block meta %}{% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="/resource/images/favicons/favicon.ico" />
-    <link rel="stylesheet" href="/resource/css/style.min.css" />
+    <link rel="stylesheet" href="/resource/css/style.min.css?20180327" />
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
-    <header class="header">
+    <header class="header {% block header_class %}{% endblock %}">
       <div class="header-inner contained">
         <h1 class="header-logo">
           <a href="/" class="header-logo-action">
