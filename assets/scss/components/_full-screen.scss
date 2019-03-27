@@ -23,8 +23,7 @@
   bottom: -14%;
   left: 0;
 
-  /* FIXME: background-attachment fixed performance is bad. But having 'position: fixed'
-  instead doesn't allow you to have more than one... */
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
 }
