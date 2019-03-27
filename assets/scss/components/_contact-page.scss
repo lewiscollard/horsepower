@@ -20,6 +20,7 @@
   @include mq($mq-portrait-tablet) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 
     margin-left: -$pad-base * 2;
   }
