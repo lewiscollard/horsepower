@@ -1,32 +1,34 @@
-<section class="upcoming contained">
-  <h2 class="upcoming-title">Upcoming events</h2>
+{% if upcoming_events %}
+  <section class="upcoming contained">
+    <h2 class="upcoming-title">Upcoming events</h2>
 
-  <p class="upcoming-subtitle">Where I'll be shooting next</p>
+    <p class="upcoming-subtitle">Where I'll be shooting next</p>
 
-  <ul class="upcoming-list constrained">
-    {% for event in upcoming_events %}
-      <li class="upcoming-item">
-        <strong class="upcoming-item-date">
-          <span class="upcoming-item-date-line upcoming-item-date-line--day">
-            {{ event['Date'].strftime('%d.%m') }}
-          </span>
+    <ul class="upcoming-list constrained">
+      {% for event in upcoming_events %}
+        <li class="upcoming-item">
+          <strong class="upcoming-item-date">
+            <span class="upcoming-item-date-line upcoming-item-date-line--day">
+              {{ event['Date'].strftime('%d.%m') }}
+            </span>
 
-          <span class="upcoming-item-date-line upcoming-item-date-line--year">
-            {{ event['Date'].strftime('%Y') }}<span class="assistive">:</span>
-          </span>
-        </strong>
+            <span class="upcoming-item-date-line upcoming-item-date-line--year">
+              {{ event['Date'].strftime('%Y') }}<span class="assistive">:</span>
+            </span>
+          </strong>
 
-        <div class="upcoming-item-description">
-          <span class="upcoming-item-title">{{ event['Title'] }}<span class="assistive">,</span></span>
-          <span class="upcoming-item-location">{{ event['Location'] }}</span>
-        </div>
-
-        {% if event['Link'] %}
-          <div class="upcoming-item-link">
-            <a href="{{ event['Link'] }}" target="_blank" class="button onWhiteHollow upcoming-item-link-button">Visit website</a>
+          <div class="upcoming-item-description">
+            <span class="upcoming-item-title">{{ event['Title'] }}<span class="assistive">,</span></span>
+            <span class="upcoming-item-location">{{ event['Location'] }}</span>
           </div>
-        {% endif %}
-      </tr>
-    {% endfor %}
-  </ul>
-</section>
+
+          {% if event['Link'] %}
+            <div class="upcoming-item-link">
+              <a href="{{ event['Link'] }}" target="_blank" class="button onWhiteHollow upcoming-item-link-button">Visit website</a>
+            </div>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
