@@ -1,25 +1,19 @@
 {
   "name": "horsepower",
   "version": "1.0.0",
-  "description": "",
-  "main": "gulpfile.js",
-  "directories": {
-    "doc": "doc"
+  "scripts": {
+    "dev": "webpack-dev-server --mode=development",
+    "build": "webpack --mode=production"
   },
   "dependencies": {
-    "browser-sync": "2.6.5",
-    "gulp": "3.9.1",
-    "gulp-cache": "0.4.5",
-    "gulp-concat": "2.6.1",
-    "gulp-clean-css": "2.3.2",
-    "gulp-plumber": "1.1.0",
-    "gulp-rename": "1.2.2",
-    "gulp-sass": "3.0.0",
-    "gulp-uglify": "2.0.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": ""
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
 }
