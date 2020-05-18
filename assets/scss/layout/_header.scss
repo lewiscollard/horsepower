@@ -14,7 +14,7 @@
     width: 100%;
 
     background-color: transparent;
-    background: linear-gradient(
+    background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.8) 0%,
       rgba(0, 0, 0, 0.638) 19%,
@@ -34,16 +34,15 @@
 }
 
 .header-logo-action {
-  height: 100%;
-  width: 100%;
-
   display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .header-logo {
   width: 170px;
-  margin: 0 auto;
   height: 100px;
+  margin: 0 auto;
 
   @include mq($mq-portrait-tablet) {
     height: 100%;
@@ -72,17 +71,17 @@
   height: 100%;
 
   @include mq($mq-portrait-tablet) {
-    display: flex;
     justify-content: space-between;
+
+    display: flex;
   }
 }
 
 .nav-outer {
-  font-size: 0;
-
   height: 100%;
   padding-bottom: $pad-base * 1.5;
 
+  font-size: 0;
   text-align: center;
 
   @include mq($mq-portrait-tablet) {
@@ -91,18 +90,18 @@
 }
 
 .nav-items {
-  display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
 
+  display: flex;
   height: 100%;
   margin-top: -$pad-base;
   margin-left: -30px;
 
   @include mq($mq-portrait-tablet) {
-    margin-left: -20px;
     margin-top: 0;
+    margin-left: -20px;
   }
 
   @include mq($mq-landscape-tablet) {
@@ -112,15 +111,16 @@
 
 .nav-item {
   flex: 1 0 auto;
+
   margin-top: $pad-base;
   margin-left: 30px;
 
   color: #fff;
 
   @include mq($mq-portrait-tablet) {
-    display: flex;
     align-items: center;
 
+    display: flex;
     margin-top: 0;
     margin-left: 20px;
   }
@@ -130,22 +130,23 @@
   }
 
   &.nav-item-button {
-    padding-left: 20px;
     padding-right: 20px;
+    padding-left: 20px;
   }
 }
 
 .nav-item-action {
-  color: inherit;
-
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
 
+  color: inherit;
+
   &:hover {
-    color: $color-red;
     text-shadow: none;
+
+    color: $color-red;
   }
 
   .header--transparent & {

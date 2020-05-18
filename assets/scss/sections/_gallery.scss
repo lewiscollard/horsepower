@@ -11,10 +11,10 @@
   width: 100%;
 
   @include mq($mq-portrait-tablet) {
-    display: flex;
     align-items: center;
     justify-content: flex-end;
 
+    display: flex;
     width: 50%;
 
     .gallery-section-altLayout & {
@@ -42,7 +42,7 @@
 .gallery-section-text-title {
   margin-bottom: $pad-base;
 
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
@@ -60,8 +60,9 @@
   width: 100%;
 
   @include mq($mq-landscape-phone) {
-    display: flex;
     flex-wrap: wrap;
+
+    display: flex;
   }
 
   @include mq($mq-portrait-tablet) {
@@ -86,6 +87,7 @@
 
   &.in-view {
     filter: grayscale(0%);
+
     transition: filter $transition-time * 10;
     transition-delay: $transition-time * 2;
   }

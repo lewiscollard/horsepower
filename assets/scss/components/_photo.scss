@@ -7,10 +7,10 @@
 }
 
 .photo-container {
-  margin-left: auto;
-  margin-right: auto;
-
   position: relative;
+
+  margin-right: auto;
+  margin-left: auto;
 
   &.photo-container-wide {
     max-width: $size-contained-med;
@@ -25,29 +25,28 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
+
   width: 100%;
   height: 100%;
-
-  z-index: 1;
 }
 
 .photo-download {
   position: absolute;
-  bottom: $pad-base;
   right: $pad-base;
+  bottom: $pad-base;
   z-index: 2;
 
   color: #fff;
 }
 
 .photo-download-action {
-  color: inherit;
-
   font-weight: 700;
   text-decoration: none;
+  text-shadow: $text-shadow;
   text-transform: uppercase;
 
-  text-shadow: $text-shadow;
+  color: inherit;
 
   .icon {
     margin-right: 5px;
@@ -55,22 +54,20 @@
 }
 
 .photo-prevnext {
-  z-index: 2;
-
   position: absolute;
   top: 50%;
-  margin-top: -15px;
+  z-index: 2;
+
   width: 30px;
   height: 30px;
+  margin-top: -15px;
 
+  font-family: sans-serif;
   line-height: 30px;
   text-align: center;
-  font-family: sans-serif;
 
-
-  border: 1px solid #cccccc;
-  background: #000000;
   background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid #ccc;
   color: $color-white;
 
   &.prev {
@@ -84,18 +81,22 @@
   @include mq($mq-portrait-tablet) {
     width: 50px;
     height: 50px;
-    line-height: 50px;
     margin-top: -25px;
+
+    line-height: 50px;
   }
 
+  /* stylelint-disable order/order */
   @media (min-width: 1380px) {
     &.prev {
       left: -70px;
     }
+
     &.next {
       right: -70px;
     }
   }
+  /* stylelint-enable */
 }
 
 .photo-meta-outer {
@@ -106,52 +107,49 @@
 }
 
 .photo-meta-inner {
-  padding-left: 90px;
-
   position: relative;
+
+  padding-left: 90px;
 }
 
 .photo-meta-icon {
-  width: 60px;
-  height: 60px;
-
-  display: block;
   position: absolute;
-
   top: 0;
   left: 0;
 
+  display: block;
+  width: 60px;
+  height: 60px;
+
+  line-height: 60px;
+  text-align: center;
+
   background-color: $color-red;
 
-  text-align: center;
-  line-height: 60px;
-
   .icon {
-    color: $color-red;
     position: relative;
-
     z-index: 2;
-
-    font-size: 12px;
 
     margin-top: -12px;
 
+    font-size: 12px;
+
+    color: $color-red;
   }
 
-  &:before {
+  &::before {
     content: '';
 
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-left: -10px;
-    margin-top: -10px;
 
-    height: 20px;
     width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
 
     background-color: #fff;
-
     border-radius: 50%;
   }
 }
@@ -161,14 +159,17 @@
     margin-top: $pad-base * 1.5;
   }
 
+  /* stylelint-disable selector-max-type */
   a {
     color: inherit;
   }
+  /* stylelint-enable */
 }
 
 .photo-meta-item-title {
-  font-weight: 700;
   display: block;
   margin-bottom: 5px;
+
+  font-weight: 700;
   text-transform: uppercase;
 }

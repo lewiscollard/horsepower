@@ -1,11 +1,12 @@
 .stats {
   z-index: 2;
-  background-color: $color-white;
-
-  text-align: center;
 
   padding-top: $pad-base * 3;
   padding-bottom: $pad-base * 3;
+
+  text-align: center;
+
+  background-color: $color-white;
 
   @media ($mq-landscape-tablet) {
     padding-top: $pad-base * 6;
@@ -23,19 +24,20 @@
 .stats-subtitle {
   @include Title();
 
-  font-size: $fs-large;
-
   margin-bottom: $pad-base * 1.5;
+
+  font-size: $fs-large;
 }
 
 .stats-stats {
   max-width: 950px;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 
   @include mq($mq-portrait-tablet) {
-    display: flex;
     justify-content: center;
+
+    display: flex;
   }
 }
 
@@ -60,8 +62,9 @@
 }
 
 .stats-text {
-  line-height: $line-height;
   margin-bottom: $pad-base * 2;
+
+  line-height: $line-height;
 
   @include mq($mq-portrait-tablet) {
     margin-bottom: $pad-base * 3;
@@ -75,9 +78,9 @@
   margin-bottom: $pad-base;
 
   font-size: 80px;
-  color: $color-red;
-
   text-align: center;
+
+  color: $color-red;
 
   @include mq($mq-portrait-tablet) {
     margin-right: 0;
@@ -89,11 +92,12 @@
 }
 
 .stats-stat-desc {
-  line-height: $line-height;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
   display: block;
+
+  font-weight: 700;
+  line-height: $line-height;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .stats-action-outer {

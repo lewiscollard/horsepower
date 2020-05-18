@@ -1,32 +1,35 @@
 .footer {
-  background-color: $color-black;
-  color: $color-white;
-
   padding-top: 30px;
   padding-bottom: 30px;
+
+  background-color: $color-black;
+  color: $color-white;
 
   .body-dark & {
     background-color: #222;
   }
 
+  /* stylelint-disable selector-max-type */
   a {
     font-weight: 800;
-    color: inherit;
     text-decoration: none;
+
+    color: inherit;
 
     &:hover {
       text-decoration: underline;
     }
   }
+  /* stylelint-enable */
 }
 
 .footer-inner {
   text-align: center;
 
   @include mq($mq-landscape-tablet) {
-    display: flex;
-
     justify-content: space-between;
+
+    display: flex;
   }
 }
 
@@ -39,8 +42,9 @@
 }
 
 .footer-right {
-  text-align: center;
   margin-top: $pad-base;
+
+  text-align: center;
 
   @include mq($mq-landscape-tablet) {
     margin-top: 0;
@@ -50,10 +54,11 @@
 .footer-chiara {
   &::before {
     content: '\00a0';
-    display: inline-block;
 
-    height: 14px;
+    display: inline-block;
     width: 38px;
+    height: 14px;
+
     background-image: url('/resource/images/chiara-mark.svg');
     background-position: center;
     background-repeat: no-repeat;

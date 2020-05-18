@@ -2,10 +2,10 @@
   padding-top: $pad-base * 2;
   padding-bottom: $pad-base * 2;
 
+  text-align: center;
+
   background-color: darken($color-red, 4);
   color: #fff;
-
-  text-align: center;
 
   @include mq($mq-portrait-tablet) {
     padding-top: $pad-base * 5;
@@ -14,10 +14,10 @@
 }
 
 .contact-section-title {
+  margin-bottom: $pad-base;
+
   font-weight: 700;
   text-transform: uppercase;
-
-  margin-bottom: $pad-base;
 }
 
 .contact-section-subtitle {

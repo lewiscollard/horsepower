@@ -1,18 +1,18 @@
 .button {
   display: inline-block;
   height: 45px;
-  line-height: 45px;
-  padding-left: 30px;
   padding-right: 30px;
+  padding-left: 30px;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 45px;
+  text-decoration: none;
+  text-transform: uppercase;
 
   background-color: $color-black;
   border: 1px solid transparent;
   color: #fff;
-
-  font-size: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
 
   transition: all 0.1s;
 
@@ -26,8 +26,8 @@
     color: $color-white;
 
     &:hover {
-      color: $color-red;
       background-color: $color-white;
+      color: $color-red;
     }
   }
 

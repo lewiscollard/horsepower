@@ -1,8 +1,8 @@
 .album-index-outer {
+  min-height: calc(100vh - 100px);
+
   background-color: $color-black;
   color: $color-white;
-
-  min-height: calc(100vh - 100px);
 }
 
 .album-index-header {
@@ -18,8 +18,9 @@
 
 .album-listing {
   @include mq($mq-portrait-tablet) {
-    display: flex;
     flex-wrap: wrap;
+
+    display: flex;
   }
 }
 

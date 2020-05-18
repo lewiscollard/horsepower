@@ -1,4 +1,4 @@
- .section-teams {
+.section-teams {
   padding-top: $pad-base * 2;
   padding-bottom: $pad-base * 2;
 
@@ -8,15 +8,15 @@
   }
 }
 
-
 .section-teams-header {
   text-align: center;
 }
 
 .section-teams-title {
   margin-bottom: $pad-base / 2;
-  text-transform: uppercase;
+
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .section-teams-subtitle {
@@ -30,19 +30,19 @@
 
 .section-teams-items {
   @include mq($mq-portrait-tablet) {
-    display: flex;
     justify-content: center;
 
+    display: flex;
     margin-top: $pad-base * 2;
     margin-left: -$pad-base * 4;
   }
 }
 
 .section-teams-item {
-  margin-bottom: $pad-base * 3;
-  margin-top: $pad-base * 2;
-
   position: relative;
+
+  margin-top: $pad-base * 2;
+  margin-bottom: $pad-base * 3;
 
   @include mq($mq-portrait-tablet) {
     width: calc(33% - #{$pad-base * 4});
@@ -51,14 +51,15 @@
 
   &::before {
     content: '';
+
+    position: absolute;
+    top: 0;
+    right: 20%;
+    bottom: 0;
+    left: 20%;
     z-index: 0;
 
     display: block;
-    position: absolute;
-    left: 20%;
-    right: 20%;
-    top: 0;
-    bottom: 0;
 
     background-color: $color-red;
 
@@ -72,55 +73,59 @@
 }
 
 .section-teams-item-action {
+  position: relative;
+  z-index: 2;
+
   display: block;
   padding-top: $pad-base * 2;
   padding-bottom: $pad-base * 2;
 
-  color: inherit;
   text-decoration: none;
 
-  position: relative;
-  z-index: 2;
+  color: inherit;
 }
 
 .section-teams-item-image {
+  z-index: 2;
+
   display: block;
   height: 130px;
-
   margin-bottom: $pad-base * 2;
-
-  z-index: 2;
 
   text-align: center;
 
+  /* stylelint-disable selector-max-type */
   img {
-    height: 100%;
     width: auto;
+    height: 100%;
   }
+  /* stylelint-enable */
 }
 
 .section-teams-item-image-placeholder {
   display: block;
-  text-align: center;
-
   height: 100%;
+
+  text-align: center;
 
   &::before {
     @include Title();
-    font-size: $fs-huge;
 
     content: '?';
+
+    font-size: $fs-huge;
   }
 }
 
 .section-teams-item-text {
-  display: block;
   position: relative;
   z-index: 1;
 
+  display: block;
+
   font-weight: 700;
-  text-transform: uppercase;
   text-align: center;
+  text-transform: uppercase;
 
   transition: color $transition-time * 2;
 

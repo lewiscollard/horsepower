@@ -46,9 +46,9 @@
 }
 
 .album-items {
-  display: flex;
-
   flex-wrap: wrap;
+
+  display: flex;
 }
 
 .album-item {
@@ -85,17 +85,18 @@
 
     content: '';
 
-    background-color: $color-red;
+    z-index: 3;
 
+    background-color: $color-red;
     opacity: 0;
+
     transform: scale(0);
     transition: all $transition-time * 3;
-
-    z-index: 3;
   }
 
   &:hover::after {
     opacity: 0.9;
+
     transform: scale(1);
   }
 }
@@ -105,8 +106,9 @@
 
   will-change: transform;
 
-  transition: transform $transition-time;
   transform: scale(1.01);
+
+  transition: transform $transition-time;
 
   .album-item:hover & {
     transform: scale(1.1);
@@ -118,19 +120,18 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -20px;
-  margin-left: -20px;
+  z-index: 4;
 
   width: 20px;
   height: 20px;
+  margin-top: -20px;
+  margin-left: -20px;
 
   font-size: 20px;
   line-height: 20px;
   text-align: center;
+
   color: #fff;
-
-  z-index: 4;
-
   opacity: 0;
 
   .album-item:hover & {
