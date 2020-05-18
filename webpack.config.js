@@ -1,3 +1,5 @@
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   entry: {
     'main': './assets/js/index.js',
@@ -29,5 +31,12 @@ module.exports = {
     compress: false,
     // I use this port out of habit.
     port: 3000
-  }
+  },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {from: 'assets/images', to: 'html/resource/images'}
+      ]
+    })
+  ]
 }
