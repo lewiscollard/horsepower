@@ -1,0 +1,6 @@
+[flake8]
+ignore =
+    # Line too long. I won't make code look worse to fit within 78 characters.
+    E501,
+    # Bare except - Pylint catches this and it's disabled where it needs to be.
+    E722,

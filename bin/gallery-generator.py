@@ -3,7 +3,7 @@ from collections import OrderedDict
 import argparse
 import datetime
 import hashlib
-import htmlentitydefs
+import html.entities
 import os
 import os.path
 import re
@@ -40,7 +40,7 @@ def parse_kvp_string(string, as_dict=False, filename='<unknown>'):
             continue
         if line.startswith(" ") or line.startswith("\t"):
             # Line continuation
-            if not len(kvp):
+            if not kvp:
                 stderr_print(
                     "warning: line continuation on first line of file"
                 )
@@ -76,10 +76,10 @@ def parse_kvp_file(fd, as_dict=False):
 def mkdirs(path, silent=True):
     try:
         os.makedirs(path)
-    except OSError, detail:
+    except OSError as detail:
         # 17 = "already exists". We can ignore it safely.
         # XX: is this portable?
-        if not detail.errno == 17 and silent:
+        if detail.errno != 17 and silent:
             raise detail
 
 
@@ -88,12 +88,12 @@ def slugify(text):
     ret = ""
     for c in text.lower():
         try:
-            ret += htmlentitydefs.codepoint2name[ord(c)]
-        except:
+            ret += html.entities.codepoint2name[ord(c)]
+        except KeyError:
             ret += c
-    ret = re.sub("([a-zA-Z])(uml|acute|grave|circ|tilde|cedil)", r"\1", ret)
-    ret = re.sub("\W", " ", ret)
-    ret = re.sub(" +", "-", ret)
+    ret = re.sub(r"([a-zA-Z])(uml|acute|grave|circ|tilde|cedil)", r"\1", ret)
+    ret = re.sub(r"\W", " ", ret)
+    ret = re.sub(r" +", "-", ret)
     return ret.strip()
 
 
@@ -172,7 +172,7 @@ class GalleryImage():
         h = hashlib.md5()
         for a in ("drivers", "event", "teams", "identifier", "featured",
                   "awesome", "kvp", "config"):
-            h.update(str(getattr(self, a)))
+            h.update(str(getattr(self, a)).encode('utf-8'))
         return h.hexdigest()
 
     def get_basename(self):
@@ -237,7 +237,7 @@ class GalleryImage():
             try:
                 if os.path.getmtime(out_file) > os.path.getmtime(self.image_file):
                     continue
-            except:
+            except OSError:
                 # File doesn't exist. It's ok.
                 pass
             # Do we crop?
@@ -345,13 +345,15 @@ class AlbumBase():
         self.config = config
         self.metadata = {}
         self.title = ""
+        self.slug = ""
+        self.info = {}
 
     def hash(self):
         h = hashlib.md5()
-        h.update(self.title)
+        h.update(self.title.encode('utf-8'))
         for i in self.pictures:
-            h.update(i.hash())
-        h.update(str(self.config) + self.title)
+            h.update(i.hash().encode('utf-8'))
+        h.update((str(self.config) + self.title).encode('utf-8'))
         return h.hexdigest()
 
     def count(self):
@@ -386,9 +388,6 @@ class AlbumBase():
     def get_template_name(self):
         return "photo.html"
 
-    def get_plural_name(self):
-        raise NotImplementedError
-
     def get_url(self):
         return self.config["URL"] + "galleries/" + self.get_base_slug() + "/" + self.get_slug() + "/"
 
@@ -405,8 +404,7 @@ class AlbumBase():
         return self.get_first(1)[0]
 
     def get_first(self, count):
-        sorted = self.get_sorted_pictures()
-        return sorted[0:count]
+        return self.get_sorted_pictures()[0:count]
 
     def get_sorted_pictures(self):
         return sorted(self.pictures, key=lambda x: getattr(x, self.get_sort_attr()),
@@ -419,7 +417,7 @@ class AlbumBase():
         )
         try:
             fd = open(filename)
-        except:
+        except OSError:
             self.info = {}
             return
         self.metadata = parse_kvp_file(fd, as_dict=True)
@@ -528,7 +526,7 @@ class EventAlbum(AlbumBase):
         year_dict = OrderedDict()
         for album in albums:
             year = album.date.strftime('%Y')
-            if not year in year_dict:
+            if year not in year_dict:
                 year_dict[year] = []
             year_dict[year].append(album)
         context['years'] = year_dict
@@ -634,10 +632,10 @@ class Gallery():
         self.awesome = AwesomeAlbum(config)
         self.photo_count = 0
 
-    def walk_callback(self, arg, path, names):
-        for fn in names:
+    def ingest_files(self, dirpath, filenames, event_details):  # pylint:disable=too-many-statements
+        for fn in filenames:
             ext = os.path.splitext(fn)[1]
-            fullpath = os.path.join(path, fn)
+            fullpath = os.path.join(dirpath, fn)
             if not ext or ext == ".desc":
                 continue
             if fn == "event.desc":
@@ -645,18 +643,14 @@ class Gallery():
             # Is it a known image file type?
             ext_bare = ext.replace(".", "")
             if not ext_bare.lower() in IMAGE_EXTENSIONS:
-                #  Nope.
-                #  stderr_print("warning: unknown file type '%s' (%s)" %
-                #  (ext_bare, fullpath))
                 continue
             # Check for a .desc file for the image.
             if not os.path.exists(fullpath + ".desc"):
-                # stderr_print("warning: %s has no description file" % fullpath)
                 continue
             img = GalleryImage(self.config)
             img.from_file(fullpath)
-            img.event = arg["name"]
-            img.date = arg["date"]
+            img.event = event_details["name"]
+            img.date = event_details["date"]  # pylint:disable=attribute-defined-outside-init
             if not img.identifier:
                 img.generate_identifier()
 
@@ -694,7 +688,7 @@ class Gallery():
                     team_target.add_image(img)
             # Now grab the event name, see if we've already created
             # one.
-            ename = arg["name"]
+            ename = event_details["name"]
             event = None
             for ev in self.events:
                 if ev.title == ename:
@@ -702,7 +696,7 @@ class Gallery():
                     break
             if not event:
                 event = EventAlbum(ename, self.config)
-                event.date = arg["date"]
+                event.date = event_details["date"]
                 self.events.append(event)
             event.add_image(img)
             img.event_object = event
@@ -719,9 +713,9 @@ class Gallery():
 
         try:
             infofd = open(filepath)
-        except Exception, detail:
+        except OSError as detail:  # pylint-disable=broad-except
             stderr_print("%s has no event.desc (%s)" % (directory, detail))
-            generate_event_desc = raw_input('Would you like to generate one? [Y/n] ').lower()
+            generate_event_desc = input('Would you like to generate one? [Y/n] ').lower()
 
             if generate_event_desc in ['n', 'no', 'false']:
                 return
@@ -734,8 +728,8 @@ class Gallery():
             name = re.sub('([a-z0-9])([A-Z])', r'\1 \2', matches.group(2))
 
             details = OrderedDict()
-            details['Event'] = raw_input('Event name: [{}] '.format(name)) or name
-            details['Date'] = raw_input('Date: [{}] '.format(matches.group(1))) or matches.group(1)
+            details['Event'] = input('Event name: [{}] '.format(name)) or name
+            details['Date'] = input('Date: [{}] '.format(matches.group(1))) or matches.group(1)
 
             infofd = open(filepath, 'w+')
             infofd.write('\n'.join([': '.join(pair) for pair in details.items()]))
@@ -747,7 +741,8 @@ class Gallery():
             "name": kvp["Event"],
             "date": datetime.datetime.strptime(kvp["Date"], "%Y-%m-%d")
         }
-        os.path.walk(directory, self.walk_callback, event_details)
+        for dirpath, dirnames, filenames in os.walk(directory):
+            self.ingest_files(dirpath, filenames, event_details)
 
     def output(self, force_overwrite):
         op = self.config["Output to"]
@@ -825,9 +820,9 @@ class Gallery():
         # Write drivers + events + teams indices.
         ctx = {}
         for title, slug, objects, album_class in (
-            ("Drivers", "drivers", drivers_sorted, DriverAlbum),
-            ("Events", "events", events_sorted, EventAlbum),
-            ("Teams", "teams", teams_sorted, TeamAlbum)
+                ("Drivers", "drivers", drivers_sorted, DriverAlbum),
+                ("Events", "events", events_sorted, EventAlbum),
+                ("Teams", "teams", teams_sorted, TeamAlbum)
         ):
             tmpl = template_env.get_template(album_class.get_taxonomy_index_template())
 
@@ -850,7 +845,7 @@ class Gallery():
             fd.close()
 
 
-class Page:
+class Page:  # pylint:disable=too-few-public-methods
 
     def __init__(self, template, config):
         self.template = template
@@ -868,8 +863,7 @@ class Page:
             # isn't this always true?
             path_sub = path_sub[1:]
         target = os.path.join(self.config["Output to"], path_sub)
-        dir = os.path.dirname(target)
-        mkdirs(dir)
+        mkdirs(os.path.dirname(target))
         if os.path.exists(target):
             # Check mtime of template vs output file and only overwrite if the
             # source file has been modified. (But if force_overwrite is set to
@@ -894,21 +888,23 @@ class PageManager:
         self.config = config
         self.pages = []
         self.page_path = os.path.join(
-            self.config["Template directory"], "pages")
+            self.config["Template directory"], "pages"
+        )
         if os.path.exists(self.page_path):
-            os.path.walk(self.page_path, self.walk_callback, None)
+            self.load_pages()
 
-    def walk_callback(self, arg, path, names):
-        for name in names:
-            # Check the extension. Ignore anything that is not an HTML
-            # file. XXX: good idea?
-            ext = os.path.splitext(name)
-            if not ext[1].lower() == ".html":
-                continue
-            fpath = os.path.join(path, name)
-            debug_print("adding %s" % fpath)
-            page = Page(fpath, self.config)
-            self.pages.append(page)
+    def load_pages(self):
+        for dirpath, _, filenames in os.walk(self.page_path):
+            for name in filenames:
+                # Check the extension. Ignore anything that is not an HTML
+                # file. XXX: good idea?
+                ext = os.path.splitext(name)
+                if not ext[1].lower() == ".html":
+                    continue
+                fpath = os.path.join(dirpath, name)
+                debug_print("adding %s" % fpath)
+                page = Page(fpath, self.config)
+                self.pages.append(page)
 
     def writeout(self, force_overwrite=False):
         for i in self.pages:
@@ -916,13 +912,13 @@ class PageManager:
 
 
 def main():
-    global DEBUG
+    global DEBUG  # pylint:disable=global-statement
     ap = argparse.ArgumentParser()
     ap.add_argument(dest="file")
     ap.add_argument("-f", dest="force_overwrite", action="store_true",
                     help="regenerate all files whether they have changed or not. Useful "
                     "for development where your master files are not changing but "
-                    "this program is.")
+                    "this program has.")
     ap.add_argument("--pages-only", dest="pages_only", action="store_true",
                     help="only regenerate pages; don't regenerate albums")
     ap.add_argument("--data-directory", dest="data_directory", metavar="DIR",
@@ -932,15 +928,15 @@ def main():
     args = ap.parse_args()
     DEBUG = args.verbose
 
-    fd = open(args.file)
-    kvp = parse_kvp_file(fd, as_dict=True)
+    with open(args.file) as fd:
+        kvp = parse_kvp_file(fd, as_dict=True)
     if "Template directory" not in kvp:
         kvp["Template directory"] = "./templates"
     if "Data directory" not in kvp:
         kvp["Data directory"] = args.data_directory or './metadata'
     if not args.pages_only:
         gallery = Gallery(kvp)
-        gallery.output_path = kvp["Output to"]
+        gallery.output_path = kvp["Output to"]  # pylint:disable=attribute-defined-outside-init
         for i in kvp["Directories"].split(","):
             i = i.strip()
             i = os.path.expanduser(i)  # Allows for ~/username to be used.

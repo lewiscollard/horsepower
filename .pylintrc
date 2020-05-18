@@ -1,0 +1,23 @@
+[MESSAGES CONTROL]
+disable=
+  invalid-name,
+  no-self-use,
+  unused-argument,
+  # I like keeping it within 78 characters, but I am also not going to make
+  # code uglier for the sake of fitting on a 1970s glass teletype.
+  line-too-long,
+  # This would require me understanding half of what I wrote (and I'm not sure
+  # I understand it well enough to document it anyway).
+  missing-module-docstring,
+  missing-function-docstring,
+  missing-class-docstring,
+
+  # I think these are annoying and arbitrary.
+  too-many-public-methods,
+  too-many-branches,
+  too-many-locals,
+  too-many-instance-attributes,
+  too-many-arguments,
+
+  # I am not going to rewrite some of the hairy stuff in a hurry.
+  fixme,
