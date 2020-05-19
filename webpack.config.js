@@ -1,9 +1,16 @@
+const path = require('path');
+
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const webpack = require('webpack');
+
+const DEV = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: {
     'main': './assets/js/index.js',
-    // 'main-css': './src/css/index.css'
+    'style': './assets/js/style.js'
   },
   output: {
     filename: '[name].js'
@@ -11,8 +18,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: DEV,
+            }
+          },
+          'css-loader', 'sass-loader'
+        ]
       },
       {
         test: /\.js$/,
@@ -29,14 +44,24 @@ module.exports = {
     contentBase: './html/',
     // Compression is mildly pointless in local dev.
     compress: false,
-    // I use this port out of habit.
+    // I use 3000 out of an old habit.
     port: 3000
   },
+
+  output: {
+    path: path.resolve(__dirname, 'html/resource/webpack/'),
+    publicPath: '/resource/webpack/'
+  },
+
   plugins: [
     new CopyPlugin({
       patterns: [
-        {from: 'assets/images', to: 'html/resource/images'}
+        {from: 'assets/images', to: path.resolve(__dirname, './html/resource/images')}
       ]
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ]
 }
