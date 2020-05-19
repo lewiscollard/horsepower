@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% import 'macros/navigation.html' as navigation %}
 <html prefix="og: http://ogp.me/ns#">
   <head>
     <title>{% block title_entire %}{% block title %}{% endblock %} -- {{ config.site_name }}{% endblock %}</title>
@@ -11,36 +12,23 @@
 
   <body class="{% block body_class %}{% endblock %}">
     <header class="header {% block header_class %}{% endblock %}">
-      <div class="header-inner contained">
-        <h1 class="header-logo">
-          <a href="/" class="header-logo-action">
-            <div class="header-logo-image">
-              {% include 'svg/logo.svg' %}
+      <div class="header__inner contained">
+        <a href="/" class="header__logo">
+          {% include 'svg/logo.svg' %}
 
-              <span class="assistive">Horsepower, by Lewis Collard</span>
-            </div>
-          </a>
-        </h1>
-        <nav class="nav-outer">
-          <ul class="nav-items">
-            <li class="nav-item">
-              <a href="/" class="nav-item-action">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/galleries/events/">Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/galleries/drivers/">Drivers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/galleries/teams/">Teams</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/about/">About</a>
-            </li>
+          <span class="assistive">Horsepower, by Lewis Collard</span>
+        </a>
 
-            <li class="nav-item button onDark nav-item-button">
-              <a href="/contact/" class="nav-item-action">Contact</a>
+        <nav class="header__nav">
+          <ul class="nav__items">
+            {{ navigation.nav_item('/', 'Home') }}
+            {{ navigation.nav_item('/galleries/events/', 'Events') }}
+            {{ navigation.nav_item('/galleries/drivers/', 'Drivers') }}
+            {{ navigation.nav_item('/galleries/teams/', 'Teams') }}
+            {{ navigation.nav_item('/about/', 'About') }}
+
+            <li class="nav__item onDark">
+              <a href="/contact/" class="nav__item-link button onDark">Contact</a>
             </li>
           </ul>
         </nav>
