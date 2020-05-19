@@ -1,5 +1,6 @@
 .header {
   background-color: $color-black;
+  color: #fff;
 
   @include mq($mq-portrait-tablet) {
     height: 120px;
@@ -45,25 +46,17 @@
   margin: 0 auto;
 
   @include mq($mq-portrait-tablet) {
-    height: 100%;
     margin-left: 0;
   }
 
   @include mq($mq-landscape-tablet) {
-    width: 300px;
+    width: 250px;
+    height: 48px;
   }
-}
 
-.header-logo-image {
-  height: 100%;
-
-  background-image: url('/resource/images/logo-white.svg');
-  background-position: center left;
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-
-  @include mq($mq-landscape-tablet) {
-    background-size: auto 40%;
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -71,6 +64,7 @@
   height: 100%;
 
   @include mq($mq-portrait-tablet) {
+    align-items: center;
     justify-content: space-between;
 
     display: flex;
@@ -115,8 +109,6 @@
   margin-top: $pad-base;
   margin-left: 30px;
 
-  color: #fff;
-
   @include mq($mq-portrait-tablet) {
     align-items: center;
 
@@ -140,8 +132,6 @@
   font-weight: 700;
   text-decoration: none;
   text-transform: uppercase;
-
-  color: inherit;
 
   &:hover {
     text-shadow: none;
