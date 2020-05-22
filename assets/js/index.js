@@ -1,3 +1,9 @@
+// Polyfill for IntersectionObserver
+import 'intersection-observer'
+
+import watchScrollBling from './scroll-bling'
+
+
 window.addEventListener('DOMContentLoaded', () => {
   const handleKeyPress = (e) => {
     // Previous
@@ -12,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('keydown', handleKeyPress)
   }
 
-  inView('.gallery-section-item').on('enter', function (element) {
-    element.classList.add('in-view')
-  })
+  // Bling for when things come into the viewport (like the from-greyscale
+  // for images on the homepage)
+  watchScrollBling()
 })
