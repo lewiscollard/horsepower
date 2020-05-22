@@ -1,0 +1,29 @@
+{% macro tile(image, link_url, title=None, count=None, indicator_type="box") %}
+  {#
+    A generic image tile, linking to something else.
+
+    This is used on the homepage for, e.g. each event in the events list,
+    and each driver for the drivers.
+  #}
+  <a href="{{ link_url }}" class="gallery-item-action">
+    <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ image }})"></div>
+    {% if title %}
+      <span class="gallery-item-title">{{ title }}</span>
+    {% endif %}
+
+    {% if count %}
+      <span class="gallery-item-count">
+        <i class="icon icon-th"></i>
+        <span class="assistive">(</span>{{ count }}
+        <span class="assistive">photos)</span>
+      </span>
+    {% endif %}
+
+    {# FIXME: add the magnifier glass indicator #}
+    {% if indicator_type == 'box' %}
+      <span class="gallery-item-indicator">
+        <i class="icon icon-right-open"></i>
+      </span>
+    {% endif %}
+  </a>
+{% endmacro %}

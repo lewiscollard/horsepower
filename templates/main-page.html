@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% import 'macros/gallery.html' as gallery_macros %}
+
 {% block header_class %}header--transparent{% endblock %}
 
 {% block title_entire %}{{ config.site_name }}{% endblock %}
@@ -115,19 +117,12 @@
           <ul class="gallery-section-items album-listing-{{tax.slug}} gallery-section-items-{{ tax.slug }}">
             {% for gallery in tax.galleries %}
               <li class="gallery-item gallery-section-item-longerDesc gallery-section-item-{{ tax.name.lower() }} gallery-section-item has-caption scroll-bling">
-                <a href="{{ gallery.get_url() }}" class="gallery-item-action">
-                  <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>
-                  <span class="gallery-item-title">{{ gallery.title }}</span>
-                  <span class="gallery-item-count">
-                    <i class="icon icon-th"></i>
-                    <span class="assistive">(</span>{{ gallery.count() }}
-                    <span class="assistive">photos)</span>
-                  </span>
-
-                  <span class="gallery-item-indicator">
-                    <i class="icon icon-right-open"></i>
-                  </span>
-                </a>
+                {{ gallery_macros.tile(
+                  image=gallery.get_cover().get_size('thumb').get_url(),
+                  link_url=gallery.get_url(),
+                  title=gallery.title,
+                  count=gallery.count(),
+                ) }}
               </li>
             {% endfor %}
           </ul>
@@ -193,13 +188,10 @@
         {% for image in awesome.pictures[0:9] %}
           <li class="gallery-item gallery-section-item has-caption">
             <div class="gallery-section-item-inner">
-              <a href="/galleries/awesome/awesome/{{ image.identifier }}/" class="gallery-item-action">
-                <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ image.get_size('thumb').get_url() }})"></div>
-
-                <span class="gallery-item-indicator gallery-item-indicator-glass">
-                  <i class="icon icon-search"></i>
-                </span>
-              </a>
+              {{ gallery_macros.tile(
+                image=image.get_size('thumb').get_url(),
+                link_url='/galleries/awesome/awesome/{}/'.format(image.identifier),
+              ) }}
             </div>
           </li>
         {% endfor %}
