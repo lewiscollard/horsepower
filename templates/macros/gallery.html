@@ -5,9 +5,10 @@
     This is used on the homepage for, e.g. each event in the events list,
     and each driver for the drivers.
   #}
-  <a href="{{ link_url }}" class="tile {% if title %}tile--has-title{% endif %}">
+  <a href="{{ link_url }}" class="tile">
     <span class="tile__image" style="background-image: url({{ image }})"></span>
     {% if title %}
+      <span class="tile__title-gradient"></span>
       <span class="tile__title">{{ title }}</span>
     {% endif %}
 
