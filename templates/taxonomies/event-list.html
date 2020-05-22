@@ -1,10 +1,10 @@
 {% extends 'taxonomies/base.html' %}
 
 {% block listing %}
-  {% for year in years %}
+  {% for key, albums in years.items() %}
     <section class="album-index-section">
       <h2 class="album-index-section-title contained">{{ year }}</h2>
-      {% set albums = years[year] %}
+
       {% include 'includes/album-listing.html' %}
     </section>
   {% endfor %}
