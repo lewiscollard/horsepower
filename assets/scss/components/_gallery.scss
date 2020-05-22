@@ -109,7 +109,7 @@
     border: 0;
   }
 
-  .gallery-item::hover & {
+  .gallery-item:hover & {
     opacity: 1;
 
     transition: opacity $transition-time;
