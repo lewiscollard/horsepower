@@ -20,10 +20,15 @@
       </span>
     {% endif %}
 
-    {# FIXME: add the magnifier glass indicator #}
     {% if indicator_type == 'box' %}
       <span class="tile__indicator">
         <i class="icon icon-right-open"></i>
+      </span>
+    {% endif %}
+
+    {% if indicator_type == 'glass' %}
+      <span class="tile__indicator tile__indicator--glass">
+        {% include 'svg/glass.svg' %}
       </span>
     {% endif %}
   </a>

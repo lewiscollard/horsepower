@@ -108,12 +108,16 @@ Intrinsic mixin.
 }
 
 .tile__indicator--glass {
-  top: calc(50% - 25px);
-  left: calc(50% - 25px);
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
 
   border: none;
-}
 
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
 
 .tile__count {
   position: absolute;
