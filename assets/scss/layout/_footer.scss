@@ -42,6 +42,9 @@
 }
 
 .footer-right {
+  align-items: center;
+
+  display: flex;
   margin-top: $pad-base;
 
   text-align: center;
@@ -52,16 +55,14 @@
 }
 
 .footer-chiara {
-  &::before {
-    content: '\00a0';
+  align-items: center;
 
-    display: inline-block;
-    width: 38px;
-    height: 14px;
+  display: inline-flex;
+  margin-left: 8px;
 
-    background-image: url('/resource/images/chiara-mark.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+  svg {
+    width: 30px;
+    height: 15px;
+    margin-right: 5px;
   }
 }
