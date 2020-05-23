@@ -805,8 +805,16 @@ class Gallery():
                 "button_text": "All teams",
             },
         ]
+
+        # Add a reverse lookup version.
+        ctx["taxonomies_dict"] = {
+            taxonomy["slug"]: taxonomy
+            for taxonomy in ctx["taxonomies"]
+        }
+
         for taxonomy in [EventAlbum, DriverAlbum, TeamAlbum, AwesomeAlbum]:
             ctx.update(taxonomy.get_homepage_context(self.config))
+
         ctx["awesome"] = self.awesome
         ctx["driver_count"] = len(drivers_sorted)
         ctx["event_count"] = len(events_sorted)
