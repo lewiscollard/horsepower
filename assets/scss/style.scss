@@ -31,8 +31,13 @@
   clear: both;
 }
 
-@media screen {
-  .assistive {
-    display: none;
-  }
+/* Assistive text for screen readers. */
+.assistive {
+  position: absolute;
+  top: -10px;
+
+  width: 1px;
+  height: 1px;
+
+  overflow: hidden;
 }
