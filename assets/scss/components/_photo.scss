@@ -1,4 +1,4 @@
-.photo-container-outer {
+.photo-outer {
   background-color: $color-black;
 
   @include mq($mq-landscape-tablet) {
@@ -6,22 +6,22 @@
   }
 }
 
-.photo-container {
+.photo__container {
   position: relative;
 
   margin-right: auto;
   margin-left: auto;
+}
 
-  &.photo-container-wide {
-    max-width: $size-contained-med;
-  }
+.photo__container--wide {
+  max-width: $size-contained-med;
 }
 
 .photo-container-inner {
   position: relative;
 }
 
-.photo-container-image {
+.photo__image {
   position: absolute;
   top: 0;
   left: 0;
@@ -31,7 +31,7 @@
   height: 100%;
 }
 
-.photo-download {
+.photo__download-wrap {
   position: absolute;
   right: $pad-base;
   bottom: $pad-base;
@@ -40,136 +40,148 @@
   color: #fff;
 }
 
-.photo-download-action {
-  font-weight: 700;
+.photo__download {
+  @include Title();
+
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+
   text-decoration: none;
   text-shadow: $text-shadow;
-  text-transform: uppercase;
 
-  color: inherit;
-
-  .icon {
-    margin-right: 5px;
+  svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
   }
 }
 
-.photo-prevnext {
+.photo__prevnext {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 15px);
   z-index: 2;
 
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
   width: 30px;
   height: 30px;
   margin-top: -15px;
-
-  font-family: sans-serif;
-  line-height: 30px;
-  text-align: center;
 
   background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid #ccc;
   color: $color-white;
 
-  &.prev {
-    left: 0;
-  }
-
-  &.next {
-    right: 0;
-  }
+  transition: background-color $transition-time, color $transition-time;
 
   @include mq($mq-portrait-tablet) {
+    top: calc(50% - 25px);
+
     width: 50px;
     height: 50px;
-    margin-top: -25px;
-
-    line-height: 50px;
   }
 
-  /* stylelint-disable order/order */
-  @media (min-width: 1380px) {
-    &.prev {
-      left: -70px;
-    }
-
-    &.next {
-      right: -70px;
-    }
+  svg {
+    width: 7px;
+    height: 10px;
   }
-  /* stylelint-enable */
+
+  &:hover {
+    background-color: #fff;
+    color: $color-red;
+  }
 }
 
-.photo-meta-outer {
+.photo__prevnext--prev {
+  left: 0;
+
+  @media (min-width: 1380px) {
+    left: -70px;
+  }
+
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.photo__prevnext--next {
+  right: 0;
+
+  @media (min-width: 1380px) {
+    right: -70px;
+  }
+}
+
+.photo__details {
   padding-top: $pad-base * 5;
   padding-bottom: $pad-base * 5;
 
   background-color: $color-white;
 }
 
-.photo-meta-inner {
-  position: relative;
-
-  padding-left: 90px;
+.photo__details-inner {
+  display: flex;
 }
 
-.photo-meta-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
+.photo__details-icon {
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
 
-  display: block;
-  width: 60px;
-  height: 60px;
-
-  line-height: 60px;
-  text-align: center;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
 
   background-color: $color-red;
 
-  .icon {
-    position: relative;
-    z-index: 2;
-
-    margin-top: -12px;
-
-    font-size: 12px;
-
-    color: $color-red;
-  }
-
-  &::before {
-    content: '';
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    width: 20px;
-    height: 20px;
-    margin-top: -10px;
-    margin-left: -10px;
-
-    background-color: #fff;
-    border-radius: 50%;
+  @include mq($mq-landscape-tablet) {
+    width: 60px;
+    height: 60px;
+    margin-right: 30px;
   }
 }
 
-.photo-meta-item {
+.photo__details-icon-circle {
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  width: 20px;
+  height: 20px;
+
+  background-color: #fff;
+  border-radius: 50%;
+  color: $color-red;
+
+  svg {
+    width: 4px;
+    height: 10px;
+  }
+}
+
+.photo-meta__item {
   & + & {
     margin-top: $pad-base * 1.5;
   }
 
   /* stylelint-disable selector-max-type */
   a {
-    color: inherit;
+    transition: color $transition-time;
+  }
+
+  a:hover {
+    color: $color-red;
   }
   /* stylelint-enable */
 }
 
-.photo-meta-item-title {
+.photo-meta__item-title {
+  @include Title();
+
   display: block;
   margin-bottom: 5px;
-
-  font-weight: 700;
-  text-transform: uppercase;
 }
