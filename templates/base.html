@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% import 'macros/navigation.html' as navigation %}
 <html prefix="og: http://ogp.me/ns#">
   <head>
     <title>{% block title_entire %}{% block title %}{% endblock %} -- {{ config.site_name }}{% endblock %}</title>
@@ -6,39 +7,28 @@
     <meta property="og:site_name" content="Horsepower, by Lewis Collard" />
     {% block meta %}{% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="/resource/images/favicons/favicon.ico" />
-    <link rel="stylesheet" href="/resource/css/style.min.css?20180327" />
+    <link rel="stylesheet" href="/resource/webpack/style.css?202005" />
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
     <header class="header {% block header_class %}{% endblock %}">
-      <div class="header-inner contained">
-        <h1 class="header-logo">
-          <a href="/" class="header-logo-action">
-            <div class="header-logo-image">
-              <span class="assistive">Horsepower, by Lewis Collard</span>
-            </div>
-          </a>
-        </h1>
-        <nav class="nav-outer">
-          <ul class="nav-items">
-            <li class="nav-item">
-              <a href="/" class="nav-item-action">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/galleries/events/">Events</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/galleries/drivers/">Drivers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/galleries/teams/">Teams</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-item-action" href="/about/">About</a>
-            </li>
+      <div class="header__inner contained">
+        <a href="/" class="header__logo">
+          {% include 'svg/logo.svg' %}
 
-            <li class="nav-item button onDark nav-item-button">
-              <a href="/contact/" class="nav-item-action">Contact</a>
+          <span class="assistive">Horsepower, by Lewis Collard</span>
+        </a>
+
+        <nav class="header__nav">
+          <ul class="nav__items">
+            {{ navigation.nav_item('/', 'Home') }}
+            {{ navigation.nav_item('/galleries/events/', 'Events') }}
+            {{ navigation.nav_item('/galleries/drivers/', 'Drivers') }}
+            {{ navigation.nav_item('/galleries/teams/', 'Teams') }}
+            {{ navigation.nav_item('/about/', 'About') }}
+
+            <li class="nav__item onDark">
+              <a href="/contact/" class="nav__item-link button onDark">Contact</a>
             </li>
           </ul>
         </nav>
@@ -48,20 +38,21 @@
     {% block content %}{% endblock %}
 
     <footer class="footer">
-      <div class="footer-inner contained">
-        <div class="footer-left">
+      <div class="footer__inner contained">
+        <div class="footer__left">
           <p><a href="/copyright/">Anti-copyright</a> Lewis Collard, 2014-2016.
           In memory of Mark Callf, 1964-2015.</p>
         </div>
 
-        <div class="footer-right">
-          <p>
-            Designed by
-            <a class="footer-chiara" href="http://www.chiaramensa.com/">Chiara Mensa</a>
-          </p>
-        </div>
+        <p class="footer__right">
+          Designed by
+          <a class="footer__chiara" href="http://www.chiaramensa.com/">
+            {% include 'svg/chiara.svg' %}
+            Chiara Mensa
+          </a>
+        </p>
       </div>
     </footer>
-    <script src="/resource/js/main.js" defer></script>
+    <script src="/resource/webpack/main.js" defer></script>
   </body>
 </html>

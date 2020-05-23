@@ -20,10 +20,9 @@
 }
 
 .text-page {
-  padding-top: $pad-base * 4;
-  padding-bottom: $pad-base * 4;
-
   max-width: 960px;
   margin-right: auto;
   margin-left: auto;
+  padding-top: $pad-base * 4;
+  padding-bottom: $pad-base * 4;
 }

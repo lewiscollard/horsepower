@@ -29,15 +29,16 @@
 }
 
 .floater-caption {
-  color: #666;
+  margin-top: $pad-base / 2;
 
   font-size: 14px;
 
-  margin-top: $pad-base / 2;
+  color: #666;
 }
 
 .floater-link {
-  color: $color-red;
   font-weight: inherit;
   text-decoration: underline;
+
+  color: $color-red;
 }

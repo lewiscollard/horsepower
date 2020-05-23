@@ -1,8 +1,8 @@
-.album-outer {
+.album {
   background-color: $color-black;
 }
 
-.album-header {
+.album__header {
   padding-top: $pad-base * 2;
   padding-bottom: $pad-base * 2;
 
@@ -14,13 +14,22 @@
   }
 }
 
-.album-header-text {
+.album__header-text {
   @include mq($mq-landscape-tablet) {
     max-width: 66%;
   }
 }
 
-.album-title-main {
+.album__title-above {
+  display: block;
+  margin-bottom: $pad-base * 0.5;
+
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.album__title-main {
   @include Title();
 
   display: block;
@@ -32,111 +41,77 @@
   }
 }
 
-.album-title-above {
-  display: block;
-  margin-bottom: $pad-base * 0.5;
-
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.album-description {
+.album__description {
   margin-top: $pad-base * 2;
 }
 
-.album-items {
-  display: flex;
-
+.album__items {
   flex-wrap: wrap;
+
+  display: flex;
 }
 
-.album-item {
+.album__item {
+  @include Intrinsic;
+
   flex: 0 0 auto;
 
-  width: 50%;
+  width: 100%;
 
   overflow: hidden;
 
   @include mq($mq-portrait-tablet) {
-    width: 25%;
+    width: calc(1 / 3 * 100%);
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: calc(1 / 4 * 100%);
   }
 
   @include mq($mq-computer-bigger) {
-    width: 20%;
+    width: calc(1 / 5 * 100%);
   }
 
   @include mq($mq-computer-huge) {
-    width: 16.666%;
+    width: calc(1 / 6 * 100%);
   }
 }
 
-.album-item-action {
-  display: block;
+.album__item--no-caption {
+  /* these can go two-up even on a phone because there's no caption to worry
+  about */
+  width: 50%;
+
+  @include mq($mq-portrait-tablet) {
+    width: calc(1 / 3 * 100%);
+  }
+
+  @include mq($mq-landscape-tablet) {
+    width: calc(1 / 4 * 100%);
+  }
+
+  @include mq($mq-computer-bigger) {
+    width: calc(1 / 5 * 100%);
+  }
+
+  @include mq($mq-computer-huge) {
+    width: calc(1 / 6 * 100%);
+  }
+}
+
+/* Elements for when albums are broken up into sections, e.g. years on events */
+.album__section {
+  & + & {
+    margin-top: $pad-base * 3;
+  }
+}
+
+.album__section-title {
+  @include Title();
+
+  margin-bottom: $pad-base * 2;
+
+  font-size: $fs-large;
 
   color: #fff;
-}
-
-.album-item-inner {
-  @include Intrinsic();
-
-  &::after {
-    @include Spread();
-
-    content: '';
-
-    background-color: $color-red;
-
-    opacity: 0;
-    transform: scale(0);
-    transition: all $transition-time * 3;
-
-    z-index: 3;
-  }
-
-  &:hover::after {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-}
-
-.album-item-photo {
-  @include Spread();
-
-  will-change: transform;
-
-  transition: transform $transition-time;
-  transform: scale(1.01);
-
-  .album-item:hover & {
-    transform: scale(1.1);
-    transition: transform $transition-time * 3;
-  }
-}
-
-.album-item-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -20px;
-  margin-left: -20px;
-
-  width: 20px;
-  height: 20px;
-
-  font-size: 20px;
-  line-height: 20px;
-  text-align: center;
-  color: #fff;
-
-  z-index: 4;
-
-  opacity: 0;
-
-  .album-item:hover & {
-    opacity: 1;
-
-    transition: opacity $transition-time;
-    transition-delay: $transition-time * 3;
-  }
 }

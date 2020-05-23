@@ -1,0 +1,79 @@
+{% import 'macros/gallery.html' as gallery_macros %}
+
+{% macro generic(id, kicker, title, link, link_text) %}
+  <section class="section">
+    <div class="section__inner contained">
+      <div class="section__header">
+        <h2 class="section__kicker">
+          {{ kicker }}
+        </h2>
+
+        <p class="section__title">
+          {{ title }}
+        </p>
+      </div>
+
+      <div class="section__body">
+        {{ caller() }}
+      </div>
+
+      {% if link and link_text %}
+        <p class="section__button-wrap">
+          <a class="button" href="{{ link }}">{{ link_text }}</a>
+        </p>
+      {% endif %}
+    </div>
+  </section>
+{% endmacro %}
+
+{% macro stats(items) %}
+  <ul class="stats">
+    {% for item in items %}
+      <li class="stats__stat">
+        <span class="stats__stat-number">{{ item.number }}</span>
+        <span class="stats__stat-desc">{{ item.text }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro gallery(id, kicker, title, link, link_text, layout="normal") %}
+  <section class="gallery-section gallery-section--{{ layout }}" id="{{ id }}">
+    <div class="gallery-section__text">
+      <div class="gallery-section__text-inner">
+        <h2 class="gallery-section__kicker">{{ kicker }}</h2>
+        <p class="gallery-section__title">
+          {{ title|safe }}
+        </p>
+        <p class="gallery-section__link-wrap">
+          <a href="{{ link }}" class="button onDark gallery-section__text-button">{{ link_text }}</a>
+        </p>
+      </div>
+    </div>
+
+    {{ caller() }}
+  </section>
+{% endmacro %}
+
+{% macro taxonomy_gallery(taxonomy, id, kicker, title, layout='normal') %}
+  {% call gallery(id=id, kicker=kicker, title=title, link=taxonomy.index_url, link_text='View all {}'.format(taxonomy.name.lower()), layout=layout) %}
+    <ul class="gallery-section__items">
+      {% for tax_gallery in taxonomy.galleries %}
+        <li class="gallery-section__item scroll-bling">
+          {{ gallery_macros.tile(
+            image=tax_gallery.get_cover().get_size('thumb').get_url(),
+            title=tax_gallery.title,
+            count=tax_gallery.count(),
+            link_url=tax_gallery.get_url(),
+          ) }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endcall %}
+{% endmacro %}
+
+{% macro full_screen_image(image) %}
+  <div class="fullscreen">
+    <div class="fullscreen__image" style="background-image: url('{{ image }}')"></div>
+  </div>
+{% endmacro %}

@@ -2,10 +2,10 @@
   padding-top: $pad-base * 2;
   padding-bottom: $pad-base * 2;
 
+  text-align: center;
+
   background-color: darken($color-red, 4);
   color: #fff;
-
-  text-align: center;
 
   @include mq($mq-portrait-tablet) {
     padding-top: $pad-base * 5;
@@ -13,23 +13,23 @@
   }
 }
 
-.contact-section-title {
+.contact-section__title {
+  margin-bottom: $pad-base;
+
   font-weight: 700;
   text-transform: uppercase;
-
-  margin-bottom: $pad-base;
 }
 
-.contact-section-subtitle {
+.contact-section__subtitle {
   @include Title();
 
   font-size: $fs-large;
 }
 
-.contact-section-text {
+.contact-section__text {
   margin-top: $pad-base * 1.5;
 }
 
-.contact-section-action-outer {
+.contact-section__action-outer {
   margin-top: $pad-base * 1.5;
 }

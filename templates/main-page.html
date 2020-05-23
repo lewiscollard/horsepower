@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 
+{% import 'macros/gallery.html' as gallery_macros %}
+{% import 'macros/sections.html' as section_macros %}
+
 {% block header_class %}header--transparent{% endblock %}
 
 {% block title_entire %}{{ config.site_name }}{% endblock %}
@@ -14,22 +17,27 @@
 
 {% block content %}
   <article class="front-page">
-    <header class="hero" id="front-page-hero">
-      <div class="hero-image"></div>
-      <div class="hero-content contained">
-        <h1 class="hero-title">
-          <span class="hero-title-top">
+    <header class="hero hero--loading" id="front-page-hero">
+      <div class="hero__image"></div>
+      <div class="hero__loader"></div>
+      <div class="hero__content contained">
+        <h1 class="hero__title">
+          <span class="hero__title-top">
             Motorsports photography by
           </span>
 
-          <span class="hero-title-bottom">
+          <span class="hero__title-bottom">
             Lewis Collard
           </span>
         </h1>
       </div>
 
-      <span class="hero-indicator">
-        <em class="hero-indicator-icon icon-right-open"></em>
+      <div class="hero__spinner">
+        {% include 'svg/spinner.svg' %}
+      </div>
+
+      <span class="hero__indicator">
+        {% include 'svg/chevron.svg' %}
       </span>
     </header>
 
@@ -38,14 +46,15 @@
         var images = [
           '/resource/images/heroes/haddon.jpg',
           '/resource/images/heroes/simmons.jpg',
+          '/resource/images/heroes/peckham.jpg',
+          '/resource/images/heroes/vaskelis.jpg',
         ]
         var image = images[Math.floor(images.length * Math.random())];
         var hero = document.querySelector('.hero')
-        var heroImage = document.querySelector('.hero-image');
-        hero.classList.add('hero-loading');
+        var heroImage = document.querySelector('.hero__image');
         var imgtag = new Image();
         imgtag.onload = function() {
-          hero.classList.remove('hero-loading')
+          hero.classList.remove('hero--loading');
           heroImage.style.backgroundImage = "url('" + image + "')";
         }
         setTimeout(function () {
@@ -54,11 +63,8 @@
       })();
     </script>
 
-    <section class="stats">
-      <h2 class="stats-title">About</h2>
-      <p class="stats-subtitle">Behind the lens</p>
-
-      <div class="plain-text stats-text constrained">
+    {% call section_macros.generic(kicker='About', title='Behind the lens', link='/about/', link_text='More about me') %}
+      <div class="section__text plain-text constrained">
         <p>I'm Lewis Collard. I am a photographer with the Norfolk Arena Drift Team,
         the greatest grass-roots drift racing crew on the planet,
         though there are allegations that I have occasionally
@@ -71,154 +77,85 @@
         enjoy it as much as I enjoyed making it.</p>
       </div>
 
-      <ul class="stats-stats constrained">
-        <li class="stats-stat">
-          <span class="stats-stat-number">{{ event_count }}</span>
-          <span class="stats-stat-desc">events attended</span>
-        </li>
-
-        <li class="stats-stat">
-          <span class="stats-stat-number">{{ driver_count }}</span>
-          <span class="stats-stat-desc">drivers photographed</span>
-        </li>
-
-        <li class="stats-stat">
-          <span class="stats-stat-number">{{ "{:,}".format(photo_count) }}</span>
-          <span class="stats-stat-desc">high resolution downloads</span>
-        </li>
-      </ul>
-
-      <p class="stats-action-outer">
-        <a class="button" href="/about/">More about me</a>
-      </p>
-    </section>
-
-    {% for tax in taxonomies %}
-      {% if tax.name in ["Events", "Drivers"] %}
-        <section class="gallery-section {% if loop.index % 2 == 0 %}gallery-section-altLayout{% endif %}" id="{{tax.slug}}">
-          <div class="gallery-section-text">
-            <div class="gallery-section-text-inner">
-              <h2 class="gallery-section-text-title">{{ tax.name }}</h2>
-              <p class="gallery-section-text-subtitle">
-                {% if tax.name == "Drivers" %}
-                  Mad skills.<br />Unique styles.
-                {% elif tax.name == "Events" %}
-                  The action.<br />Up close.
-                {% endif %}
-              </p>
-              <p class="gallery-section-text-action-outer">
-                <a href="{{ tax.index_url }}" class="button onDark gallery-section-text-button">View all</a>
-              </p>
-            </div>
-          </div>
-
-          <ul class="gallery-section-items album-listing-{{tax.slug}} gallery-section-items-{{ tax.slug }}">
-            {% for gallery in tax.galleries %}
-              <li class="gallery-item gallery-section-item-longerDesc gallery-section-item-{{ tax.name.lower() }} gallery-section-item has-caption">
-                <a href="{{ gallery.get_url() }}" class="gallery-item-action">
-                  <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ gallery.get_cover().get_size('thumb').get_url() }})"></div>
-                  <span class="gallery-item-title">{{ gallery.title }}</span>
-                  <span class="gallery-item-count">
-                    <i class="icon icon-th"></i>
-                    <span class="assistive">(</span>{{ gallery.count() }}
-                    <span class="assistive">photos)</span>
-                  </span>
-
-                  <span class="gallery-item-indicator">
-                    <i class="icon icon-right-open"></i>
-                  </span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </section>
-
-        {% if tax.name == "Events" %}
-          <div class="fullscreen">
-            <div class="fullscreen-image fast-parallax" data-parallax-y-by="-2" data-parallax-unit="%" style="background-image: url(/resource/images/fullscreen/ross/DSC_2170-1920.JPG)"></div>
-          </div>
-
-        {% elif tax.name == "Drivers" %}
-          <div class="fullscreen fullscreen-2">
-            <div class="fullscreen-image fast-parallax" data-parallax-y-by="-2" data-parallax-unit="%" style="background-image: url(/resource/images/fullscreen/ash/DSC_0020-1920.JPG)"></div>
-          </div>
-        {% endif %}
-      {% elif tax.name == "Teams" %}
-        <section class="section-teams contained">
-          <div class="section-teams-header">
-            <h1 class="section-teams-title">{{ tax.name }}</h1>
-            <p class="section-teams-subtitle">Speed. Angle. Showmanship.</p>
-          </div>
-
-          <ul class="section-teams-items">
-            {% for gallery in tax.galleries[:3] %}
-              <li class="section-teams-item">
-                <a class="section-teams-item-action" href="{{ gallery.get_url() }}">
-                  <span class="section-teams-item-image">
-                    {% if gallery.metadata["Transparent image"] %}
-                      <img aria-hidden="true" src='{{ gallery.metadata["Transparent image"] }}' alt="" />
-                    {% else %}
-                      <span class="section-teams-item-image-placeholder"></span>
-                    {% endif %}
-                  </span>
-                  <span class="section-teams-item-text">
-                    {{ gallery.title }}
-                  </span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-
-          <p class="section-teams-action-outer">
-            <a class="button" href="{{ tax.index_url }}">View all teams</a>
-          </p>
-        </section>
-      {% endif %}
-    {% endfor %}
-
-    <section class="gallery-section {% if loop.index % 2 == 0 %}gallery-section-altLayout{% endif %}" id="awesome">
-      <div class="gallery-section-text">
-        <div class="gallery-section-text-inner">
-          <h2 class="gallery-section-text-title">Greatest hits</h2>
-          <p class="gallery-section-text-subtitle">
-            The best of the best.
-          </p>
-          <p class="gallery-section-text-action-outer">
-            <a href="{{ awesome.get_url() }}" class="button onDark gallery-section-text-button">View all</a>
-          </p>
-        </div>
+      <div class="section__extra constrained">
+        {{ section_macros.stats([
+          {'number': event_count, 'text': 'events attended'},
+          {'number': driver_count, 'text': 'drivers photographed'},
+          {'number': '{:,}'.format(photo_count), 'text': 'high resolution downloads'},
+        ]) }}
       </div>
+    {% endcall %}
 
-      <ul class="gallery-section-items album-listing-awesome">
-        {% for image in awesome.pictures[0:9] %}
-          <li class="gallery-item gallery-section-item has-caption">
-            <div class="gallery-section-item-inner">
-              <a href="/galleries/awesome/awesome/{{ image.identifier }}/" class="gallery-item-action">
-                <div class="gallery-section-item-image gallery-item-image has-caption" style="background-image: url({{ image.get_size('thumb').get_url() }})"></div>
+    {{ section_macros.taxonomy_gallery(
+      taxonomy=taxonomies_dict.events,
+      id='events',
+      kicker='Events',
+      title='The action.<br>Up close.'
+    ) }}
 
-                <span class="gallery-item-indicator gallery-item-indicator-glass">
-                  <i class="icon icon-search"></i>
+    {{ section_macros.full_screen_image('/resource/images/fullscreen/ross/DSC_2170-1920.JPG') }}
+
+    {{ section_macros.taxonomy_gallery(
+      taxonomy=taxonomies_dict.drivers,
+      id='drivers',
+      kicker='Drivers',
+      title='Mad skills.<br>Unique styles.',
+      layout='switched'
+    ) }}
+
+    {{ section_macros.full_screen_image('/resource/images/fullscreen/ash/DSC_0020-1920.JPG') }}
+
+    {% set taxonomy = taxonomies_dict.teams %}
+    {% call section_macros.generic(kicker=taxonomy.name, title='Speed. Angle. Showmanship.', link=taxonomy.index_url, link_text='View all teams') %}
+      <div class="section__extra">
+        <ul class="team-list">
+          {% for gallery in taxonomy.galleries[:3] %}
+            <li class="team-list__item">
+              <a class="team-list__item-action" href="{{ gallery.get_url() }}">
+                <span class="team-list__item-image">
+                  {% if gallery.metadata["Transparent image"] %}
+                    <img aria-hidden="true" src='{{ gallery.metadata["Transparent image"] }}' alt="" />
+                  {% else %}
+                    <span class="team-list__item-image-placeholder"></span>
+                  {% endif %}
+                </span>
+                <span class="team-list__item-text">
+                  {{ gallery.title }}
                 </span>
               </a>
-            </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endcall %}
+
+    {% call section_macros.gallery(id="awesome", kicker='Greatest hits', title='The best of the best', link=awesome.get_url(), link_text='View all', layout='switched') %}
+      <ul class="gallery-section__items">
+        {% for image in awesome.pictures[0:9] %}
+          <li class="gallery-section__item">
+            {{ gallery_macros.tile(
+              image=image.get_size('thumb').get_url(),
+              link_url='/galleries/awesome/awesome/{}/'.format(image.identifier),
+              indicator_type='glass'
+            ) }}
           </li>
         {% endfor %}
       </ul>
-    </section>
+    {% endcall %}
 
     {% include 'includes/upcoming-events.html' %}
 
     <section class="contact-section">
       <div class="contained">
-        <h2 class="contact-section-title">Contact me</h2>
+        <h2 class="contact-section__title">Contact me</h2>
 
-        <p class="contact-section-subtitle">Got questions?</o>
+        <p class="contact-section__subtitle">Got questions?</o>
 
-          <div class="plain-text contact-section-text">
+          <div class="plain-text contact-section__text">
             <p>Think you should be here, and you're not? Want me at your event? Spotted an error?</p>
           </div>
 
-          <p class="contact-section-action-outer">
+          <p class="contact-section__action-outer">
             <a class="button onDark" href="/contact/">Get in touch</a>
           </p>
         </h2>

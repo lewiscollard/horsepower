@@ -1,3 +1,4 @@
+/* stylelint-disable selector-max-universal, selector-max-type, selector-no-qualifying-type */
 .plain-text {
   > * {
     margin-top: $pad-base;
@@ -24,19 +25,22 @@
   a {
     font-weight: 800;
     text-decoration: underline;
+
     color: $color-red;
 
     &.button {
-      color: #fff;
       text-decoration: none;
+
+      color: #fff;
     }
   }
 
   ul li {
     position: relative;
+
     padding-left: $pad-base;
 
-    &::before{
+    &::before {
       content: '';
 
       position: absolute;
@@ -51,7 +55,8 @@
     }
   }
 
-  li + li{
+  li + li {
     margin-top: $pad-base / 2;
   }
 }
+/* stylelint-enable */

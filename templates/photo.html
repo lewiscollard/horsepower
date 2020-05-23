@@ -10,62 +10,68 @@
 
 {% block content %}
   <article class="photo-outer">
-    <div class="photo-container-outer">
-      <div class="photo-container photo-container-{{photo.aspect_ratio_name()}}">
+    <div class="photo">
+      <div class="photo__container photo__container--{{photo.aspect_ratio_name()}}">
         {% if prev_photo %}
-          <a aria-hidden="true" class="photo-prevnext prev" href="{{ prev_photo.context_url }}">
-            <i class="icon icon-left-open"></i>
+          <a rel="prev" class="photo__prevnext photo__prevnext--prev" href="{{ prev_photo.context_url }}">
+            {% include 'svg/chevron.svg' %}
 
-            <span class="assistive">Next photo</span>
+            <span class="assistive">Previous photo</span>
           </a>
         {% endif %}
 
         {% if next_photo %}
-          <a aria-hidden="true" class="photo-prevnext next" href="{{ next_photo.context_url }}">
+          <a rel="next" class="photo__prevnext photo__prevnext--next" href="{{ next_photo.context_url }}">
+            {% include 'svg/chevron.svg' %}
+
             <span class="assistive">Next photo</span>
-            <i class="icon icon-right-open"></i>
           </a>
         {% endif %}
 
-        <div class="photo-container-inner" style="padding-bottom: {{ photo.aspect_padding_bottom() }}%">
-          <img class="photo-container-image" src='{{ photo.get_size("large").get_url() }}' alt="{{ photo.identifier }}" />
+        <div class="photo__inner" style="padding-bottom: {{ photo.aspect_padding_bottom() }}%">
+          <img class="photo__image" src='{{ photo.get_size("large").get_url() }}' alt="{{ photo.identifier }}" />
 
-          <p class="photo-download">
-            <a class="photo-download-action" href='{{ photo.get_size("full").get_url() }}'>
-              <i class="icon icon-download"></i>Download high res</a>
+          <p class="photo__download-wrap">
+            <a class="photo__download" rel="download" href='{{ photo.get_size("full").get_url() }}'>
+              {% include 'svg/download.svg' %}
+              Download high res
+            </a>
           </p>
         </div>
       </div>
     </div>
 
-    <div class="photo-meta-outer constrained">
-      <div class="photo-meta-inner">
-        <span class="photo-meta-icon">
-          <i class="icon icon-info"></i>
+    <div class="photo__details">
+      <div class="photo__details-inner constrained">
+        <span class="photo__details-icon">
+          <span class="photo__details-icon-circle">
+            {% include 'svg/i.svg' %}
+          </span>
         </span>
-        <ul id="photo-meta">
-          <li class="photo-meta-item">
-            <strong class="photo-meta-item-title">Photo reference<span class="assistive">:</span></strong> {{photo.identifier}}
+
+        <ul class="photo-meta" id="photo-meta">
+          <li class="photo-meta__item">
+            <strong class="photo-meta__item-title">Photo reference<span class="assistive">:</span></strong> {{photo.identifier}}
           </li>
 
           {% if photo.driver_objects %}
-            <li class="photo-meta-item">
-              <strong class="photo-meta-item-title">Driver{% if photo.driver_objects|length > 1 %}s{% endif %}<span class="assistive">:</span></strong>
+            <li class="photo-meta__item">
+              <strong class="photo-meta__item-title">Driver{% if photo.driver_objects|length > 1 %}s{% endif %}<span class="assistive">:</span></strong>
               {% for driver in photo.driver_objects %}{% if loop.index > 1%},{% endif %}
               <a href="{{ driver.get_url() }}">{{ driver.title }}</a>{% endfor %}
             </li>
           {% endif %}
 
           {% if photo.event_object %}
-            <li class="photo-meta-item">
-              <strong class="photo-meta-item-title">Event<span class="assistive">:</span></strong>
+            <li class="photo-meta__item">
+              <strong class="photo-meta__item-title">Event<span class="assistive">:</span></strong>
               <a href="{{ photo.event_object.get_url() }}">{{ photo.event_object.title }}</a>
             </li>
           {% endif %}
 
           {% if photo.team_objects %}
-            <li class="photo-meta-item">
-              <strong class="photo-meta-item-title">Team{% if photo.team_objects|length > 1 %}s{% endif %}<span class="assistive">:</span></strong>
+            <li class="photo-meta__item">
+              <strong class="photo-meta__item-title">Team{% if photo.team_objects|length > 1 %}s{% endif %}<span class="assistive">:</span></strong>
               {% for team in photo.team_objects %}
                 <a href="{{ team.get_url() }}">{{ team.title }}</a>
               {% endfor %}
