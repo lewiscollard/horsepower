@@ -29,6 +29,10 @@
 }
 
 .gallery-section__text-inner {
+  flex-direction: column;
+  justify-content: center;
+
+  display: flex;
   height: 100%;
 
   padding: ($pad-base * 2) ($pad-base * 1);
