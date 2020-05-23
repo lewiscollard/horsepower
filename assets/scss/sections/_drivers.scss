@@ -13,7 +13,7 @@
 }
 
 .section-teams-title {
-  margin-bottom: $pad-base / 2;
+  margin-bottom: $pad-base;
 
   font-weight: 700;
   text-transform: uppercase;
@@ -21,6 +21,7 @@
 
 .section-teams-subtitle {
   @include Title();
+
   font-size: 28px;
 
   @include mq($mq-landscape-phone) {
