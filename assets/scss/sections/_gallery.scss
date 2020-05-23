@@ -7,7 +7,7 @@
   }
 }
 
-.gallery-section-text {
+.gallery-section__text {
   width: 100%;
 
   @include mq($mq-portrait-tablet) {
@@ -17,7 +17,7 @@
     display: flex;
     width: 50%;
 
-    .gallery-section-altLayout & {
+    .gallery-section--switched & {
       justify-content: flex-start;
       order: 2;
     }
@@ -28,7 +28,7 @@
   }
 }
 
-.gallery-section-text-inner {
+.gallery-section__text-inner {
   height: 100%;
 
   padding: ($pad-base * 2) ($pad-base * 1);
@@ -39,24 +39,24 @@
   }
 }
 
-.gallery-section-text-title {
+.gallery-section__kicker {
   margin-bottom: $pad-base;
 
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.gallery-section-text-subtitle {
+.gallery-section__title {
   @include Title();
 
   font-size: $fs-large;
 }
 
-.gallery-section-text-action-outer {
-  margin-top: $pad-base * 3;
+.gallery-section__link-wrap {
+  margin-top: $pad-base * 2;
 }
 
-.gallery-section-items {
+.gallery-section__items {
   width: 100%;
 
   @include mq($mq-landscape-phone) {
@@ -68,7 +68,7 @@
   @include mq($mq-portrait-tablet) {
     width: 50%;
 
-    .gallery-section-altLayout & {
+    .gallery-section--switched & {
       order: 0;
     }
   }
@@ -78,10 +78,12 @@
   }
 }
 
-.gallery-section-item {
+.gallery-section__item {
   @include Intrinsic();
 
   width: 100%;
+
+  overflow: hidden;
 
   &.scroll-bling {
     filter: grayscale(100%);
@@ -133,9 +135,4 @@
       display: block;
     }
   }
-}
-
-.gallery-section-item-image {
-  /* workaround for rendering weirdness */
-  transform: scale(1.01);
 }
