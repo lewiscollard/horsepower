@@ -16,7 +16,10 @@
     width: calc(33% - #{$pad-base * 4});
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: $pad-base * 4;
+
+    & + & {
+      margin-left: $pad-base * 4;
+    }
   }
 
   &::before {
