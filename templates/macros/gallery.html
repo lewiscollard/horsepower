@@ -19,15 +19,15 @@
 
     {% if count %}
       <span class="tile__count">
-        <i class="icon icon-th"></i>
+        {% include 'svg/waffle.svg' %}
         <span class="assistive">(</span>{{ count }}
         <span class="assistive">photos)</span>
       </span>
     {% endif %}
 
     {% if indicator_type == 'box' %}
-      <span class="tile__indicator">
-        <i class="icon icon-right-open"></i>
+      <span class="tile__indicator tile__indicator--box">
+        {% include 'svg/chevron.svg' %}
       </span>
     {% endif %}
 
