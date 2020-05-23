@@ -5,7 +5,7 @@
   background-color: $color-black;
   color: $color-white;
 
-  .body-dark & {
+  .body--dark & {
     background-color: #222;
   }
 
@@ -23,7 +23,7 @@
   /* stylelint-enable */
 }
 
-.footer-inner {
+.footer__inner {
   text-align: center;
 
   @include mq($mq-landscape-tablet) {
@@ -33,7 +33,7 @@
   }
 }
 
-.footer-left {
+.footer__left {
   line-height: $line-height;
 
   @include mq($mq-landscape-tablet) {
@@ -41,7 +41,7 @@
   }
 }
 
-.footer-right {
+.footer__right {
   align-items: center;
 
   display: flex;
@@ -54,7 +54,7 @@
   }
 }
 
-.footer-chiara {
+.footer__chiara {
   align-items: center;
 
   display: inline-flex;
@@ -64,5 +64,7 @@
     width: 30px;
     height: 15px;
     margin-right: 5px;
+
+    fill: #9cd6dc;
   }
 }
