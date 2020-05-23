@@ -13,23 +13,23 @@
   }
 }
 
-.contact-section-title {
+.contact-section__title {
   margin-bottom: $pad-base;
 
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.contact-section-subtitle {
+.contact-section__subtitle {
   @include Title();
 
   font-size: $fs-large;
 }
 
-.contact-section-text {
+.contact-section__text {
   margin-top: $pad-base * 1.5;
 }
 
-.contact-section-action-outer {
+.contact-section__action-outer {
   margin-top: $pad-base * 1.5;
 }
