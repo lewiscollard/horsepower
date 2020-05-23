@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 {% import 'macros/navigation.html' as navigation %}
-<html prefix="og: http://ogp.me/ns#">
+<html prefix="og: http://ogp.me/ns#" lang="en">
   <head>
     <title>{% block title_entire %}{% block title %}{% endblock %} -- {{ config.site_name }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:site_name" content="Horsepower, by Lewis Collard" />
+    <meta charset="utf-8">
     {% block meta %}{% endblock %}
     <link rel="shortcut icon" type="image/x-icon" href="/resource/images/favicons/favicon.ico" />
     <link rel="stylesheet" href="/resource/webpack/style.css?202005" />
