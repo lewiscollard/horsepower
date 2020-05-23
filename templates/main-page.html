@@ -16,22 +16,27 @@
 
 {% block content %}
   <article class="front-page">
-    <header class="hero" id="front-page-hero">
-      <div class="hero-image"></div>
-      <div class="hero-content contained">
-        <h1 class="hero-title">
-          <span class="hero-title-top">
+    <header class="hero hero--loading" id="front-page-hero">
+      <div class="hero__image"></div>
+      <div class="hero__loader"></div>
+      <div class="hero__content contained">
+        <h1 class="hero__title">
+          <span class="hero__title-top">
             Motorsports photography by
           </span>
 
-          <span class="hero-title-bottom">
+          <span class="hero__title-bottom">
             Lewis Collard
           </span>
         </h1>
       </div>
 
-      <span class="hero-indicator">
-        <em class="hero-indicator-icon icon-right-open"></em>
+      <div class="hero__spinner">
+        {% include 'svg/spinner.svg' %}
+      </div>
+
+      <span class="hero__indicator">
+        {% include 'svg/chevron.svg' %}
       </span>
     </header>
 
@@ -43,11 +48,10 @@
         ]
         var image = images[Math.floor(images.length * Math.random())];
         var hero = document.querySelector('.hero')
-        var heroImage = document.querySelector('.hero-image');
-        hero.classList.add('hero-loading');
+        var heroImage = document.querySelector('.hero__image');
         var imgtag = new Image();
         imgtag.onload = function() {
-          hero.classList.remove('hero-loading')
+          hero.classList.remove('hero--loading');
           heroImage.style.backgroundImage = "url('" + image + "')";
         }
         setTimeout(function () {
