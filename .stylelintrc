@@ -1,8 +1,12 @@
 {
   "plugins": [
-    "stylelint-order"
+    "stylelint-order",
+    "stylelint-z-index-value-constraint"
   ],
   "rules": {
+    "plugin/z-index-value-constraint": {
+      "max": 2
+    },
     "order/order": [
       {
         "type": "at-rule",

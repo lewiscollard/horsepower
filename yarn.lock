@@ -6390,6 +6390,11 @@ stylelint-order@^4.0.0:
     postcss "^7.0.26"
     postcss-sorting "^5.0.1"
 
+stylelint-z-index-value-constraint@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/stylelint-z-index-value-constraint/-/stylelint-z-index-value-constraint-1.1.0.tgz#aa70f5be05e96f81f38008bc373389ae85a3baed"
+  integrity sha512-+G8gKfAi21vr4i2YnsnyRNpQIc1AtyqkyQS5c9SgEqjRj4MjIphks632/bsYkDw7mlfZLo8MsyhTaQpMjfktMg==
+
 stylelint@^13.4.1:
   version "13.4.1"
   resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-13.4.1.tgz#b347d27407d644492f8877657f6c0e7e823bd29f"
