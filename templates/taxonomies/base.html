@@ -3,13 +3,15 @@
 {% block body_class %}body-dark{% endblock %}
 
 {% block content %}
-  <article class="album-index-outer">
-    <div class="album-index-header contained">
-      <h1 class="album-index-title">{{ title }}</h1>
+  <article class="album">
+    <div class="album__header contained">
+      <h1 class="album__title">
+        <span class="album__title-main">{{ title }}</span>
+      </h1>
     </div>
+
     {% block listing %}
       {% include 'includes/album-listing.html' %}
     {% endblock %}
-    <div class="clearme"></div>
   </article>
 {%endblock%}

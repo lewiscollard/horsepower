@@ -1,16 +1,14 @@
 {% import 'macros/gallery.html' as gallery_macros %}
 
-<ul class="album-listing album-listing-{{ base_slug }} gallery-items">
+<ul class="album__items">
   {% for album in albums %}
-    <li class="gallery-item has-caption album-listing-item">
-      <div class="gallery-item-inner">
-        {{ gallery_macros.tile(
-          image=album.get_cover().get_size('thumb').get_url(),
-          link_url=album.get_url(),
-          title=album.title,
-          count=album.count()
-        ) }}
-      </div>
+    <li class="album__item">
+      {{ gallery_macros.tile(
+        image=album.get_cover().get_size('thumb').get_url(),
+        link_url=album.get_url(),
+        title=album.title,
+        count=album.count()
+      ) }}
     </li>
   {% endfor %}
 </ul>

@@ -6,11 +6,11 @@ Intrinsic mixin.
 */
 
 .tile {
-  @include Spread();
+  display: block;
 
   text-decoration: none;
 
-  color: inherit;
+  color: #fff;
 
   &::after {
     @include Spread();

@@ -1,9 +1,9 @@
 {% extends 'taxonomies/base.html' %}
 
 {% block listing %}
-  {% for key, albums in years.items() %}
-    <section class="album-index-section">
-      <h2 class="album-index-section-title contained">{{ year }}</h2>
+  {% for year, albums in years.items() %}
+    <section class="album__section">
+      <h2 class="album__section-title contained">{{ year }}</h2>
 
       {% include 'includes/album-listing.html' %}
     </section>

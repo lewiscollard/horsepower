@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+
 {% block body_class %}body-dark{% endblock %}
+
+{% import 'macros/gallery.html' as gallery_macros %}
 
 {% block title %}{{ album.get_title() }}{% endblock %}
 
@@ -12,42 +15,35 @@
 {% endblock %}
 
 {% block content %}
-  <article class="album-outer full-height">
-    <div class="album-inner">
-      <div class="album-header contained">
-        <div class="album-header-text">
-          <h1 class="album-title">
-            {% if album.get_taxonomy_name() %}
-              <span class="album-title-above">{{ album.get_taxonomy_name() }}</span><span class="assistive">:</span>
-            {% endif %}
-            <span class="album-title-main">{{ album.title }}</span>
-          </h1>
-
-          {% if album.metadata and album.metadata["Description"] %}
-            <p class="album-description">
-              {{ album.metadata["Description"] }}
-            </p>
+  <article class="album full-height">
+    <header class="album__header contained">
+      <div class="album__header-text">
+        <h1 class="album__title">
+          {% if album.get_taxonomy_name() %}
+            <span class="album__title-above">{{ album.get_taxonomy_name() }}</span><span class="assistive">:</span>
           {% endif %}
-        </div>
-      </div>
+          <span class="album__title-main">{{ album.title }}</span>
+        </h1>
 
-      <div class="album-items-outer">
-        <ul class="album-items">
-          {% for photo in photos %}
-            <li class="album-item">
-              <a href="{{ photo.context_url }}" class="album-item-action">
-                <div class="album-item-inner">
-                  <img class="album-item-photo" src="{{ photo.get_size('thumb').get_url() }}" alt="{{ photo.identifier }}" />
-                  <span class="album-item-indicator">
-                    <i class="icon icon-search"></i>
-                  </span>
-                </div>
-              </a>
-            </li>
-          {% endfor %}
-          </ul>
+        {% if album.metadata and album.metadata["Description"] %}
+          <p class="album__description">
+            {{ album.metadata["Description"] }}
+          </p>
+        {% endif %}
       </div>
-      <div class="clearme"></div>
-    </div>
+    </header>
+
+    <ul class="album__items">
+      {% for photo in photos %}
+        <li class="album__item album__item--no-caption">
+          {{ gallery_macros.tile(
+            image=photo.get_size('thumb').get_url(),
+            indicator_type="glass",
+            alt_text=photo.identifier,
+            link_url=photo.context_url,
+          ) }}
+        </li>
+      {% endfor %}
+    </ul>
   </article>
 {% endblock %}

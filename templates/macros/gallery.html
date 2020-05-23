@@ -1,4 +1,4 @@
-{% macro tile(image, link_url, title=None, count=None, indicator_type="box") %}
+{% macro tile(image, link_url, title=None, count=None, indicator_type="box", alt_text=None) %}
   {#
     A generic image tile, linking to something else.
 
@@ -6,7 +6,12 @@
     and each driver for the drivers.
   #}
   <a href="{{ link_url }}" class="tile">
-    <span class="tile__image" style="background-image: url({{ image }})"></span>
+    {% if alt_text %}
+      <img src="{{ image }}" alt="{{ alt_text }}" class="tile__image">
+    {% else %}
+      <span class="tile__image" style="background-image: url({{ image }})"></span>
+    {% endif %}
+
     {% if title %}
       <span class="tile__title-gradient"></span>
       <span class="tile__title">{{ title }}</span>
