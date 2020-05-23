@@ -22,10 +22,11 @@
 @import 'components/upcoming-events';
 
 /* Front page sections */
-@import 'sections/stats';
 @import 'sections/contact';
-@import 'sections/teams';
 @import 'sections/gallery';
+@import 'sections/generic';
+@import 'sections/teams';
+@import 'sections/stats';
 
 @import 'vendor/fontello';
 

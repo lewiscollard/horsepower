@@ -1,38 +1,11 @@
 .stats {
-  z-index: 2;
-
-  padding-top: $pad-base * 3;
-  padding-bottom: $pad-base * 3;
+  max-width: 950px;
+  margin-right: auto;
+  margin-left: auto;
 
   text-align: center;
 
   background-color: $color-white;
-
-  @media ($mq-landscape-tablet) {
-    padding-top: $pad-base * 6;
-    padding-bottom: $pad-base * 6;
-  }
-}
-
-.stats-title {
-  margin-bottom: 20px;
-
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.stats-subtitle {
-  @include Title();
-
-  margin-bottom: $pad-base * 1.5;
-
-  font-size: $fs-large;
-}
-
-.stats-stats {
-  max-width: 950px;
-  margin-right: auto;
-  margin-left: auto;
 
   @include mq($mq-portrait-tablet) {
     justify-content: center;
@@ -41,7 +14,7 @@
   }
 }
 
-.stats-stat {
+.stats__stat {
   text-align: center;
 
   & + & {
@@ -49,7 +22,6 @@
   }
 
   @include mq($mq-portrait-tablet) {
-
     &:nth-child(2) {
       margin-right: auto;
       margin-left: auto;
@@ -71,7 +43,7 @@
   }
 }
 
-.stats-stat-number {
+.stats__stat-number {
   @include Title();
 
   display: block;
@@ -91,7 +63,7 @@
   }
 }
 
-.stats-stat-desc {
+.stats__stat-desc {
   display: block;
 
   font-weight: 700;
@@ -100,6 +72,3 @@
   text-transform: uppercase;
 }
 
-.stats-action-outer {
-  margin-top: $pad-base * 2;
-}

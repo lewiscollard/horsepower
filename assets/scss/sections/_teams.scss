@@ -1,45 +1,12 @@
-.section-teams {
-  padding-top: $pad-base * 2;
-  padding-bottom: $pad-base * 2;
-
-  @include mq($mq-portrait-tablet) {
-    padding-top: $pad-base * 5;
-    padding-bottom: $pad-base * 5;
-  }
-}
-
-.section-teams-header {
-  text-align: center;
-}
-
-.section-teams-title {
-  margin-bottom: $pad-base;
-
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.section-teams-subtitle {
-  @include Title();
-
-  font-size: 28px;
-
-  @include mq($mq-landscape-phone) {
-    font-size: $fs-large;
-  }
-}
-
-.section-teams-items {
+.team-list {
   @include mq($mq-portrait-tablet) {
     justify-content: center;
 
     display: flex;
-    margin-top: $pad-base * 2;
-    margin-left: -$pad-base * 4;
   }
 }
 
-.section-teams-item {
+.team-list__item {
   position: relative;
 
   margin-top: $pad-base * 2;
@@ -47,6 +14,8 @@
 
   @include mq($mq-portrait-tablet) {
     width: calc(33% - #{$pad-base * 4});
+    margin-top: 0;
+    margin-bottom: 0;
     margin-left: $pad-base * 4;
   }
 
@@ -73,7 +42,7 @@
   }
 }
 
-.section-teams-item-action {
+.team-list__item-action {
   position: relative;
   z-index: 2;
 
@@ -86,7 +55,7 @@
   color: inherit;
 }
 
-.section-teams-item-image {
+.team-list__item-image {
   z-index: 2;
 
   display: block;
@@ -103,7 +72,7 @@
   /* stylelint-enable */
 }
 
-.section-teams-item-image-placeholder {
+.team-list__item-image-placeholder {
   display: block;
   height: 100%;
 
@@ -118,7 +87,7 @@
   }
 }
 
-.section-teams-item-text {
+.team-list__item-text {
   position: relative;
   z-index: 1;
 
@@ -130,11 +99,7 @@
 
   transition: color $transition-time * 2;
 
-  .section-teams-item:hover & {
+  .team-list__item:hover & {
     color: #fff;
   }
-}
-
-.section-teams-action-outer {
-  text-align: center;
 }

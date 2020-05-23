@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% import 'macros/gallery.html' as gallery_macros %}
+{% import 'macros/sections.html' as section_macros %}
 
 {% block header_class %}header--transparent{% endblock %}
 
@@ -60,11 +61,8 @@
       })();
     </script>
 
-    <section class="stats">
-      <h2 class="stats-title">About</h2>
-      <p class="stats-subtitle">Behind the lens</p>
-
-      <div class="plain-text stats-text constrained">
+    {% call section_macros.generic(kicker='About', title='Behind the lens', link='/about/', link_text='More about me') %}
+      <div class="section__text plain-text constrained">
         <p>I'm Lewis Collard. I am a photographer with the Norfolk Arena Drift Team,
         the greatest grass-roots drift racing crew on the planet,
         though there are allegations that I have occasionally
@@ -77,27 +75,14 @@
         enjoy it as much as I enjoyed making it.</p>
       </div>
 
-      <ul class="stats-stats constrained">
-        <li class="stats-stat">
-          <span class="stats-stat-number">{{ event_count }}</span>
-          <span class="stats-stat-desc">events attended</span>
-        </li>
-
-        <li class="stats-stat">
-          <span class="stats-stat-number">{{ driver_count }}</span>
-          <span class="stats-stat-desc">drivers photographed</span>
-        </li>
-
-        <li class="stats-stat">
-          <span class="stats-stat-number">{{ "{:,}".format(photo_count) }}</span>
-          <span class="stats-stat-desc">high resolution downloads</span>
-        </li>
-      </ul>
-
-      <p class="stats-action-outer">
-        <a class="button" href="/about/">More about me</a>
-      </p>
-    </section>
+      <div class="section__extra constrained">
+        {{ section_macros.stats([
+          {'number': event_count, 'text': 'events attended'},
+          {'number': driver_count, 'text': 'drivers photographed'},
+          {'number': "{:,}".format(photo_count), 'text': 'high resolution downloads'},
+        ]) }}
+      </div>
+    {% endcall %}
 
     {% for tax in taxonomies %}
       {% if tax.name in ["Events", "Drivers"] %}
@@ -143,35 +128,28 @@
           </div>
         {% endif %}
       {% elif tax.name == "Teams" %}
-        <section class="section-teams contained">
-          <div class="section-teams-header">
-            <h1 class="section-teams-title">{{ tax.name }}</h1>
-            <p class="section-teams-subtitle">Speed. Angle. Showmanship.</p>
+        {% call section_macros.generic(kicker=tax.name, title='Speed. Angle. Showmanship.', link=tax.index_url, link_text='View all teams') %}
+          <div class="section__extra">
+            <ul class="team-list">
+              {% for gallery in tax.galleries[:3] %}
+                <li class="team-list__item">
+                  <a class="team-list__item-action" href="{{ gallery.get_url() }}">
+                    <span class="team-list__item-image">
+                      {% if gallery.metadata["Transparent image"] %}
+                        <img aria-hidden="true" src='{{ gallery.metadata["Transparent image"] }}' alt="" />
+                      {% else %}
+                        <span class="team-list__item-image-placeholder"></span>
+                      {% endif %}
+                    </span>
+                    <span class="team-list__item-text">
+                      {{ gallery.title }}
+                    </span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
           </div>
-
-          <ul class="section-teams-items">
-            {% for gallery in tax.galleries[:3] %}
-              <li class="section-teams-item">
-                <a class="section-teams-item-action" href="{{ gallery.get_url() }}">
-                  <span class="section-teams-item-image">
-                    {% if gallery.metadata["Transparent image"] %}
-                      <img aria-hidden="true" src='{{ gallery.metadata["Transparent image"] }}' alt="" />
-                    {% else %}
-                      <span class="section-teams-item-image-placeholder"></span>
-                    {% endif %}
-                  </span>
-                  <span class="section-teams-item-text">
-                    {{ gallery.title }}
-                  </span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-
-          <p class="section-teams-action-outer">
-            <a class="button" href="{{ tax.index_url }}">View all teams</a>
-          </p>
-        </section>
+        {% endcall %}
       {% endif %}
     {% endfor %}
 
