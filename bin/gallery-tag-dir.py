@@ -9,11 +9,11 @@ dirname = "."
 if len(sys.argv) > 1:
     dirname = sys.argv[1]
 
-driver = raw_input("Driver name: ").strip()
-team = raw_input("Team name: ").strip()
+driver = input("Driver name: ").strip()
+team = input("Team name: ").strip()
 
 if not driver:
-    yn = raw_input("no driver name given - carry on? (y/N) ").strip()
+    yn = input("no driver name given - carry on? (y/N) ").strip()
     if not yn or not yn[0] == "y":
         sys.exit()
 
@@ -28,7 +28,7 @@ for pattern in glob_patterns:
 
 for fn in files:
     descfile = "{}.desc".format(fn)
-    print "writing {}".format(os.path.abspath(descfile))
+    print("writing {}".format(os.path.abspath(descfile)))
     fd = open(descfile, "wb")
     if driver:
         fd.write("Driver: {}\n".format(driver))
