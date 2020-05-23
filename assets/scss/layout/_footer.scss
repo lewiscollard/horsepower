@@ -43,11 +43,10 @@
 
 .footer__right {
   align-items: center;
+  justify-content: center;
 
   display: flex;
   margin-top: $pad-base;
-
-  text-align: center;
 
   @include mq($mq-landscape-tablet) {
     margin-top: 0;
